@@ -1,0 +1,112 @@
+@author: Tyrien Gilpin
+ 
+Programming Language: Java
+
+Data Structure for storing persons: Linked List
+
+Social Network Data Structure: Tree map O(log(n))
+
+Type of search to use: Bidirectional Search O(n^(k/2)) 
+
+Desired size of seperation: 6
+
+Preffered Maximum dept of tree: 6
+
+Possible treeMap keys: community, school, employer
+
+Problem 1:
+Question for sir &/ fellow group members: 
+	Is it safe to populate a sinlge tree Map using all key values
+	or having two seperate tree maps sorted by two key values
+	then combining those trees sorted by the third key value?
+	or is it not just the same as using the three keys for the one
+	treeMap.
+
+	Implication: One person may be added to multiple branches within
+			  the tree. Will that affect our search? If yes how 
+			   could that be mitigated?
+
+Note Well: Chosen key value type must be considered as it relates to 
+		searching.Why? For time complexity and efficiency. That is
+	 	if the key values will affect the search at all. If not then 
+		we can start coding. If yes we need to discuss the matter.
+
+
+Seperation could be calculated based on search.
+
+Idea few: What if we had 3 different treeMaps using only one type of key 
+	then search related trees based on what the users wants his/her
+	friends activities to be based on.
+	
+	Implication: That would require us to store one person to three 
+			  different maps based on each key value type. 
+			  Upside? If adding a new person requires no map
+			  Configuration the time complexity should be O(1)
+			  which is great.
+
+ 
+Problem 2: 
+After solving how  we will group the persons on the Map based of value 
+of key type, the next problem is to figure out friendship.
+
+Question: Are we going to make everyone who live in the same community 
+	    automatically be friends? Doing that would be easy but it
+	    just doesn't sound  logical.
+	    What if im from the same comminity as Jane and I we're
+	    enemies in person? I wouldn't want the system to automatially
+	    add us as friends. 
+
+	    In that case we would dtill have to keep track of who is 
+	    actually friends with who? That will also affect calculation
+	    degree calculation.
+	
+	    Possible soulution? That is for us to find out. All I know is 
+			that we might need another data structure. Might be
+			array, might be a map, list or whatever. I don't
+			know yet.
+
+
+NTS: Pickup here in the morning. ITPM Test Monday 10am
+
+
+
+
+After resolving problems one and 2 this is what we need to do:
+	Be able to load file person objects into program
+	These object should be stored in a data structure before 
+	adding them to map.
+	
+	Ensure person object contain a flag for privacy or not. I'm 
+	thinking integer values 0 and 1 where 1 is a request for privacy
+	and zero means no request, allow suggesstion.
+	(Group can decide on this)
+	
+	Scan through user activities. How will we track that? I have two
+	ideas. We could idea have a list of activities attribute assigned
+	to the person class.///OR/// Add users to map without assigned 
+	activites then add these activities to the users after(Idea 2 is 
+	alot of background work tho). To make idea one we we could just 
+	leave the list of activity attributes blank for now. We would just 
+	have to figure out how to read the list from the file and we could 
+	make this easy by adding the list of activity attribute as the last
+	atribute of a person making it the last element in the line of a file
+	which would be easier to read.
+	(Group can decide on this)
+
+	calculate distance between 2 selected friends
+	
+	Calculate average degrees of seperation
+	Problem here: Should the average be calculated based on key type
+	values or should it be based on the person someone is friends with
+	or both? IF both we will have to do some serious work. It's probably
+	both. May God help us.
+
+
+
+
+
+
+
+
+
+@author: Tyrien Gilpin
