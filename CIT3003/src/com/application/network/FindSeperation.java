@@ -22,7 +22,7 @@ public class FindSeperation {
 	// or you could create your own conside the bidirectional search algorithm to
 	// reduce time complexity where first half is searched using BFS and second half
 	// search using
-	// DFS. Implication? you might visist one node twice that must be mitigated
+	// DFS. Implication? you might visit one node twice that must be mitigated
 	// during
 	// divide bfs....bidirectional search employs divide and conquer techniques
 	public int degreeOfSeperation(Person user, Person friend) {
@@ -31,7 +31,8 @@ public class FindSeperation {
 			+" is 0. Because they are direct friends");
 			return 0;
 		}else {
-			//search degree of 
+			//search degree of
+			//need to be filled with code
 		}
 		return -1;
 	}
@@ -47,6 +48,7 @@ public class FindSeperation {
 		return (List<Person>) currentFriends;
 	}
 	
+	//getter for the class attribute
 
 	//Getter
 	public SocialNetworkService getSocialNet() {
