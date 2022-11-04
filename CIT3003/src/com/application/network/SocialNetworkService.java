@@ -7,7 +7,9 @@ import java.util.TreeMap;
 import com.application.models.Person;
 
 public class SocialNetworkService {
-	TreeMap<Person, Collection<Person>> network = new TreeMap();
+	
+	TreeMap<Person, Collection<Person>> network = new TreeMap<Person, Collection<Person>>();
+
 	
 	//This method returns a collection of the users that are
 	//immediate friends of the user passed to the method

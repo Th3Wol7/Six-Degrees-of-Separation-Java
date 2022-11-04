@@ -1,7 +1,7 @@
 package com.application.models;
 
 public class Person {
-
+	private String username;
 	private String firstName;
 	private String lastName;
 	private String Phone;
@@ -14,6 +14,7 @@ public class Person {
 	
 	//Default Constructor
 	public Person() {
+		this.username = "";
 		this.firstName = "N/A";
 		this.lastName = "N/A";
 		this.Phone = "N/A";
@@ -25,8 +26,9 @@ public class Person {
 	}
 	
 	//Primary Constructor
-	public Person(String firstName, String lastName, String phone, String email, String community, String school,
+	public Person(String username, String firstName, String lastName, String phone, String email, String community, String school,
 			String employer, int privacy) {
+		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.Phone = phone;
@@ -40,6 +42,7 @@ public class Person {
 	
 	//Copy Constructor
 	public Person(Person obj) {
+		this.username = obj.username;
 		this.firstName = obj.firstName;
 		this.lastName = obj.lastName;
 		this.Phone = obj.Phone;
@@ -60,6 +63,14 @@ public class Person {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public void setLastName(String lastName) {
@@ -116,7 +127,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Firstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nPhone: "
+		return "Username: "+ getUsername()+ "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nPhone: "
 				+ getPhone() + "\nEmail: " + getEmail() + "\nCommunity: " + getCommunity() + "\nSchool: "
 				+ getSchool() + "\nEmployer: " + getEmployer() + "\nPrivacy: " + getPrivacy();
 	}

@@ -1,11 +1,13 @@
 package com.application.network;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.application.models.Person;
 
 public class FindSeperation {
 	private final SocialNetworkService socialNet;
+	//NTS: remember to Synchronize the tree for threading
 	
 	FindSeperation(SocialNetworkService sns){
 		socialNet = sns;
@@ -29,8 +31,9 @@ public class FindSeperation {
 	//It should jump to the person node and store the nodes that have direct connections
 	//to the user passed to the function
 	public List<Person>findFriends(Person user){
-		
+		List<Person> friendList = new ArrayList<>();
 		return null;
+		//return null;
 	}
 	
 	//This method returns a list of users in the network that share the same
