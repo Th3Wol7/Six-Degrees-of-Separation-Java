@@ -8,9 +8,20 @@ import com.application.models.Person;
 
 public class SocialNetworkService {
 	
-	TreeMap<Person, Collection<Person>> network = new TreeMap<Person, Collection<Person>>();
-
+	private TreeMap<Person, Collection<Person>> network = new TreeMap<Person, Collection<Person>>();
+	 //you might want to write a helper method; you might want to make it recursive;
+	 //and you might want to read about in-order tree
 	
+	public TreeMap<Person, Collection<Person>> getNetwork() {
+		return network;
+	}
+
+
+	public void setNetwork(TreeMap<Person, Collection<Person>> network) {
+		this.network = network;
+	}
+
+
 	//This method returns a collection of the users that are
 	//immediate friends of the user passed to the method
 	Collection<Person> userFriends(Person user){
