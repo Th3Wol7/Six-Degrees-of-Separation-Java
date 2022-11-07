@@ -25,6 +25,8 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import com.application.gUI.utils.GUIElements;
+
 public class LoginScreen {
 
 	final int panWidth = 1000;

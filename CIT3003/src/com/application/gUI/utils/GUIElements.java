@@ -1,4 +1,4 @@
-package com.application.gUI.screens;
+package com.application.gUI.utils;
 
 import java.awt.geom.RoundRectangle2D;
 import java.awt.*;
@@ -67,7 +67,7 @@ public class GUIElements {
 
         private int radius;
 
-        RoundedBorder(int radius) {
+        public RoundedBorder(int radius) {
             this.radius = radius;
         }
 

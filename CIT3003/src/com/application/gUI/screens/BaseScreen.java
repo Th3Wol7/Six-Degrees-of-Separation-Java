@@ -7,7 +7,6 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import com.application.gUI.screens.GUIElements.FrameDragListener;;
 
 public class BaseScreen {
 
@@ -47,11 +46,6 @@ public class BaseScreen {
         //sets Pop up location of frame to center of the screen and make visible
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
-        //Allows frame to be moved around Frame drag movement
-        FrameDragListener frameDragListener = new FrameDragListener(frame);
-        frame.addMouseListener(frameDragListener);
-        frame.addMouseMotionListener(frameDragListener);
 
     }
 

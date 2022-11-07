@@ -1,6 +1,9 @@
 package com.application.gUI.screens;
 
 import javax.swing.*;
+
+import com.application.gUI.utils.GUIElements;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
