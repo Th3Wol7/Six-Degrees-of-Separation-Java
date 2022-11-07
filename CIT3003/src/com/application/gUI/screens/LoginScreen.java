@@ -55,7 +55,6 @@ public class LoginScreen {
     private static Icon prospects;
 
     private static JTextField userName;
-   // private static JTextField userText;
     private static JTextArea userSwap;
 
     private static JPasswordField passwordText;

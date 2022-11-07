@@ -6,17 +6,14 @@ import javax.swing.*;
 
 public class MainScreen {
 
-    // #region Constants
-    final int panWidth = 1000;
+	final int panWidth = 1000;
     final int panHeight = 600;
     final int uih = 25;
-    final int admin = 1;
-    final int customer = 0;
-    final int adminsetX = 140;
-    final int adminsetY = 520;
-    final int adminoffsetX = adminsetX + 60;
-    final int adminoffsetY = adminsetY + 9;
-    
+    final int newUserSetX = 140;
+    final int newUserSetY = 520;
+    final int newUserOffsetX = newUserSetX + 60;
+    final int newUserOffsetY = newUserSetY + 9;
+
     private static JFrame frame;
 
       public MainScreen() {
@@ -30,7 +27,7 @@ public class MainScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //#endregion
+
         new LoginScreen(frame);
     }
     
