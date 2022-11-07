@@ -29,7 +29,7 @@ public class BaseScreen {
     	//Setting properties of frame
         frame = new JFrame();
         
-        appIcon = ImageIO.read(getClass().getResource("logo5.jpg"));
+        appIcon = ImageIO.read(getClass().getResource("mainImage.png"));
 
         frame.setIconImage(appIcon); //Sets icon of application
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
