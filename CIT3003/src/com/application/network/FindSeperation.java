@@ -111,7 +111,7 @@ public class FindSeperation {
 	
 	
 	
-		//This method returns a list of activities suggesstions to a user based 
+		//This method returns a list of activities suggestions to a user based 
 		//on the activities of the users in the network that share the same
 		// employer, school or community. Ensure that each node is only checked once
 		// ensure that each node is check before stopping
@@ -121,8 +121,12 @@ public class FindSeperation {
 		}
 	
 	
-	
-	
+		//This method should determine the average degree of separation of the nodes in the tree
+		//then return the value
+		public int averageDegreeOfSeperation() {
+			
+			return 0;
+		}
 	
 
 }
