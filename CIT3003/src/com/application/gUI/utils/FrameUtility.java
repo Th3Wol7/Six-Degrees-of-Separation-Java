@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import javax.swing.border.Border;
 
-public class GUIElements {
+public class FrameUtility {
 
     public static JButton exitButton;
 

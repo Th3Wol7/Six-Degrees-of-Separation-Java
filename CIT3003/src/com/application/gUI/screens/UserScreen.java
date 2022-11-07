@@ -2,7 +2,7 @@ package com.application.gUI.screens;
 
 import javax.swing.*;
 
-import com.application.gUI.utils.GUIElements;
+import com.application.gUI.utils.FrameUtility;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -74,10 +74,10 @@ public class UserScreen {
      userPanel.setBackground(Color.black);
      
     
-     GUIElements.addExitButton();
-     GUIElements.exitButton.setBounds(755, 0, 45, 45);
-     GUIElements.exitButton.setForeground(buttonColor);
-     primaryPanel.add(GUIElements.exitButton);
+     FrameUtility.addExitButton();
+     FrameUtility.exitButton.setBounds(755, 0, 45, 45);
+     FrameUtility.exitButton.setForeground(buttonColor);
+     primaryPanel.add(FrameUtility.exitButton);
      
   // Sets size and location of logo
      Logo.setBounds(0, 0, 200, 150);

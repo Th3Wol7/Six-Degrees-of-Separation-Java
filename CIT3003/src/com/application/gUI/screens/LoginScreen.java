@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
-import com.application.gUI.utils.GUIElements;
+import com.application.gUI.utils.FrameUtility;
 
 public class LoginScreen {
 
@@ -110,9 +110,9 @@ public class LoginScreen {
 
         //Calling custom util methods to build ui
         // Calls Function To create and add Exit Button
-        GUIElements.addExitButton();
-        GUIElements.exitButton.setBounds(455, 0, 45, 45);
-        imagePanel.add(GUIElements.exitButton);
+        FrameUtility.addExitButton();
+        FrameUtility.exitButton.setBounds(455, 0, 45, 45);
+        imagePanel.add(FrameUtility.exitButton);
 
         // WelcomeLabel Message display
         // Creates and defines welcomeLabel! message
@@ -270,7 +270,7 @@ public class LoginScreen {
         loginButton.setContentAreaFilled(false);
         loginButton.setForeground(Color.white);
         loginButton.setFont(Oswald);
-        loginButton.setBorder(new GUIElements.RoundedBorder(25));
+        loginButton.setBorder(new FrameUtility.RoundedBorder(25));
         loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         loginButton.addActionListener(new ActionListener() {
             @Override

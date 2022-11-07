@@ -10,7 +10,6 @@ import javax.swing.*;
 
 public class BaseScreen {
 
-    // #region Constants
 	//Constants used in defining the properties of the screen
 	final int panWidth = 1000;
     final int panHeight = 600;
