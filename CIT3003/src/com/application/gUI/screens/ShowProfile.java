@@ -48,7 +48,6 @@ public class ShowProfile implements ActionListener {
 	private JRadioButton yesBtn, noBtn;
 	private JButton editBtn, saveBtn, cancelBtn;
 	private ButtonGroup buttonGroup;
-	private int privacy;
 	private String user;
 	private Person currentUser;
 	
