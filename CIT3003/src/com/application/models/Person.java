@@ -1,6 +1,10 @@
 package com.application.models;
 
-public class Person {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Person implements Serializable{
 	private String username;
 	private String firstName;
 	private String lastName;
@@ -10,8 +14,11 @@ public class Person {
 	private String school;
 	private String employer;
 	private int privacy;
+	private List<String> activity;
+	
+	
 
-	// Default Constructor
+	//Default Constructor
 	public Person() {
 		this.username = "";
 		this.firstName = "N/A";
@@ -22,11 +29,12 @@ public class Person {
 		this.school = "N/A";
 		this.employer = "N/A";
 		this.privacy = 0;
+		this.activity = new ArrayList<>();
 	}
 
 	// Primary Constructor
 	public Person(String username, String firstName, String lastName, String phone, String email, 
-			String community, String school, String employer, int privacy) {
+			String community, String school, String employer, int privacy, List<String> activity) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,6 +44,7 @@ public class Person {
 		this.school = school;
 		this.employer = employer;
 		this.privacy = privacy;
+		this.activity = activity;
 	}
 
 	// Copy Constructor
@@ -49,6 +58,7 @@ public class Person {
 		this.school = obj.school;
 		this.employer = obj.employer;
 		this.privacy = obj.privacy;
+		this.activity = obj.activity;
 	}
 
 	public String getFirstName() {
@@ -122,12 +132,19 @@ public class Person {
 	public void setPrivacy(int privacy) {
 		this.privacy = privacy;
 	}
+	public List<String>  getActivity() {
+		return activity;
+	}
+
+	public void setActivity(List<String> activity) {
+		this.activity = activity;
+	}
 
 	@Override
 	public String toString() {
-		return "Username: " + getUsername() + "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName()
-				+ "\nPhone: " + getPhone() + "\nEmail: " + getEmail() + "\nCommunity: " + getCommunity() + "\nSchool: "
-				+ getSchool() + "\nEmployer: " + getEmployer() + "\nPrivacy: " + getPrivacy();
+		return "Username: "+ getUsername()+ "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nPhone: "
+				+ getPhone() + "\nEmail: " + getEmail() + "\nCommunity: " + getCommunity() + "\nSchool: "
+				+ getSchool() + "\nEmployer: " + getEmployer() + "\nPrivacy: " + getPrivacy() +"\n Activities: " +getActivity();
 	}
 
 }
