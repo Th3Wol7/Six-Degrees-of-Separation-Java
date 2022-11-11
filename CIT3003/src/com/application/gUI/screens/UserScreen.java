@@ -73,13 +73,13 @@ public class UserScreen {
      userPanel.setLayout(new BorderLayout());
      userPanel.setBackground(Color.black);
      
-    
+  
      FrameUtility.addExitButton();
      FrameUtility.exitButton.setBounds(755, 0, 45, 45);
      FrameUtility.exitButton.setForeground(buttonColor);
-     primaryPanel.add(FrameUtility.exitButton);
-     
-  // Sets size and location of logo
+     primaryPanel.add(FrameUtility.exitButton); 
+         
+     //Sets size and location of logo
      Logo.setBounds(0, 0, 200, 150);
 
      //adding Logo to top of side panel
@@ -173,7 +173,8 @@ public class UserScreen {
 	 viewProfileButton.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-             //showProfile();
+        	 primaryPanel = new ShowProfile("jcar3").getProfilePanel();
+        	 //userPanel.add(new ShowProfile("jcar3"), BorderLayout.CENTER);            
          }
      });
 	 
