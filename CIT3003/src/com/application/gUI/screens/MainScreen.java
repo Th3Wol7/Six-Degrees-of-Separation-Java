@@ -35,8 +35,5 @@ public class MainScreen {
     	new MainScreen();
     }
     
-    
-    
-    
-
+ 
 }

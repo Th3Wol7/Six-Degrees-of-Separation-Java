@@ -26,13 +26,13 @@ public class FindSeperation {
 	// during
 	// divide bfs....bidirectional search employs divide and conquer techniques
 	public int degreeOfSeperation(Person user, Person friend) {
-		if(friendsMatch(user, friend) == true) {
-			System.out.print("Degree of seperation between"+ user.getUsername()+ " & "+ friend.getUsername()
-			+" is 0. Because they are direct friends");
+		if (friendsMatch(user, friend) == true) {
+			System.out.print("Degree of seperation between" + user.getUsername() + " & " + friend.getUsername()
+					+ " is 0. Because they are direct friends");
 			return 0;
-		}else {
-			//search degree of
-			//need to be filled with code
+		} else {
+			// search degree of
+			// need to be filled with code
 		}
 		return -1;
 	}
@@ -47,18 +47,15 @@ public class FindSeperation {
 		currentFriends = getSocialNet().getNetwork().get(user);// storing user's current friends
 		return (List<Person>) currentFriends;
 	}
-	
-	//getter for the class attribute
 
-	//Getter
+	// Getter
 	public SocialNetworkService getSocialNet() {
 		return socialNet;
 	}
-	
 
-	//This method checks if one person is a friend of the other
+	// This method checks if one person is a friend of the other
 	public boolean friendsMatch(Person user, Person friend) {
-		if(findFriends(user) != null) {//If user has friends then...
+		if (findFriends(user) != null) {// If user has friends then...
 			for (Person person : findFriends(user)) {
 				if (friend.equals(person)) {
 					return true;
@@ -107,26 +104,22 @@ public class FindSeperation {
 
 		return suggestedFriends;
 	}
-	
-	
-	
-	
-		//This method returns a list of activities suggestions to a user based 
-		//on the activities of the users in the network that share the same
-		// employer, school or community. Ensure that each node is only checked once
-		// ensure that each node is check before stopping
-		public List<String> SuggestsActivities(Person user) {
-		
-			return null;
-		}
-	
-	
-		//This method should determine the average degree of separation of the nodes in the tree
-		//then return the value
-		public int averageDegreeOfSeperation() {
-			
-			return 0;
-		}
-	
+
+	// This method returns a list of activities suggestions to a user based
+	// on the activities of the users in the network that share the same
+	// employer, school or community. Ensure that each node is only checked once
+	// ensure that each node is check before stopping
+	public List<String> SuggestsActivities(Person user) {
+
+		return null;
+	}
+
+	// This method should determine the average degree of separation of the nodes in
+	// the tree
+	// then return the value
+	public int averageDegreeOfSeperation() {
+
+		return 0;
+	}
 
 }

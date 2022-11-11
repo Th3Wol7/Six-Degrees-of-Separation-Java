@@ -10,9 +10,8 @@ public class Person {
 	private String school;
 	private String employer;
 	private int privacy;
-	
-	
-	//Default Constructor
+
+	// Default Constructor
 	public Person() {
 		this.username = "";
 		this.firstName = "N/A";
@@ -24,10 +23,10 @@ public class Person {
 		this.employer = "N/A";
 		this.privacy = 0;
 	}
-	
-	//Primary Constructor
-	public Person(String username, String firstName, String lastName, String phone, String email, String community, String school,
-			String employer, int privacy) {
+
+	// Primary Constructor
+	public Person(String username, String firstName, String lastName, String phone, String email, 
+			String community, String school, String employer, int privacy) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -38,9 +37,8 @@ public class Person {
 		this.employer = employer;
 		this.privacy = privacy;
 	}
-	
-	
-	//Copy Constructor
+
+	// Copy Constructor
 	public Person(Person obj) {
 		this.username = obj.username;
 		this.firstName = obj.firstName;
@@ -127,9 +125,9 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Username: "+ getUsername()+ "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nPhone: "
-				+ getPhone() + "\nEmail: " + getEmail() + "\nCommunity: " + getCommunity() + "\nSchool: "
+		return "Username: " + getUsername() + "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName()
+				+ "\nPhone: " + getPhone() + "\nEmail: " + getEmail() + "\nCommunity: " + getCommunity() + "\nSchool: "
 				+ getSchool() + "\nEmployer: " + getEmployer() + "\nPrivacy: " + getPrivacy();
 	}
-	
+
 }
