@@ -65,7 +65,7 @@ public class UserScreen{
      sidePanel.setLayout(null);
      
      // sets layout to be null, to allow for free placement of JAttributes
-     primaryPanel.setBackground(new Color(216, 227, 241));
+     primaryPanel.setBackground(Color.decode("#e0e2df"));//(new Color(216, 227, 241));
      primaryPanel.setLayout(null);  
      
      userPanel.setBounds(0, 0, panWidth, panHeight);
@@ -206,15 +206,62 @@ public class UserScreen{
      LogOutButton.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-             frame.remove(userPanel);;
-             new LoginScreen(frame);
+        
+    	 try {
+        	 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+         } catch (Exception ex) {
+             ex.printStackTrace();
          }
+     int option = JOptionPane.showConfirmDialog(
+                 null,
+                 "Are you sure ?",
+                 "Log Out",
+                 JOptionPane.YES_NO_OPTION
+         );
+         
+         if (option == JOptionPane.YES_OPTION) {
+        	 frame.remove(userPanel);
+        	 try {
+            	 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+             } catch (Exception ex) {
+                 ex.printStackTrace();
+             }
+        	 new LoginScreen(frame);
+             
+       
+         }
+     }
+
+        	  
      });
      
      quitButton.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-        	 System.exit(0);
+        	 try {
+            	 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+             } catch (Exception ex) {
+                 ex.printStackTrace();
+             }
+        	  
+        	 int option1 = JOptionPane.showConfirmDialog(
+                     null,
+                     "Are you sure ?",
+                     "Log Out",
+                     JOptionPane.YES_NO_OPTION
+             );
+             
+             if (option1 == JOptionPane.YES_OPTION) {
+            	  System.exit(0); 
+             }else {
+            	 try {
+                	 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+                 } catch (Exception ex) {
+                     ex.printStackTrace();
+                 }
+            	
+             }
+        	 
          }
      });
  }

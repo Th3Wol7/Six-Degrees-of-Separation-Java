@@ -39,6 +39,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	private JRadioButton yesBtn, noBtn;
 	private JButton editBtn, saveBtn, cancelBtn;
 	private ButtonGroup buttonGroup;
+	private Font fieldFont, labelFont;
 	private String user;
 	private Person currentUser;
 
@@ -61,6 +62,8 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
 		this.add(FrameUtility.exitButton);
+		fieldFont = new Font("Oswald", Font.TYPE1_FONT, 15);
+		labelFont = new Font("Oswald", Font.TYPE1_FONT, 16);
 		
 		titleLabel = new JLabel("My Profile", SwingConstants.CENTER);
 		titleLabel.setBounds(280, 50, 200, 50);
@@ -68,39 +71,39 @@ public class ProfileScreen extends JPanel implements ActionListener {
 
 		usernameLabel = new JLabel("Username", SwingConstants.LEFT);
 		usernameLabel.setBounds(40, 150, 200, 50);
-		usernameLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		usernameLabel.setFont(labelFont);
 
 		firstNameLabel = new JLabel("Firstname", SwingConstants.LEFT);
 		firstNameLabel.setBounds(40, 235, 200, 50);
-		firstNameLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		firstNameLabel.setFont(labelFont);
 
 		lastNameLabel = new JLabel("Lastname", SwingConstants.LEFT);
 		lastNameLabel.setBounds(430, 235, 200, 50);
-		lastNameLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		lastNameLabel.setFont(labelFont);
 
 		phoneLabel = new JLabel("Telephone");
 		phoneLabel.setBounds(430, 405, 200, 50);
-		phoneLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		phoneLabel.setFont(labelFont);
 
 		emailLabel = new JLabel("Email");
 		emailLabel.setBounds(430, 150, 200, 50);
-		emailLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		emailLabel.setFont(labelFont);
 
 		communityLabel = new JLabel("Community");
 		communityLabel.setBounds(430, 320, 200, 50);
-		communityLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		communityLabel.setFont(labelFont);
 
 		schoolLabel = new JLabel("Education", SwingConstants.LEFT);
 		schoolLabel.setBounds(40, 320, 200, 50);
-		schoolLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		schoolLabel.setFont(labelFont);
 
 		employerLabel = new JLabel("Employer");
 		employerLabel.setBounds(40, 405, 200, 50);
-		employerLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		employerLabel.setFont(labelFont);
 
 		privacyLabel = new JLabel("Privacy");
 		privacyLabel.setBounds(40, 490, 200, 50);
-		privacyLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		privacyLabel.setFont(labelFont);
 		
 		lineSeparation = new JTextField(20);
 		lineSeparation.setBounds(0, 100, 800, 25);//125, 350, 250, uih
@@ -113,86 +116,88 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		usernameField = new JTextField(20);
 		usernameField.setBounds(40, 190, 250, 25);// 125, 350, 250, uih
 		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
-		usernameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
+		usernameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		usernameField.setBackground(null);
-		usernameField.setForeground(Color.white);
-		usernameField.setFont(new Font("Oswald", Font.TYPE1_FONT, 15));
-		usernameField.setCaretColor(Color.white);
+		usernameField.setForeground(Color.gray);
+		usernameField.setFont(fieldFont);
+		usernameField.setCaretColor(Color.black);
 
 		firstNameField = new JTextField(30);
 		firstNameField.setBounds(40, 275, 250, 25);// 125, 350, 250, uih
 		firstNameField.setHorizontalAlignment(SwingConstants.CENTER);
-		firstNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
+		firstNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		firstNameField.setBackground(null);
-		firstNameField.setForeground(Color.white);
-		firstNameField.setFont(new Font("Oswald", Font.TYPE1_FONT, 15));
-		firstNameField.setCaretColor(Color.white);
+		firstNameField.setForeground(Color.gray);
+		firstNameField.setFont(fieldFont);
+		firstNameField.setCaretColor(Color.black);
 
 		lastNameField = new JTextField(30);
 		lastNameField.setBounds(430, 275, 250, 25);// 125, 350, 250, uih
 		lastNameField.setHorizontalAlignment(SwingConstants.CENTER);
-		lastNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
+		lastNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		lastNameField.setBackground(null);
-		lastNameField.setForeground(Color.white);
-		lastNameField.setFont(new Font("Oswald", Font.TYPE1_FONT, 15));
-		lastNameField.setCaretColor(Color.white);
+		lastNameField.setForeground(Color.gray);
+		lastNameField.setFont(fieldFont);
+		lastNameField.setCaretColor(Color.black);
 
 		phoneField = new JTextField(20);
 		phoneField.setBounds(430, 445, 250, 25);// 125, 350, 250, uih
 		phoneField.setHorizontalAlignment(SwingConstants.CENTER);
-		phoneField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
+		phoneField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		phoneField.setBackground(null);
-		phoneField.setForeground(Color.white);
-		phoneField.setFont(new Font("Oswald", Font.TYPE1_FONT, 15));
-		phoneField.setCaretColor(Color.white);
+		phoneField.setForeground(Color.gray);
+		phoneField.setFont(fieldFont);
+		phoneField.setCaretColor(Color.black);
 
 		emailField = new JTextField(30);
 		emailField.setBounds(430, 190, 250, 25);// 125, 350, 250, uih
 		emailField.setHorizontalAlignment(SwingConstants.CENTER);
-		emailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
+		emailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		emailField.setBackground(null);
-		emailField.setForeground(Color.white);
-		emailField.setFont(new Font("Oswald", Font.TYPE1_FONT, 15));
-		emailField.setCaretColor(Color.white);
+		emailField.setForeground(Color.gray);
+		emailField.setFont(fieldFont);
+		emailField.setCaretColor(Color.black);
 
 		communityField = new JTextField(30);
 		communityField.setBounds(430, 360, 250, 25);// 125, 350, 250, uih
 		communityField.setHorizontalAlignment(SwingConstants.CENTER);
-		communityField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
+		communityField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		communityField.setBackground(null);
-		communityField.setForeground(Color.white);
-		communityField.setFont(new Font("Oswald", Font.TYPE1_FONT, 15));
-		communityField.setCaretColor(Color.white);
+		communityField.setForeground(Color.gray);
+		communityField.setFont(fieldFont);
+		communityField.setCaretColor(Color.black);
 
 		schoolField = new JTextField(30);
 		schoolField.setBounds(40, 360, 250, 25);// 125, 350, 250, uih
 		schoolField.setHorizontalAlignment(SwingConstants.CENTER);
-		schoolField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
+		schoolField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		schoolField.setBackground(null);
-		schoolField.setForeground(Color.white);
-		schoolField.setFont(new Font("Oswald", Font.TYPE1_FONT, 15));
-		schoolField.setCaretColor(Color.white);
+		schoolField.setForeground(Color.gray);
+		schoolField.setFont(fieldFont);
+		schoolField.setCaretColor(Color.black);
 
 		employerField = new JTextField(30);
 		employerField.setBounds(40, 445, 250, 25);// 125, 350, 250, uih
 		employerField.setHorizontalAlignment(SwingConstants.CENTER);
-		employerField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
+		employerField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		employerField.setBackground(null);
-		employerField.setForeground(Color.white);
-		employerField.setFont(new Font("Oswald", Font.TYPE1_FONT, 15));
-		employerField.setCaretColor(Color.white);
+		employerField.setForeground(Color.gray);
+		employerField.setFont(fieldFont);
+		employerField.setCaretColor(Color.black);
 
 		yesBtn = new JRadioButton("Yes");
 		yesBtn.setBounds(140, 510, 65, 20);
-		yesBtn.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
-
+		yesBtn.setFont(labelFont);
+		yesBtn.setOpaque(false);
+		
 		noBtn = new JRadioButton("No");
 		noBtn.setBounds(230, 510, 50, 20);
-		noBtn.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		noBtn.setFont(labelFont);
+		noBtn.setOpaque(false);
 
 		editBtn = new JButton("Edit");
 		editBtn.setBounds(510, 530, 120, 30);
-		editBtn.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		editBtn.setFont(labelFont);
 		editBtn.setOpaque(true);
 		editBtn.setBorderPainted(false);
 		editBtn.setBackground(new Color(224, 224, 224));
@@ -200,7 +205,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 
 		saveBtn = new JButton("Save");
 		saveBtn.setBounds(450, 530, 120, 30);
-		saveBtn.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		saveBtn.setFont(labelFont);
 		saveBtn.setOpaque(true);
 		saveBtn.setBorderPainted(false);
 		saveBtn.setBackground(new Color(224, 224, 224));
@@ -208,7 +213,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 
 		cancelBtn = new JButton("Cancel");
 		cancelBtn.setBounds(590, 530, 120, 30);
-		cancelBtn.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
+		cancelBtn.setFont(labelFont);
 		cancelBtn.setOpaque(true);
 		cancelBtn.setBorderPainted(false);
 		cancelBtn.setBackground(new Color(224, 224, 224));
@@ -239,19 +244,8 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	}
 
 	public void addComponentsToPanel() {
-		/*profilePanel.add(titleLabel);//profilePanel.add(Logo);
-		profilePanel.add(usernameLabel); profilePanel.add(usernameField);
-		profilePanel.add(firstNameLabel);profilePanel.add(firstNameField);
-		profilePanel.add(lastNameLabel); profilePanel.add(lastNameField);
-		profilePanel.add(schoolLabel);   profilePanel.add(schoolField);
-		profilePanel.add(communityLabel);profilePanel.add(communityField);
-		profilePanel.add(employerLabel); profilePanel.add(employerField);
-		profilePanel.add(phoneLabel); profilePanel.add(phoneField);
-		profilePanel.add(privacyLabel);
-		profilePanel.add(yesBtn); profilePanel.add(noBtn);
-		profilePanel.add(editBtn);*/
-		this.add(titleLabel); this.add(lineSeparation);
 		//profilePanel.add(Logo);
+		this.add(titleLabel); this.add(lineSeparation);
 		this.add(usernameLabel); this.add(usernameField);
 		this.add(emailLabel); this.add(emailField);
 		this.add(firstNameLabel);this.add(firstNameField);
@@ -263,12 +257,11 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		this.add(privacyLabel);
 		this.add(yesBtn); add(noBtn);
 		this.add(editBtn);
-
 	}
 
 	public void setWindowProperties() {
 		this.setSize(800, 600);
-		this.setBackground(new Color(216, 227, 241));
+		this.setBackground(new Color(253, 252, 252));///(new Color(216, 227, 241));
 		this.setLayout(null);
 	}
 
@@ -406,10 +399,11 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == editBtn) {
+			editBtn.setVisible(false);	
 			this.remove(editBtn);
-			editBtn.setVisible(false);
 			this.add(saveBtn);
 			this.add(cancelBtn);
+			cancelBtn.setVisible(true);
 
 			usernameField.setEnabled(true);
 			firstNameField.setEnabled(true);
@@ -421,7 +415,6 @@ public class ProfileScreen extends JPanel implements ActionListener {
 			employerField.setEnabled(true);
 			yesBtn.setEnabled(true);
 			noBtn.setEnabled(true);
-
 		}
 		if (e.getSource() == saveBtn) {
 			// conduct username duplication checks
@@ -429,9 +422,11 @@ public class ProfileScreen extends JPanel implements ActionListener {
 			// update file database, update tree
 		}
 		if (e.getSource() == cancelBtn) {
+			this.add(editBtn);
+			cancelBtn.setVisible(false);
+			//saveBtn.setVisible(false);
 			this.remove(cancelBtn);
 			this.remove(saveBtn);
-			this.add(editBtn);
 			editBtn.setVisible(true);
 			usernameField.setEnabled(false);
 			firstNameField.setEnabled(false);
@@ -443,6 +438,22 @@ public class ProfileScreen extends JPanel implements ActionListener {
 			employerField.setEnabled(false);
 			yesBtn.setEnabled(false);
 			noBtn.setEnabled(false);
+			
+			/*usernameField.setText(currentUser.getUsername());
+			firstNameField.setText(currentUser.getFirstName());
+			lastNameField.setText(currentUser.getLastName());
+			phoneField.setText(currentUser.getPhone());
+			emailField.setText(currentUser.getEmail());
+			communityField.setText(currentUser.getCommunity());
+			schoolField.setText(currentUser.getSchool());
+			employerField.setText(currentUser.getEmployer());
+			if (currentUser.getPrivacy() == 1) {
+				yesBtn.setSelected(true);
+				noBtn.setSelected(false);
+			} else {
+				noBtn.setSelected(true);
+				yesBtn.setSelected(false);
+			}*/
 		}
 		if (e.getSource() == yesBtn) {
 			noBtn.setSelected(false);

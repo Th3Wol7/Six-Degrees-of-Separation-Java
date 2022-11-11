@@ -7,6 +7,8 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import com.application.gUI.utils.FrameUtility.FrameDragListener;
+
 
 public class BaseScreen {
 
@@ -45,7 +47,12 @@ public class BaseScreen {
         //sets Pop up location of frame to center of the screen and make visible
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
+        
+        //Allows user to move frame around
+        FrameDragListener frameDragListener = new FrameDragListener(frame);
+        frame.addMouseListener(frameDragListener);
+        frame.addMouseMotionListener(frameDragListener);
+        
     }
 
     public JFrame getBaseFrame() {
