@@ -28,7 +28,7 @@ import com.application.gUI.utils.FrameUtility;
 import com.application.models.Person;
 
 @SuppressWarnings("serial")
-public class ShowProfile extends JPanel implements ActionListener {
+public class ProfileScreen extends JPanel implements ActionListener {
 	private static Icon profileIcon;
 	private static JLabel Logo;
 	private JLabel titleLabel, usernameLabel, firstNameLabel,lastNameLabel; 
@@ -42,7 +42,7 @@ public class ShowProfile extends JPanel implements ActionListener {
 	private String user;
 	private Person currentUser;
 
-	public ShowProfile(String username) {
+	public ProfileScreen(String username) {
 		this.user = username;
 		initializeComponents();
 		addComponentsToPanel();

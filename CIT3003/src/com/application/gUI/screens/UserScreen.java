@@ -176,7 +176,7 @@ public class UserScreen{
          @Override
          public void actionPerformed(ActionEvent e) {
         	primaryPanel.removeAll();
-			primaryPanel.add(new ShowProfile("jcar3"));
+			primaryPanel.add(new ProfileScreen("jcar3"));
 			primaryPanel.repaint();
 			primaryPanel.revalidate();
         }
