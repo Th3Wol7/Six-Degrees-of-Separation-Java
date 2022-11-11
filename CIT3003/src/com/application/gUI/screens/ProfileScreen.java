@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.BorderFactory;
@@ -304,7 +305,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				String school = inFileStream.next();
 				String employer = inFileStream.next();
 				int privacy = inFileStream.nextInt();
-				// ArrayList<String> activities = new ArrayList<>(); //Accounting for activity
+				ArrayList<String> activities = new ArrayList<>(); //Accounting for activity
 				/*
 				 * if(inFileStream.nextLine() != null) { activities = (ArrayList<String>)
 				 * Arrays.asList(inFileStream.nextLine().split("\\s+"));
@@ -314,7 +315,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				 * .collect(Collectors.toList()); // collect to List }
 				 */
 				person = new Person(username, firstName, lastName, phone, email, community, school, employer,
-						privacy /* ,activities2 */);
+						privacy ,activities);
 
 				if (user == person.getUsername()) {
 					usernameField.setText(person.getUsername());
@@ -378,7 +379,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				String school2 = inFileStream.next();
 				String employer2 = inFileStream.next();
 				int privacy2 = inFileStream.nextInt();
-				// ArrayList<String> activities2 = new ArrayList<>(); //Accounting for activity
+				 ArrayList<String> activities2 = new ArrayList<>(); //Accounting for activity
 				// implementation
 				/*
 				 * if(inFileStream.nextLine() != null) { activities2 = (ArrayList<String>)
@@ -388,14 +389,17 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				 * Arrays.stream(inFileStream.nextLine().split("\\s+"))
 				 * .collect(Collectors.toList()); // collect to List }
 				 */
+				 
+				 /*person = new Person(username, firstName, lastName, phone, email, community, school, employer,
+							privacy ,activities2);*/
 				String record = username2 + "\t" + firstName2 + "\t" + lastName2 + "\t" + phone2 + "\t" + email2 + "\t"
 						+ community2 + "\t" + school2 + "\t" + employer2 + "\t"
-						+ privacy2 /* +currentUser.getActivity() */ + "\n";
+						+ privacy2  +currentUser.getActivity()  + "\n";
 
 				if (username2.equals(currentUser.getUsername())) {
 					record = username + "\t" + firstName + "\t" + lastName + "\t" + phone + "\t" + email + "\t"
 							+ community + "\t" + school + "\t" + employer + "\t" + privacy
-							+ /* +currentUser.getActivity() */"\n";
+							+  currentUser.getActivity() +"\n";
 				}
 				outFileStream.write(record);
 			}
