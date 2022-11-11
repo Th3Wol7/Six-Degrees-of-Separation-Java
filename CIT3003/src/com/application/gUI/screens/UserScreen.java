@@ -5,10 +5,11 @@ import javax.swing.*;
 import com.application.gUI.utils.FrameUtility;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class UserScreen {
+public class UserScreen{
  final int panWidth = 1000;
  final int panHeight = 600;
  final int uih = 25;
@@ -33,7 +34,7 @@ public class UserScreen {
  
  private static JFrame parentFrame;
 
- public UserScreen( JFrame frame){
+ public UserScreen(JFrame frame){
 	 
 	 frame.setShape(new RoundRectangle2D.Double(0, 0, panWidth, panHeight, 30, 30));
      frame.setSize(panWidth, panHeight);
@@ -93,6 +94,7 @@ public class UserScreen {
      userPanel.add(primaryPanel, BorderLayout.CENTER);
      
      parentFrame.add(userPanel);
+    
  }
 
  //Setting up buttons and their properties
@@ -173,9 +175,11 @@ public class UserScreen {
 	 viewProfileButton.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-        	 primaryPanel = new ShowProfile("jcar3").getProfilePanel();
-        	 //userPanel.add(new ShowProfile("jcar3"), BorderLayout.CENTER);            
-         }
+        	primaryPanel.removeAll();
+			primaryPanel.add(new ShowProfile("jcar3"));
+			primaryPanel.repaint();
+			primaryPanel.revalidate();
+        }
      });
 	 
 	 friendsButton.addActionListener(new ActionListener() {

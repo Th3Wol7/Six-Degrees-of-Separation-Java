@@ -2,6 +2,7 @@ package com.application.gUI.screens;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -27,15 +28,14 @@ import com.application.gUI.utils.FrameUtility;
 import com.application.models.Person;
 
 @SuppressWarnings("serial")
-public class ShowProfile implements ActionListener {
+public class ShowProfile extends JPanel implements ActionListener {
 	private static Icon profileIcon;
 	private static JLabel Logo;
-	private JLabel titleLabel, usernameLabel, firstNameLabel,
-	lastNameLabel, phoneLabel, emailLabel, communityLabel, schoolLabel, 
-	employerLabel, privacyLabel;
-	private JTextField usernameField, firstNameField, lastNameField, 
-	phoneField, emailField, communityField, schoolField, employerField;
-	private JPanel profilePanel;
+	private JLabel titleLabel, usernameLabel, firstNameLabel,lastNameLabel; 
+	private JLabel phoneLabel, emailLabel, communityLabel, schoolLabel, employerLabel, privacyLabel;
+	private JTextField usernameField, firstNameField, lastNameField; 
+	private JTextField phoneField, emailField, communityField, schoolField, employerField;
+	private JTextField lineSeparation;
 	private JRadioButton yesBtn, noBtn;
 	private JButton editBtn, saveBtn, cancelBtn;
 	private ButtonGroup buttonGroup;
@@ -52,8 +52,7 @@ public class ShowProfile implements ActionListener {
 	}
 
 	public void initializeComponents() {
-		profilePanel = new JPanel();
-
+	
 		// profileIcon = new ImageIcon(new
 		// ImageIcon(ShowProfile.class.getResource("image file path here")).getImage()
 		// .getScaledInstance(100, 60, Image.SCALE_DEFAULT));
@@ -61,10 +60,10 @@ public class ShowProfile implements ActionListener {
 		FrameUtility.addExitButton();
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
-		profilePanel.add(FrameUtility.exitButton);
-
+		this.add(FrameUtility.exitButton);
+		
 		titleLabel = new JLabel("My Profile", SwingConstants.CENTER);
-		titleLabel.setBounds(260, 50, 200, 50);
+		titleLabel.setBounds(280, 50, 200, 50);
 		titleLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 34));
 
 		usernameLabel = new JLabel("Username", SwingConstants.LEFT);
@@ -102,7 +101,15 @@ public class ShowProfile implements ActionListener {
 		privacyLabel = new JLabel("Privacy");
 		privacyLabel.setBounds(40, 490, 200, 50);
 		privacyLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 16));
-
+		
+		lineSeparation = new JTextField(20);
+		lineSeparation.setBounds(0, 100, 800, 25);//125, 350, 250, uih
+		lineSeparation.setHorizontalAlignment(SwingConstants.CENTER);
+		lineSeparation.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.gray));
+		lineSeparation.setBackground(null);
+		lineSeparation.setCaretColor(Color.gray);
+        
+        
 		usernameField = new JTextField(20);
 		usernameField.setBounds(40, 190, 250, 25);// 125, 350, 250, uih
 		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -232,7 +239,7 @@ public class ShowProfile implements ActionListener {
 	}
 
 	public void addComponentsToPanel() {
-		profilePanel.add(titleLabel);//profilePanel.add(Logo);
+		/*profilePanel.add(titleLabel);//profilePanel.add(Logo);
 		profilePanel.add(usernameLabel); profilePanel.add(usernameField);
 		profilePanel.add(firstNameLabel);profilePanel.add(firstNameField);
 		profilePanel.add(lastNameLabel); profilePanel.add(lastNameField);
@@ -242,16 +249,27 @@ public class ShowProfile implements ActionListener {
 		profilePanel.add(phoneLabel); profilePanel.add(phoneField);
 		profilePanel.add(privacyLabel);
 		profilePanel.add(yesBtn); profilePanel.add(noBtn);
-		profilePanel.add(editBtn);
+		profilePanel.add(editBtn);*/
+		this.add(titleLabel); this.add(lineSeparation);
+		//profilePanel.add(Logo);
+		this.add(usernameLabel); this.add(usernameField);
+		this.add(emailLabel); this.add(emailField);
+		this.add(firstNameLabel);this.add(firstNameField);
+		this.add(lastNameLabel); this.add(lastNameField);
+		this.add(schoolLabel);   this.add(schoolField);
+		this.add(communityLabel);this.add(communityField);
+		this.add(employerLabel); this.add(employerField);
+		this.add(phoneLabel); this.add(phoneField);
+		this.add(privacyLabel);
+		this.add(yesBtn); add(noBtn);
+		this.add(editBtn);
+
 	}
 
 	public void setWindowProperties() {
-		profilePanel.setPreferredSize(new Dimension(800, 600));
-		profilePanel.setVisible(true);
-		profilePanel.setBackground(new Color(216, 227, 241));
-		profilePanel.setLayout(null);
-		profilePanel.setPreferredSize(new Dimension(800, 600));
-		profilePanel.setVisible(true);
+		this.setSize(800, 600);
+		this.setBackground(new Color(216, 227, 241));
+		this.setLayout(null);
 	}
 
 	public void registerListeners() {
@@ -262,13 +280,6 @@ public class ShowProfile implements ActionListener {
 		cancelBtn.addActionListener(this);
 	}
 	
-	public JPanel getProfilePanel() {
-		return profilePanel;
-	}
-
-	public void setProfilePanel(JPanel profilePanel) {
-		this.profilePanel = profilePanel;
-	}
 
 	// This method adds the users data to the respective fields on the screen
 	public void setupProfile() {//NTS: Test this method
@@ -395,9 +406,10 @@ public class ShowProfile implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == editBtn) {
-			profilePanel.remove(editBtn);
-			profilePanel.add(saveBtn);
-			profilePanel.add(cancelBtn);
+			this.remove(editBtn);
+			editBtn.setVisible(false);
+			this.add(saveBtn);
+			this.add(cancelBtn);
 
 			usernameField.setEnabled(true);
 			firstNameField.setEnabled(true);
@@ -417,9 +429,20 @@ public class ShowProfile implements ActionListener {
 			// update file database, update tree
 		}
 		if (e.getSource() == cancelBtn) {
-			profilePanel.remove(cancelBtn);
-			profilePanel.remove(saveBtn);
-			profilePanel.add(editBtn);
+			this.remove(cancelBtn);
+			this.remove(saveBtn);
+			this.add(editBtn);
+			editBtn.setVisible(true);
+			usernameField.setEnabled(false);
+			firstNameField.setEnabled(false);
+			lastNameField.setEnabled(false);
+			phoneField.setEnabled(false);
+			emailField.setEnabled(false);
+			communityField.setEnabled(false);
+			schoolField.setEnabled(false);
+			employerField.setEnabled(false);
+			yesBtn.setEnabled(false);
+			noBtn.setEnabled(false);
 		}
 		if (e.getSource() == yesBtn) {
 			noBtn.setSelected(false);
