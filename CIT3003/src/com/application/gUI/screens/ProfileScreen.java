@@ -99,7 +99,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 
 		employerLabel = new JLabel("Employer");
 		employerLabel.setBounds(40, 405, 200, 50);
-		employerLabel.setFont(labelFont);
+		employerLabel.setFont(labelFont); 
 
 		privacyLabel = new JLabel("Privacy");
 		privacyLabel.setBounds(40, 490, 200, 50);

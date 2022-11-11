@@ -19,7 +19,7 @@ public class MainScreen {
       public MainScreen() {
 
         //Try Catch block For frame creation
-        // Calls Function To create main background Plate
+        // Calls Function To create main background Plate 
 
         try {
             BaseScreen baseFrame = new BaseScreen();

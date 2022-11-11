@@ -247,7 +247,7 @@ public class UserScreen{
         	 int option1 = JOptionPane.showConfirmDialog(
                      null,
                      "Are you sure ?",
-                     "Log Out",
+                     "Exit", 
                      JOptionPane.YES_NO_OPTION
              );
              
