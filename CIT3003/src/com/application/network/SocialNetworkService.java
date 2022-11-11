@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -128,6 +130,20 @@ public class SocialNetworkService {
 	public void addPerson(Person user) {
 		network.put(user, new ArrayList<>());
 	}
+	
+	//remove a person from the network
+	public void removePerson(Person user) {
+		network.remove(user);
+		Set<Map.Entry<Person, Collection<Person>>> entries = getNetwork().entrySet();
+		entries.forEach(entry -> {	//For each person in the network
+			for(Person friend: entry.getValue()) {//for each of their friends
+				if(friend.equals(user)) {//if their friends is the user being removed, 
+					entry.getValue().remove(user);//remove the user as that persons friend
+					
+				}
+			}
+		});
+	}
 
 	// This methods makes a connection between two friends in the Social network
 	public void addFriend(Person user, Person friend) {
@@ -143,6 +159,21 @@ public class SocialNetworkService {
 		// to the collections of friends assigned to the user node data value
 		network.get(user).add(friend);
 		network.get(friend).add(user);
+	}
+	
+	public void removeFriend(Person user, Person friend) {
+		// Checking the existence of both friends in the Map- Might not be necessary
+				if (!(network.containsKey(user))) {
+					addPerson(user);
+				}
+				if (!(network.containsKey(friend))) {
+					addPerson(user);
+				}
+
+				// removing link between the two persons in the network by adding a friend
+				// to the collections of friends assigned to the user node data value
+				network.get(user).remove(friend);
+				network.get(friend).remove(user);
 	}
 
 }

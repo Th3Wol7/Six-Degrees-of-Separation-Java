@@ -28,10 +28,10 @@ public class FindSeperation {
 	public int degreeOfSeperation(Person user, Person friend) {
 		if (friendsMatch(user, friend) == true) {
 			System.out.print("Degree of seperation between" + user.getUsername() + " & " + friend.getUsername()
-					+ " is 0. Because they are direct friends");
-			return 0;
+					+ " is 1. Because they are direct friends");
+			return 1;
 		} else {
-			// search degree of
+			// search degree of separation
 			// need to be filled with code
 		}
 		return -1;

@@ -31,9 +31,9 @@ import com.application.models.Person;
 public class ProfileScreen extends JPanel implements ActionListener {
 	private static Icon profileIcon;
 	private static JLabel Logo;
-	private JLabel titleLabel, usernameLabel, firstNameLabel,lastNameLabel; 
+	private JLabel titleLabel, usernameLabel, firstNameLabel, lastNameLabel;
 	private JLabel phoneLabel, emailLabel, communityLabel, schoolLabel, employerLabel, privacyLabel;
-	private JTextField usernameField, firstNameField, lastNameField; 
+	private JTextField usernameField, firstNameField, lastNameField;
 	private JTextField phoneField, emailField, communityField, schoolField, employerField;
 	private JTextField lineSeparation;
 	private JRadioButton yesBtn, noBtn;
@@ -53,7 +53,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	}
 
 	public void initializeComponents() {
-	
+
 		// profileIcon = new ImageIcon(new
 		// ImageIcon(ShowProfile.class.getResource("image file path here")).getImage()
 		// .getScaledInstance(100, 60, Image.SCALE_DEFAULT));
@@ -64,7 +64,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		this.add(FrameUtility.exitButton);
 		fieldFont = new Font("Oswald", Font.TYPE1_FONT, 15);
 		labelFont = new Font("Oswald", Font.TYPE1_FONT, 16);
-		
+
 		titleLabel = new JLabel("My Profile", SwingConstants.CENTER);
 		titleLabel.setBounds(280, 50, 200, 50);
 		titleLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 34));
@@ -99,20 +99,19 @@ public class ProfileScreen extends JPanel implements ActionListener {
 
 		employerLabel = new JLabel("Employer");
 		employerLabel.setBounds(40, 405, 200, 50);
-		employerLabel.setFont(labelFont); 
+		employerLabel.setFont(labelFont);
 
 		privacyLabel = new JLabel("Privacy");
 		privacyLabel.setBounds(40, 490, 200, 50);
 		privacyLabel.setFont(labelFont);
-		
+
 		lineSeparation = new JTextField(20);
-		lineSeparation.setBounds(0, 100, 800, 25);//125, 350, 250, uih
+		lineSeparation.setBounds(0, 100, 800, 25);// 125, 350, 250, uih
 		lineSeparation.setHorizontalAlignment(SwingConstants.CENTER);
 		lineSeparation.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.gray));
 		lineSeparation.setBackground(null);
 		lineSeparation.setCaretColor(Color.gray);
-        
-        
+
 		usernameField = new JTextField(20);
 		usernameField.setBounds(40, 190, 250, 25);// 125, 350, 250, uih
 		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -189,12 +188,14 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		yesBtn.setBounds(140, 510, 65, 20);
 		yesBtn.setFont(labelFont);
 		yesBtn.setOpaque(false);
+		yesBtn.setFocusPainted(false);
 		
 		noBtn = new JRadioButton("No");
 		noBtn.setBounds(230, 510, 50, 20);
 		noBtn.setFont(labelFont);
 		noBtn.setOpaque(false);
-
+		noBtn.setFocusPainted(false);
+		
 		editBtn = new JButton("Edit");
 		editBtn.setBounds(510, 530, 120, 30);
 		editBtn.setFont(labelFont);
@@ -233,6 +234,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		buttonGroup = new ButtonGroup();
 		buttonGroup.add(yesBtn);
 		buttonGroup.add(noBtn);
+		
 	}
 
 	public Person getCurrentUser() {
@@ -244,24 +246,34 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	}
 
 	public void addComponentsToPanel() {
-		//profilePanel.add(Logo);
-		this.add(titleLabel); this.add(lineSeparation);
-		this.add(usernameLabel); this.add(usernameField);
-		this.add(emailLabel); this.add(emailField);
-		this.add(firstNameLabel);this.add(firstNameField);
-		this.add(lastNameLabel); this.add(lastNameField);
-		this.add(schoolLabel);   this.add(schoolField);
-		this.add(communityLabel);this.add(communityField);
-		this.add(employerLabel); this.add(employerField);
-		this.add(phoneLabel); this.add(phoneField);
+		// profilePanel.add(Logo);
+		this.add(titleLabel);
+		this.add(lineSeparation);
+		this.add(usernameLabel);
+		this.add(usernameField);
+		this.add(emailLabel);
+		this.add(emailField);
+		this.add(firstNameLabel);
+		this.add(firstNameField);
+		this.add(lastNameLabel);
+		this.add(lastNameField);
+		this.add(schoolLabel);
+		this.add(schoolField);
+		this.add(communityLabel);
+		this.add(communityField);
+		this.add(employerLabel);
+		this.add(employerField);
+		this.add(phoneLabel);
+		this.add(phoneField);
 		this.add(privacyLabel);
-		this.add(yesBtn); add(noBtn);
+		this.add(yesBtn);
+		add(noBtn);
 		this.add(editBtn);
 	}
 
 	public void setWindowProperties() {
 		this.setSize(800, 600);
-		this.setBackground(new Color(253, 252, 252));///(new Color(216, 227, 241));
+		this.setBackground(new Color(253, 252, 252));/// (new Color(216, 227, 241));
 		this.setLayout(null);
 	}
 
@@ -272,10 +284,9 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		saveBtn.addActionListener(this);
 		cancelBtn.addActionListener(this);
 	}
-	
 
 	// This method adds the users data to the respective fields on the screen
-	public void setupProfile() {//NTS: Test this method
+	public void setupProfile() {// NTS: Test this method
 
 		Scanner inFileStream = null;
 
@@ -337,7 +348,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	}
 
 	// This method updates the new info entered by the user;
-	public void updateUser() {//NTS: Test this method
+	public void updateUser() {// NTS: Test this method
 		String username = usernameField.getText().trim();
 		String firstName = firstNameField.getText().trim();
 		String lastName = lastNameField.getText().trim();
@@ -399,7 +410,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == editBtn) {
-			editBtn.setVisible(false);	
+			editBtn.setVisible(false);
 			this.remove(editBtn);
 			this.add(saveBtn);
 			this.add(cancelBtn);
@@ -424,7 +435,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		if (e.getSource() == cancelBtn) {
 			this.add(editBtn);
 			cancelBtn.setVisible(false);
-			//saveBtn.setVisible(false);
+			// saveBtn.setVisible(false);
 			this.remove(cancelBtn);
 			this.remove(saveBtn);
 			editBtn.setVisible(true);
@@ -438,22 +449,20 @@ public class ProfileScreen extends JPanel implements ActionListener {
 			employerField.setEnabled(false);
 			yesBtn.setEnabled(false);
 			noBtn.setEnabled(false);
-			
-			/*usernameField.setText(currentUser.getUsername());
-			firstNameField.setText(currentUser.getFirstName());
-			lastNameField.setText(currentUser.getLastName());
-			phoneField.setText(currentUser.getPhone());
-			emailField.setText(currentUser.getEmail());
-			communityField.setText(currentUser.getCommunity());
-			schoolField.setText(currentUser.getSchool());
-			employerField.setText(currentUser.getEmployer());
-			if (currentUser.getPrivacy() == 1) {
-				yesBtn.setSelected(true);
-				noBtn.setSelected(false);
-			} else {
-				noBtn.setSelected(true);
-				yesBtn.setSelected(false);
-			}*/
+
+			/*
+			 * usernameField.setText(currentUser.getUsername());
+			 * firstNameField.setText(currentUser.getFirstName());
+			 * lastNameField.setText(currentUser.getLastName());
+			 * phoneField.setText(currentUser.getPhone());
+			 * emailField.setText(currentUser.getEmail());
+			 * communityField.setText(currentUser.getCommunity());
+			 * schoolField.setText(currentUser.getSchool());
+			 * employerField.setText(currentUser.getEmployer()); if
+			 * (currentUser.getPrivacy() == 1) { yesBtn.setSelected(true);
+			 * noBtn.setSelected(false); } else { noBtn.setSelected(true);
+			 * yesBtn.setSelected(false); }
+			 */
 		}
 		if (e.getSource() == yesBtn) {
 			noBtn.setSelected(false);
