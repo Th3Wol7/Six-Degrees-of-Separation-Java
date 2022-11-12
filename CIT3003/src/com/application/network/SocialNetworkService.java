@@ -29,7 +29,7 @@ public class SocialNetworkService {
 		this.network = network;
 	}
 
-	// This method retreives user data from the file database and create the network
+	// This method retrieves user data from the file database and create the network
 	// and connections
 	public void createNetwork() {
 		Scanner inFileStream1 = null;
@@ -41,7 +41,7 @@ public class SocialNetworkService {
 			inFileStream1 = new Scanner(new File("./database/people.txt"));
 			inFileStream2 = new Scanner(new File("./database/friends.txt"));
 			inFileStream3 = new Scanner(new File("./database/peopleCopy.txt"));
-			inFileStream4 = new Scanner(new File("./database/Activities.txt"));
+			inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));
 			while (inFileStream1.hasNext()) { // #while 1
 				String username = inFileStream1.next();
 				String firstName = inFileStream1.next();
@@ -56,22 +56,17 @@ public class SocialNetworkService {
 				List<String> activities = new ArrayList<>(); // Accounting for activity
 				while (inFileStream4.hasNext()) {// #while 2
 					if (username.equals(inFileStream4.next())) {
-						String actUser = inFileStream4.next();
-						String actFName = inFileStream4.next();
-						String actLName = inFileStream4.next();
-						if (inFileStream4.nextLine() != null) {
-							activities = (ArrayList<String>) Arrays.stream(inFileStream4.nextLine().split("\\s+"))
-									.collect(Collectors.toList()); // collect to List
-							/*
-							 * if(inFileStream.nextLine() != null) { activities = (ArrayList<String>)
-							 * Arrays.asList(inFileStream.nextLine().split("\\s+"));
-							 */
+						String actUser = inFileStream4.next();//this variables are necessary
+						String actFName = inFileStream4.next();//this variables are necessary
+						String act = inFileStream4.next();
+						String act1[] = act.split(",");
+						for(int i = 0; i <act1.length; i++) {
+							activities.add(act1[i]);
 						}
-						//ressetting in file stream
-						inFileStream4 = new Scanner(new File("./database/Activities.txt"));
-						
-						break;// exit #while 2
-					}
+						//resetting in file stream
+						inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));
+						break;// exit #while 2	
+						}
 				}
 				person = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
 						activities);
@@ -86,31 +81,28 @@ public class SocialNetworkService {
 					// If the first ID number of the line is equal to that of the current person
 					if (friendsListing[0].equalsIgnoreCase(person.getUsername())) {
 						while (inFileStream3.hasNext()) {// Reading the database again //#while 4
-							String username2 = inFileStream1.next();
-							String firstName2 = inFileStream1.next();
-							String lastName2 = inFileStream1.next();
-							String phone2 = inFileStream1.next();
-							String email2 = inFileStream1.next();
-							String community2 = inFileStream1.next();
-							String school2 = inFileStream1.next();
-							String employer2 = inFileStream1.next();
+							String username2 = inFileStream3.next();
+							String firstName2 = inFileStream3.next();
+							String lastName2 = inFileStream3.next();
+							String phone2 = inFileStream3.next();
+							String email2 = inFileStream3.next();
+							String community2 = inFileStream3.next();
+							String school2 = inFileStream3.next();
+							String employer2 = inFileStream3.next();
 							System.out.println(employer2);///For testing
-							int privacy2 = inFileStream1.nextInt();
+							int privacy2 = inFileStream3.nextInt();
 							ArrayList<String> activities2 = new ArrayList<>(); // Accounting for activity
 							while (inFileStream4.hasNext()) {// #while 5
 								if (username2.equals(inFileStream4.next())) {
-									String actUser = inFileStream4.next();
-									String actFName = inFileStream4.next();
-									String actLName = inFileStream4.next();
-									if (inFileStream4.nextLine() != null) {
-
-										activities2 = (ArrayList<String>) Arrays
-												.stream(inFileStream4.nextLine().split("\\s+"))
-												.collect(Collectors.toList()); // collect to List
-
+									String actUser = inFileStream4.next();//this variables are necessary
+									String actFName = inFileStream4.next();//this variables are necessary
+									String act = inFileStream4.next();
+									String act1[] = act.split(",");
+									for(int i = 0; i <act1.length; i++) {
+										activities2.add(act1[i]);
 									}
-									//ressetting in file stream
-									inFileStream4 = new Scanner(new File("./database/Activities.txt"));
+									//resetting in file stream
+									inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));
 									break;// exit #while 2
 								}
 							}
@@ -122,6 +114,7 @@ public class SocialNetworkService {
 							for (int i = 1; i < friendsListing.length; i++) {
 								if (person2.getUsername().equalsIgnoreCase(friendsListing[i])) {
 									friends.add(person2);
+									System.out.println(person2);
 								} // search key value
 							}
 						}

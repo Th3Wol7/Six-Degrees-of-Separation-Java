@@ -292,7 +292,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		Scanner inFileStream = null;
 
 		try {
-			inFileStream = new Scanner(new File("../database/people.txt"));
+			inFileStream = new Scanner(new File("./database/people.txt"));
 
 			while (inFileStream.hasNext()) {
 				Person person;
