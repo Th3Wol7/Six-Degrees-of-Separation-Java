@@ -50,7 +50,7 @@ public class SocialNetworkService {
 				String school = inFileStream1.next();
 				String employer = inFileStream1.next();
 				int privacy = inFileStream1.nextInt();
-				// ArrayList<String> activities = new ArrayList<>(); //Accounting for activity
+				 ArrayList<String> activities = new ArrayList<>(); //Accounting for activity
 				/*
 				 * if(inFileStream.nextLine() != null) { activities = (ArrayList<String>)
 				 *		 Arrays.asList(inFileStream.nextLine().split("\\s+"));
@@ -61,7 +61,7 @@ public class SocialNetworkService {
 				 * }
 				 */
 				person = new Person(username, firstName, lastName, phone, email, community, school, 
-								employer, privacy /* ,activities2 */);
+								employer, privacy ,activities );
 
 				Collection<Person> friends = new ArrayList<>();
 				while (inFileStream2.hasNextLine()) {// Reading the friends list an entire line at a time
@@ -81,7 +81,7 @@ public class SocialNetworkService {
 							String school2 = inFileStream1.next();
 							String employer2 = inFileStream1.next();
 							int privacy2 = inFileStream1.nextInt();
-							// ArrayList<String> activities2 = new ArrayList<>(); //Accounting for activity
+							ArrayList<String> activities2 = new ArrayList<>(); //Accounting for activity
 							// implementation
 							/*
 							 * if(inFileStream.nextLine() != null) { activities2 = (ArrayList<String>)
@@ -93,7 +93,7 @@ public class SocialNetworkService {
 							 */
 
 							person2 = new Person(username2, firstName2, lastName2, phone2, email2, community2,
-									school2,employer2, privacy2 /* ,activities2 */);
+									school2,employer2, privacy2 ,activities2);
 
 							// Check if any user name retrieved from the friends list
 							// matches the user name of the current person that was read
