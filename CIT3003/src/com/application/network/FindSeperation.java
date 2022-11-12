@@ -39,6 +39,11 @@ public class FindSeperation {
 		if(!(socialNet.getNetwork().isEmpty())) {//For Testing purposes
 			System.out.println(socialNet.getNetwork().get(person));//For Testing purposes
 		}
+		//NOTE WELL: THE INFO BEING DISPLAYED IN THE CONSOLE IS THE FRIENDS OF THE 
+		//USER 'ACKEEM SCWARCT" THAT IS BEING RETRIEVED FROM THE NETWORK IN LINE 40
+		
+		
+		
 	}
 
 	FindSeperation(SocialNetworkService sns) {

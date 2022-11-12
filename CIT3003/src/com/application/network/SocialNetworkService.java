@@ -114,7 +114,7 @@ public class SocialNetworkService {
 							for (int i = 1; i < friendsListing.length; i++) {
 								if (person2.getUsername().equalsIgnoreCase(friendsListing[i])) {
 									friends.add(person2);
-									System.out.println(person2);
+									//System.out.println(person2);//For Testing Purposes
 								} // search key value
 							}
 						}

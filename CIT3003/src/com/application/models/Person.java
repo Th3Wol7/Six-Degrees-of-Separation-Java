@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable{
+public class Person implements Serializable, Comparable<Person>{
 	private String username;
 	private String firstName;
 	private String lastName;
@@ -145,6 +145,11 @@ public class Person implements Serializable{
 		return "Username: "+ getUsername()+ "\nFirstname: " + getFirstName() + "\nLastname: " + getLastName() + "\nPhone: "
 				+ getPhone() + "\nEmail: " + getEmail() + "\nCommunity: " + getCommunity() + "\nSchool: "
 				+ getSchool() + "\nEmployer: " + getEmployer() + "\nPrivacy: " + getPrivacy() +"\n Activities: " +getActivity();
+	}
+
+	@Override
+	public int compareTo(Person obj) {
+		return this.getFirstName().compareTo(obj.getFirstName());
 	}
 
 }
