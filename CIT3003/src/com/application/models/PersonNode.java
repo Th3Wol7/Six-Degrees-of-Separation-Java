@@ -1,91 +1,76 @@
 package com.application.models;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
+//new ShortestPath(node_A, node_E).bfs();
+
 public class PersonNode {
-
-	//Node attributes
 	private Person data;
-	private PersonNode left;
-	private PersonNode right;
-	private int colour;
-	private PersonNode parent;
+    private boolean visited;
+    private List<PersonNode> friends;
+    private PersonNode previous;
 	
-	//Default Constructor
-	public PersonNode() {
-		this.data = null;
-		this.left = null;
-		this.right = null;
-		this.colour = 1; //Where 1 represents red
-		this.parent = null;
-	}
-	
-	
-	//Primary Constructor
-	public PersonNode(Person data, PersonNode left, PersonNode right, int colour, PersonNode parent) {
-		this.data = data;
-		this.left = right;
-		this.right = right;
-		this.colour = colour;
-		this.parent = parent;
-	}
-	
-	//Primary Constructor 2
-	public PersonNode(Person data) {
-		this.data = data;
-		this.left = null;
-		this.right = null;
-		this.colour = 1; //Where 1 represents red
-		this.parent = null;
-	}
-
-	//Getters and setters
-	public Person getData() {
+    
+    public PersonNode(Person user) {
+    	this.data = user;
+    	this.visited = false;
+    	this.friends = new LinkedList<PersonNode>();
+    	this.previous = null;
+    }
+    
+    
+    public PersonNode(Person user, Collection<Person> neighbours){
+    	this.data = user;
+    	this.friends = adjacent(neighbours);
+    	this.visited = false;
+    	this.previous = null;
+    }
+    
+    public void addNeighbour(PersonNode node) {
+    	this.friends.add(node);
+    	node.getFriends().add(this);
+    }
+    
+    public List<PersonNode> adjacent(Collection<Person> neighbours){
+    	List<PersonNode> converted =  new LinkedList<PersonNode>();
+    	for(Person person: neighbours) {
+    		converted.add(new PersonNode(person));
+    	}
+    	return converted;
+    }
+ 
+    public Person getData() {
 		return data;
 	}
-
-
 	public void setData(Person data) {
 		this.data = data;
 	}
-
-
-	public PersonNode getLeft() {
-		return left;
+	public boolean isVisited() {
+		return visited;
+	}
+	public void setVisited(boolean visited) {
+		this.visited = visited;
+	}
+	public List<PersonNode> getFriends() {
+		return friends;
+	}
+	public void setFriends(List<PersonNode> friends) {
+		this.friends = friends;
+	}
+	public PersonNode getPrevious() {
+		return previous;
+	}
+	public void setPrevious(PersonNode previous) {
+		this.previous = previous;
 	}
 
 
-	public void setLeft(PersonNode left) {
-		this.left = left;
+	@Override
+	public String toString() {
+		return "PersonNode [getData()=" + getData() + ", isVisited()=" + isVisited() + ", getFriends()=" + getFriends()
+				+ ", getPrevious()=" + getPrevious() + "]";
 	}
-
-
-	public PersonNode getRight() {
-		return right;
-	}
-
-
-	public void setRight(PersonNode right) {
-		this.right = right;
-	}
-
-
-	public int getColour() {
-		return colour;
-	}
-
-
-	public void setColour(int colour) {
-		this.colour = colour;
-	}
-
-
-	public PersonNode getParent() {
-		return parent;
-	}
-
-
-	public void setParent(PersonNode parent) {
-		this.parent = parent;
-	}
-
-	
+    
 }

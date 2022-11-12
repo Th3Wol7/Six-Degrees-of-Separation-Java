@@ -4,13 +4,20 @@ package com.application.network;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Stream;
+
+import com.application.models.Node;
 //import org.apache.commons.lang3.StringUtils;
 import com.application.models.Person;
+import com.application.models.PersonNode;
+import com.application.utils.network.BreadthFirstSearch;
 
 
 public class FindSeperation {
@@ -40,6 +47,9 @@ public class FindSeperation {
 				"Gardening", "Get a manicure or pedicure", "Cooking", "volunteering"));
 		 
 	 }*/
+	
+	
+	
 	// Returns the degree of separation between users in the social
 	// network via the Dijkstra's algorithm another shortest path algorithm
 	// or you could create your own conside the bidirectional search algorithm to
@@ -48,16 +58,68 @@ public class FindSeperation {
 	// DFS. Implication? you might visit one node twice that must be mitigated
 	// during
 	// divide bfs....bidirectional search employs divide and conquer techniques
-	public int degreeOfSeperation(Person user, Person friend) {
-		if (friendsMatch(user, friend) == true) {
-			System.out.print("Degree of seperation between" + user.getUsername() + " & " + friend.getUsername()
+	public int degreeOfSeperation(Person user, Person user2) {
+		if (friendsMatch(user, user2) == true) {
+			System.out.print("Degree of seperation between" + user.getUsername() + " & " + user2.getUsername()
 					+ " is 1. Because they are direct friends");
 			return 1;
 		} else {
-			// search degree of separation
-			// need to be filled with code
+			
+		//If any of of the users friends is a friend of user2 return 2 degrees of separation	
+		//two because they both have mutual friends that they are 1 degree away from
+		//otherwise keep looping and record the 6 degree of separation
+		if (findFriends(user) != null) {// If user has friends then...
+			for (Person person : findFriends(user)) {
+				List<Person> matches = new ArrayList<>();
+				if (getSocialNet().getNetwork().get(user2).contains(person)) {
+					System.out.print("Degree of seperation between" + user.getUsername() + " & " + user2.getUsername()
+					+ " is 2. Because they share a mutual friend.");
+					return 2;
+				}
+			}					
 		}
-		return -1;
+		
+		PersonNode nodeA = new PersonNode(user, getSocialNet().getNetwork().get(user));
+		PersonNode nodeB = new PersonNode(user2, getSocialNet().getNetwork().get(user2));
+		return new BreadthFirstSearch(nodeA, nodeB).separationDegree();
+		
+		//Here we want to say, if we search and realize that the two person are not friends
+		//then we search their individual friends list and find that the are no mutual friends there
+		//we need to search the friends of the user's friends to see if any of them are friends with 
+		//the user2's friends
+		
+		
+		
+		
+		/*if (findFriends(user) != null) {// If user has friends then...
+			List<Person> matches = new ArrayList<>();
+			int i = 0;
+			for (Person person : findFriends(user)) {
+				
+				if(getSocialNet().getNetwork().get(user2).contains(person)) {
+					matches.add(person);
+				}
+				i++;
+			}
+			//If nothing is in the list
+			if(matches == new ArrayList<Person>()) {
+					for (Person person : findFriends(user)) {//for each friend of a the user	
+						for(Person userFriends : getSocialNet().getNetwork().get(person)){//for each friend of the user friend
+							if(!(matches.contains(userFriends))) {
+								matches.add(userFriends);
+								
+							}
+						}
+				
+				}
+				
+			}
+			
+			
+		}*/
+		
+		
+		}
 	}
 
 	// This method returns a list of all the person in the network
@@ -194,12 +256,4 @@ public class FindSeperation {
 			return 0;
 		}
 	
-		/*Add an implementation of how the activities of a user
-		 *  will be tracked and stored in the file database.
-		 *  Ensure that proper connections are made in 
-			conformity with TreeMap and our current implementation
-		 */
-				
-
-
 }

@@ -1,9 +1,9 @@
 package com.application.network;
 
-import com.application.models.PersonNode;
+import com.application.models.Node;
 
 public class SocialNetworkTree {
-	private PersonNode root;
+	private Node root;
 	//Need to use a TreeMap to implement social network because
 	//Tree maps uses red black trees
 	public SocialNetworkTree() {
@@ -11,10 +11,10 @@ public class SocialNetworkTree {
 		root = null;
 	}
 	
-	 PersonNode rotateLeft(PersonNode node)
+	 Node rotateLeft(Node node)
 	    {
-		 PersonNode x = node.getRight();
-		 PersonNode y = x.getLeft();
+		 Node x = node.getRight();
+		 Node y = x.getLeft();
 	        x.setLeft(node);
 	        node.setRight(y);
 	        node.setParent(x); //Setting x as parent.
@@ -25,10 +25,10 @@ public class SocialNetworkTree {
 	 
 	 
 	    //method to performs right rotation
-	 PersonNode rotateRight(PersonNode node)
+	 Node rotateRight(Node node)
 	    {
-		 PersonNode nodeA = node.getLeft();
-		 PersonNode nodeB = nodeA.getRight();
+		 Node nodeA = node.getLeft();
+		 Node nodeB = nodeA.getRight();
 		 nodeA.setRight(node);
 	        node.setLeft(nodeB);
 	        node.setParent(nodeA);
