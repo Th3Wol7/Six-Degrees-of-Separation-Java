@@ -278,7 +278,7 @@ public class LoginScreen {
                     loginPanel.setVisible(false);
                     loginPanel.removeAll();
                     frame.remove(loginPanel);
-                   new UserScreen(frame);
+                   new UserScreen(frame, userName.getText().trim());
             }
 
         });

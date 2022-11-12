@@ -52,7 +52,7 @@ public class SocialNetworkService {
 				String school = inFileStream1.next();
 				String employer = inFileStream1.next();
 				int privacy = inFileStream1.nextInt();
-				System.out.println(privacy);//For testing purposes
+				//System.out.println(privacy);//For testing purposes
 				List<String> activities = new ArrayList<>(); // Accounting for activity
 				while (inFileStream4.hasNext()) {// #while 2
 					if (username.equals(inFileStream4.next())) {
@@ -77,7 +77,7 @@ public class SocialNetworkService {
 					String[] friendsListing;
 					// Separating words in line to retrieve individual friend usernames
 					friendsListing = inFileStream2.nextLine().split("\\s+");
-					System.out.println(friendsListing[0]);///For Testing
+					//System.out.println(friendsListing[0]);///For Testing
 					// If the first ID number of the line is equal to that of the current person
 					if (friendsListing[0].equalsIgnoreCase(person.getUsername())) {
 						while (inFileStream3.hasNext()) {// Reading the database again //#while 4
@@ -89,7 +89,7 @@ public class SocialNetworkService {
 							String community2 = inFileStream3.next();
 							String school2 = inFileStream3.next();
 							String employer2 = inFileStream3.next();
-							System.out.println(employer2);///For testing
+						//	System.out.println(employer2);///For testing
 							int privacy2 = inFileStream3.nextInt();
 							ArrayList<String> activities2 = new ArrayList<>(); // Accounting for activity
 							while (inFileStream4.hasNext()) {// #while 5

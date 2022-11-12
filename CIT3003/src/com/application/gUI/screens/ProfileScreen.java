@@ -50,7 +50,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		addComponentsToPanel();
 		setWindowProperties();
 		registerListeners();
-		// setupProfile();
+		setupProfile();
 	}
 
 	public void initializeComponents() {
@@ -118,7 +118,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
 		usernameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		usernameField.setBackground(null);
-		usernameField.setForeground(Color.gray);
+		usernameField.setForeground(Color.black);
 		usernameField.setFont(fieldFont);
 		usernameField.setCaretColor(Color.black);
 
@@ -127,7 +127,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		firstNameField.setHorizontalAlignment(SwingConstants.CENTER);
 		firstNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		firstNameField.setBackground(null);
-		firstNameField.setForeground(Color.gray);
+		firstNameField.setForeground(Color.black);
 		firstNameField.setFont(fieldFont);
 		firstNameField.setCaretColor(Color.black);
 
@@ -136,7 +136,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		lastNameField.setHorizontalAlignment(SwingConstants.CENTER);
 		lastNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		lastNameField.setBackground(null);
-		lastNameField.setForeground(Color.gray);
+		lastNameField.setForeground(Color.black);
 		lastNameField.setFont(fieldFont);
 		lastNameField.setCaretColor(Color.black);
 
@@ -145,7 +145,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		phoneField.setHorizontalAlignment(SwingConstants.CENTER);
 		phoneField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		phoneField.setBackground(null);
-		phoneField.setForeground(Color.gray);
+		phoneField.setForeground(Color.black);
 		phoneField.setFont(fieldFont);
 		phoneField.setCaretColor(Color.black);
 
@@ -154,7 +154,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		emailField.setHorizontalAlignment(SwingConstants.CENTER);
 		emailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		emailField.setBackground(null);
-		emailField.setForeground(Color.gray);
+		emailField.setForeground(Color.black);
 		emailField.setFont(fieldFont);
 		emailField.setCaretColor(Color.black);
 
@@ -163,7 +163,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		communityField.setHorizontalAlignment(SwingConstants.CENTER);
 		communityField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		communityField.setBackground(null);
-		communityField.setForeground(Color.gray);
+		communityField.setForeground(Color.black);
 		communityField.setFont(fieldFont);
 		communityField.setCaretColor(Color.black);
 
@@ -172,7 +172,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		schoolField.setHorizontalAlignment(SwingConstants.CENTER);
 		schoolField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		schoolField.setBackground(null);
-		schoolField.setForeground(Color.gray);
+		schoolField.setForeground(Color.black);
 		schoolField.setFont(fieldFont);
 		schoolField.setCaretColor(Color.black);
 
@@ -181,7 +181,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		employerField.setHorizontalAlignment(SwingConstants.CENTER);
 		employerField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		employerField.setBackground(null);
-		employerField.setForeground(Color.gray);
+		employerField.setForeground(Color.black);
 		employerField.setFont(fieldFont);
 		employerField.setCaretColor(Color.black);
 
@@ -190,13 +190,13 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		yesBtn.setFont(labelFont);
 		yesBtn.setOpaque(false);
 		yesBtn.setFocusPainted(false);
-		
+
 		noBtn = new JRadioButton("No");
 		noBtn.setBounds(230, 510, 50, 20);
 		noBtn.setFont(labelFont);
 		noBtn.setOpaque(false);
 		noBtn.setFocusPainted(false);
-		
+
 		editBtn = new JButton("Edit");
 		editBtn.setBounds(510, 530, 120, 30);
 		editBtn.setFont(labelFont);
@@ -235,7 +235,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		buttonGroup = new ButtonGroup();
 		buttonGroup.add(yesBtn);
 		buttonGroup.add(noBtn);
-		
+
 	}
 
 	public Person getCurrentUser() {
@@ -290,9 +290,10 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	public void setupProfile() {// NTS: Test this method
 
 		Scanner inFileStream = null;
-
+		Scanner inFileStream2 = null;
 		try {
 			inFileStream = new Scanner(new File("./database/people.txt"));
+			inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
 
 			while (inFileStream.hasNext()) {
 				Person person;
@@ -305,19 +306,25 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				String school = inFileStream.next();
 				String employer = inFileStream.next();
 				int privacy = inFileStream.nextInt();
-				ArrayList<String> activities = new ArrayList<>(); //Accounting for activity
-				/*
-				 * if(inFileStream.nextLine() != null) { activities = (ArrayList<String>)
-				 * Arrays.asList(inFileStream.nextLine().split("\\s+"));
-				 * 
-				 * //OR!!!!!!!!!!!!! List<String> activityList =
-				 * Arrays.stream(inFileStream.nextLine().split("\\s+"))
-				 * .collect(Collectors.toList()); // collect to List }
-				 */
-				person = new Person(username, firstName, lastName, phone, email, community, school, employer,
-						privacy  ,activities);
+				ArrayList<String> activities = new ArrayList<>(); // Accounting for activity
+				while (inFileStream2.hasNext()) {// #while 2
+					if (username.equals(inFileStream2.next())) {
+						String actUser = inFileStream2.next();// this variables are necessary
+						String actFName = inFileStream2.next();// this variables are necessary
+						String act = inFileStream2.next();
+						String act1[] = act.split(",");
+						for (int i = 0; i < act1.length; i++) {
+							activities.add(act1[i]);
+						}
+						// resetting in file stream
+						inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
+						break;// exit #while 2
+					}
+				}
+				person = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
+						activities);
 
-				if (user == person.getUsername()) {
+				if (user.equals(person.getUsername())) {
 					usernameField.setText(person.getUsername());
 					firstNameField.setText(person.getFirstName());
 					lastNameField.setText(person.getLastName());
@@ -364,8 +371,10 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		}
 		Scanner inFileStream = null;
 		FileWriter outFileStream = null;
-		File dataTempFile = new File("tempDatabase.txt");
-		File databaseFile = new File("../database/people.txt");
+
+		File dataTempFile = new File("./database/tempDatabase.txt");
+		File databaseFile = new File("./database/people.txt");
+
 		try {
 			inFileStream = new Scanner(databaseFile);
 			outFileStream = new FileWriter(dataTempFile, true);
@@ -379,34 +388,25 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				String school2 = inFileStream.next();
 				String employer2 = inFileStream.next();
 				int privacy2 = inFileStream.nextInt();
-				 ArrayList<String> activities2 = new ArrayList<>(); //Accounting for activity
-				// implementation
-				/*
-				 * if(inFileStream.nextLine() != null) { activities2 = (ArrayList<String>)
-				 * Arrays.asList(inFileStream.nextLine().split("\\s+"));
-				 * 
-				 * //OR!!!!!!!!!!!!! List<String> activityList2 =
-				 * Arrays.stream(inFileStream.nextLine().split("\\s+"))
-				 * .collect(Collectors.toList()); // collect to List }
-				 */
-				 
-				 /*person = new Person(username, firstName, lastName, phone, email, community, school, employer,
-							privacy ,activities2);*/
 				String record = username2 + "\t" + firstName2 + "\t" + lastName2 + "\t" + phone2 + "\t" + email2 + "\t"
-						+ community2 + "\t" + school2 + "\t" + employer2 + "\t"
-						+ privacy2 +currentUser.getActivity() + "\n";
+						+ community2 + "\t" + school2 + "\t" + employer2 + "\t" + privacy2 + "\n";
 
 				if (username2.equals(currentUser.getUsername())) {
 					record = username + "\t" + firstName + "\t" + lastName + "\t" + phone + "\t" + email + "\t"
-							+ community + "\t" + school + "\t" + employer + "\t" + privacy
-							+ currentUser.getActivity() + "\n";
+							+ community + "\t" + school + "\t" + employer + "\t" + privacy + "\n";
 				}
 				outFileStream.write(record);
 			}
 			inFileStream.close();
 			outFileStream.close();
+		} catch (FileNotFoundException fnfe) {
+			System.err.println("File could not be found: " + fnfe.getMessage());
 		} catch (Exception e) {
-
+			e.printStackTrace();
+		} finally {
+			if (inFileStream != null) {
+				inFileStream.close();
+			}
 		}
 
 	}
@@ -453,19 +453,23 @@ public class ProfileScreen extends JPanel implements ActionListener {
 			employerField.setEnabled(false);
 			yesBtn.setEnabled(false);
 			noBtn.setEnabled(false);
-			
-			 usernameField.setText(currentUser.getUsername());
-			 firstNameField.setText(currentUser.getFirstName());
-			 lastNameField.setText(currentUser.getLastName());
-			 phoneField.setText(currentUser.getPhone());
-			 emailField.setText(currentUser.getEmail());
-			 communityField.setText(currentUser.getCommunity());
-			 schoolField.setText(currentUser.getSchool());
-			 employerField.setText(currentUser.getEmployer()); if
-			 (currentUser.getPrivacy() == 1) { yesBtn.setSelected(true);
-			 noBtn.setSelected(false); } else { noBtn.setSelected(true);
-			  yesBtn.setSelected(false); }
-			 
+
+			usernameField.setText(currentUser.getUsername());
+			firstNameField.setText(currentUser.getFirstName());
+			lastNameField.setText(currentUser.getLastName());
+			phoneField.setText(currentUser.getPhone());
+			emailField.setText(currentUser.getEmail());
+			communityField.setText(currentUser.getCommunity());
+			schoolField.setText(currentUser.getSchool());
+			employerField.setText(currentUser.getEmployer());
+			if (currentUser.getPrivacy() == 1) {
+				yesBtn.setSelected(true);
+				noBtn.setSelected(false);
+			} else {
+				noBtn.setSelected(true);
+				yesBtn.setSelected(false);
+			}
+
 		}
 		if (e.getSource() == yesBtn) {
 			noBtn.setSelected(false);

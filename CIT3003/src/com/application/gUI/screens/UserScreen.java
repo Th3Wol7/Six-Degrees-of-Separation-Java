@@ -44,10 +44,12 @@ public class UserScreen {
 	private static JButton networkButton;
 	private static JButton LogOutButton;
 	private static JButton quitButton;
-
+	
 	private static JFrame parentFrame;
 
-	public UserScreen(JFrame frame) {
+	private String user;
+	
+	public UserScreen(JFrame frame, String user) {
 
 		frame.setShape(new RoundRectangle2D.Double(0, 0, panWidth, panHeight, 30, 30));
 		frame.setSize(panWidth, panHeight);
@@ -55,6 +57,7 @@ public class UserScreen {
 		parentFrame = frame;
 		Oswald = new Font("Oswald", Font.TYPE1_FONT, 15);
 
+		this.user = user;
 		// Assigns default image to variable
 		defaultLogoIcon = new ImageIcon();
 		Logo = new JLabel(defaultLogoIcon);
@@ -187,7 +190,7 @@ public class UserScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				primaryPanel.removeAll();
-				primaryPanel.add(new ProfileScreen("jcar3"));
+				primaryPanel.add(new ProfileScreen(user));
 				primaryPanel.repaint();
 				primaryPanel.revalidate();
 			}

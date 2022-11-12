@@ -36,9 +36,9 @@ public class FindSeperation {
 		
 		Person person = new Person("aks1738" ,"Ackeem", "shwarct", "8765672033", "Ackshwarct033@gmail.com" ,	
 									"Papine", "UTECH", "none", 0, activity);//For Testing purposes
-		//if(!(socialNet.getNetwork().isEmpty())) {//For Testing purposes
+		if(!(socialNet.getNetwork().isEmpty())) {//For Testing purposes
 			System.out.println(socialNet.getNetwork().get(person));//For Testing purposes
-		//}
+		}
 	}
 
 	FindSeperation(SocialNetworkService sns) {
