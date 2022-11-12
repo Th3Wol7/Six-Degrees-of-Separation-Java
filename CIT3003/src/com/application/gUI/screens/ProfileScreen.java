@@ -379,7 +379,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				String school2 = inFileStream.next();
 				String employer2 = inFileStream.next();
 				int privacy2 = inFileStream.nextInt();
-				ArrayList<String> activities2 = new ArrayList<>(); //Accounting for activity
+				 ArrayList<String> activities2 = new ArrayList<>(); //Accounting for activity
 				// implementation
 				/*
 				 * if(inFileStream.nextLine() != null) { activities2 = (ArrayList<String>)
@@ -389,6 +389,9 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				 * Arrays.stream(inFileStream.nextLine().split("\\s+"))
 				 * .collect(Collectors.toList()); // collect to List }
 				 */
+				 
+				 /*person = new Person(username, firstName, lastName, phone, email, community, school, employer,
+							privacy ,activities2);*/
 				String record = username2 + "\t" + firstName2 + "\t" + lastName2 + "\t" + phone2 + "\t" + email2 + "\t"
 						+ community2 + "\t" + school2 + "\t" + employer2 + "\t"
 						+ privacy2 +currentUser.getActivity() + "\n";
