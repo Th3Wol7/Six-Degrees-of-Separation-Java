@@ -1,19 +1,13 @@
 package com.application.network;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 import java.util.Set;
 //import org.apache.commons.lang3.StringUtils;
 import com.application.models.Person;
@@ -55,13 +49,13 @@ public class FindSeperation {
 	// during
 	// divide bfs....bidirectional search employs divide and conquer techniques
 	public int degreeOfSeperation(Person user, Person friend) {
-		if(friendsMatch(user, friend) == true) {
-			System.out.print("Degree of seperation between"+ user.getUsername()+ " & "+ friend.getUsername()
-			+" is 0. Because they are direct friends");
-			return 0;
-		}else {
-			//search degree of
-			//need to be filled with code
+		if (friendsMatch(user, friend) == true) {
+			System.out.print("Degree of seperation between" + user.getUsername() + " & " + friend.getUsername()
+					+ " is 1. Because they are direct friends");
+			return 1;
+		} else {
+			// search degree of separation
+			// need to be filled with code
 		}
 		return -1;
 	}
@@ -76,18 +70,15 @@ public class FindSeperation {
 		currentFriends = getSocialNet().getNetwork().get(user);// storing user's current friends
 		return (List<Person>) currentFriends;
 	}
-	
-	//getter for the class attribute
 
-	//Getter
+	// Getter
 	public SocialNetworkService getSocialNet() {
 		return socialNet;
 	}
-	
 
-	//This method checks if one person is a friend of the other
+	// This method checks if one person is a friend of the other
 	public boolean friendsMatch(Person user, Person friend) {
-		if(findFriends(user) != null) {//If user has friends then...
+		if (findFriends(user) != null) {// If user has friends then...
 			for (Person person : findFriends(user)) {
 				if (friend.equals(person)) {
 					return true;

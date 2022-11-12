@@ -31,10 +31,10 @@ public class Person implements Serializable{
 		this.privacy = 0;
 		this.activity = new ArrayList<>();
 	}
-	
-	//Primary Constructor
-	public Person(String username, String firstName, String lastName, String phone, String email, String community, String school,
-			String employer, int privacy, List<String> activity) {
+
+	// Primary Constructor
+	public Person(String username, String firstName, String lastName, String phone, String email, 
+			String community, String school, String employer, int privacy, List<String> activity) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -46,9 +46,8 @@ public class Person implements Serializable{
 		this.privacy = privacy;
 		this.activity = activity;
 	}
-	
-	
-	//Copy Constructor
+
+	// Copy Constructor
 	public Person(Person obj) {
 		this.username = obj.username;
 		this.firstName = obj.firstName;
@@ -147,5 +146,5 @@ public class Person implements Serializable{
 				+ getPhone() + "\nEmail: " + getEmail() + "\nCommunity: " + getCommunity() + "\nSchool: "
 				+ getSchool() + "\nEmployer: " + getEmployer() + "\nPrivacy: " + getPrivacy() +"\n Activities: " +getActivity();
 	}
-	
+
 }
