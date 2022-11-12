@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
-import com.application.gUI.utils.FrameUtility;
+import com.application.utils.gUI.FrameUtility;
 
 public class LoginScreen {
 

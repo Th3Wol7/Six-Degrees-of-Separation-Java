@@ -7,7 +7,7 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import com.application.gUI.utils.FrameUtility.FrameDragListener;
+import com.application.utils.gUI.FrameUtility.FrameDragListener;
 
 
 public class BaseScreen {

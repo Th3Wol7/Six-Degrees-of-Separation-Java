@@ -1,4 +1,4 @@
-package com.application.gUI.utils;
+package com.application.utils.gUI;
 
 import java.awt.geom.RoundRectangle2D;
 import java.awt.*;

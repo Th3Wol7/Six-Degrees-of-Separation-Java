@@ -1,4 +1,4 @@
-package com.application.gUI.utils;
+package com.application.utils.gUI;
 
 public class GenerateFriendsList {
 

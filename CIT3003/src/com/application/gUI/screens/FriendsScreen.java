@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import com.application.gUI.utils.FrameUtility;
+import com.application.utils.gUI.FrameUtility;
 
 public class FriendsScreen extends JPanel implements ActionListener {
 	private static Icon profileIcon;

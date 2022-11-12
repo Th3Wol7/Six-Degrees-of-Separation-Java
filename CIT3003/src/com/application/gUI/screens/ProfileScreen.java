@@ -25,8 +25,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.application.gUI.utils.FrameUtility;
 import com.application.models.Person;
+import com.application.utils.gUI.FrameUtility;
 
 @SuppressWarnings("serial")
 public class ProfileScreen extends JPanel implements ActionListener {

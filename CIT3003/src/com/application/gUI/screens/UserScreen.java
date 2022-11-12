@@ -1,7 +1,5 @@
 package com.application.gUI.screens;
 
-import com.application.gUI.utils.FrameUtility;
-
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.BorderFactory;
@@ -13,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+
+import com.application.utils.gUI.FrameUtility;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
