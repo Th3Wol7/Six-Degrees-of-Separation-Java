@@ -38,10 +38,10 @@ public class SocialNetworkService {
 		Scanner inFileStream4 = null;
 		Person person = null, person2 = null;
 		try {
-			inFileStream1 = new Scanner(new File("../database/people.txt"));
-			inFileStream2 = new Scanner(new File("../database/friends.txt"));
-			inFileStream3 = new Scanner(new File("../database/people.txt"));
-			inFileStream4 = new Scanner(new File("../database/Activities.txt"));
+			inFileStream1 = new Scanner(new File("./database/people.txt"));
+			inFileStream2 = new Scanner(new File("./database/friends.txt"));
+			inFileStream3 = new Scanner(new File("./database/peopleCopy.txt"));
+			inFileStream4 = new Scanner(new File("./database/Activities.txt"));
 			while (inFileStream1.hasNext()) { // #while 1
 				String username = inFileStream1.next();
 				String firstName = inFileStream1.next();
@@ -52,6 +52,7 @@ public class SocialNetworkService {
 				String school = inFileStream1.next();
 				String employer = inFileStream1.next();
 				int privacy = inFileStream1.nextInt();
+				System.out.println(privacy);//For testing purposes
 				List<String> activities = new ArrayList<>(); // Accounting for activity
 				while (inFileStream4.hasNext()) {// #while 2
 					if (username.equals(inFileStream4.next())) {
@@ -66,8 +67,9 @@ public class SocialNetworkService {
 							 * Arrays.asList(inFileStream.nextLine().split("\\s+"));
 							 */
 						}
-
-						inFileStream4.close();
+						//ressetting in file stream
+						inFileStream4 = new Scanner(new File("./database/Activities.txt"));
+						
 						break;// exit #while 2
 					}
 				}
@@ -80,19 +82,20 @@ public class SocialNetworkService {
 					String[] friendsListing;
 					// Separating words in line to retrieve individual friend usernames
 					friendsListing = inFileStream2.nextLine().split("\\s+");
-
+					System.out.println(friendsListing[0]);///For Testing
 					// If the first ID number of the line is equal to that of the current person
 					if (friendsListing[0].equalsIgnoreCase(person.getUsername())) {
 						while (inFileStream3.hasNext()) {// Reading the database again //#while 4
-							String username2 = inFileStream3.next();
-							String firstName2 = inFileStream3.next();
-							String lastName2 = inFileStream3.next();
-							String phone2 = inFileStream3.next();
-							String email2 = inFileStream3.next();
-							String community2 = inFileStream3.next();
-							String school2 = inFileStream3.next();
-							String employer2 = inFileStream3.next();
-							int privacy2 = inFileStream3.nextInt();
+							String username2 = inFileStream1.next();
+							String firstName2 = inFileStream1.next();
+							String lastName2 = inFileStream1.next();
+							String phone2 = inFileStream1.next();
+							String email2 = inFileStream1.next();
+							String community2 = inFileStream1.next();
+							String school2 = inFileStream1.next();
+							String employer2 = inFileStream1.next();
+							System.out.println(employer2);///For testing
+							int privacy2 = inFileStream1.nextInt();
 							ArrayList<String> activities2 = new ArrayList<>(); // Accounting for activity
 							while (inFileStream4.hasNext()) {// #while 5
 								if (username2.equals(inFileStream4.next())) {
@@ -106,7 +109,8 @@ public class SocialNetworkService {
 												.collect(Collectors.toList()); // collect to List
 
 									}
-									inFileStream4.close();
+									//ressetting in file stream
+									inFileStream4 = new Scanner(new File("./database/Activities.txt"));
 									break;// exit #while 2
 								}
 							}
@@ -133,6 +137,7 @@ public class SocialNetworkService {
 		} finally {
 			if (inFileStream1 != null) {
 				inFileStream1.close();
+				inFileStream4.close();
 			}
 		}
 	}

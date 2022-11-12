@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import com.application.network.FindSeperation;
+
 public class MainScreen {
 
 	final int panWidth = 1000;
@@ -20,7 +22,7 @@ public class MainScreen {
 
 		// Try Catch block For frame creation
 		// Calls Function To create main background Plate
-
+		new FindSeperation();//For Testing purposes
 		try {
 			BaseScreen baseFrame = new BaseScreen();
 			frame = baseFrame.getBaseFrame();

@@ -28,7 +28,17 @@ public class FindSeperation {
 	// NTS: remember to Synchronize the tree for threading
 	public FindSeperation(){
 		this.socialNet = new SocialNetworkService();
-	
+		socialNet.createNetwork();//For Testing purposes 
+		List<String> activity = new ArrayList<>();
+		activity.add("running");//For Testing purposes
+		activity.add("reading");//For Testing purposes
+		activity.add("volunteering");//For Testing purposes
+		
+		Person person = new Person("aks1738" ,"Ackeem", "shwarct", "8765672033", "Ackshwarct033@gmail.com" ,	
+									"Papine", "UTECH", "none", 0, activity);//For Testing purposes
+		//if(!(socialNet.getNetwork().isEmpty())) {
+			System.out.println(socialNet.getNetwork().get(person));//For Testing purposes
+		//}
 	}
 
 	FindSeperation(SocialNetworkService sns) {
