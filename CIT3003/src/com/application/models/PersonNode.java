@@ -1,5 +1,6 @@
 package com.application.models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class PersonNode {
     public PersonNode(Person user) {
     	this.data = user;
     	this.visited = false;
-    	this.friends = new LinkedList<PersonNode>();
+    	this.friends = new ArrayList<PersonNode>();
     	this.previous = null;
     }
     
@@ -34,7 +35,7 @@ public class PersonNode {
     }
     
     public List<PersonNode> adjacent(Collection<Person> neighbours){
-    	List<PersonNode> converted =  new LinkedList<PersonNode>();
+    	List<PersonNode> converted =  new ArrayList<PersonNode>();
     	for(Person person: neighbours) {
     		converted.add(new PersonNode(person));
     	}

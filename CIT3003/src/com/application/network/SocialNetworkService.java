@@ -52,7 +52,7 @@ public class SocialNetworkService {
 				String school = inFileStream1.next();
 				String employer = inFileStream1.next();
 				int privacy = inFileStream1.nextInt();
-				//System.out.println(privacy);//For testing purposes
+				
 				List<String> activities = new ArrayList<>(); // Accounting for activity
 				while (inFileStream4.hasNext()) {// #while 2
 					if (username.equals(inFileStream4.next())) {
@@ -70,16 +70,19 @@ public class SocialNetworkService {
 				}
 				person = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
 						activities);
-
+				
 				Collection<Person> friends = new ArrayList<>();
+				inFileStream2 = new Scanner(new File("./database/friends.txt"));
 				// #while 3
 				while (inFileStream2.hasNextLine()) {// Reading the friends list an entire line at a time
 					String[] friendsListing;
-					// Separating words in line to retrieve individual friend usernames
+					//System.out.println(inFileStream2.hasNextLine());//For Testing purposes
+					//Separating words in line to retrieve individual friend usernames
 					friendsListing = inFileStream2.nextLine().split("\\s+");
-					//System.out.println(friendsListing[0]);///For Testing
+					
 					// If the first ID number of the line is equal to that of the current person
 					if (friendsListing[0].equalsIgnoreCase(person.getUsername())) {
+						inFileStream3 = new Scanner(new File("./database/peopleCopy.txt"));
 						while (inFileStream3.hasNext()) {// Reading the database again //#while 4
 							String username2 = inFileStream3.next();
 							String firstName2 = inFileStream3.next();
@@ -89,7 +92,7 @@ public class SocialNetworkService {
 							String community2 = inFileStream3.next();
 							String school2 = inFileStream3.next();
 							String employer2 = inFileStream3.next();
-						//	System.out.println(employer2);///For testing
+							//System.out.println(employer2);///For testing
 							int privacy2 = inFileStream3.nextInt();
 							ArrayList<String> activities2 = new ArrayList<>(); // Accounting for activity
 							while (inFileStream4.hasNext()) {// #while 5
@@ -121,6 +124,7 @@ public class SocialNetworkService {
 						break;
 					}
 				}
+				//System.out.println(friends);//For testing
 				network.put(person, friends);
 			}
 		} catch (FileNotFoundException fnfe) {

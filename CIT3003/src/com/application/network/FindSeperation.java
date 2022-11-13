@@ -30,25 +30,45 @@ public class FindSeperation {
 		this.socialNet = new SocialNetworkService();
 		socialNet.createNetwork();//For Testing purposes 
 		List<String> activity = new ArrayList<>();
-		activity.add("running");//For Testing purposes
+		List<String> activity2 = new ArrayList<>();
+		List<String> activity3 = new ArrayList<>();
 		activity.add("reading");//For Testing purposes
-		activity.add("volunteering");//For Testing purposes
+		activity.add("movie");//For Testing purposes
+		activity.add("running");//For Testing purposes
 		
-		Person person = new Person("aks1738" ,"Ackeem", "shwarct", "8765672033", "Ackshwarct033@gmail.com" ,	
-									"Papine", "UTECH", "none", 0, activity);//For Testing purposes
+		//reading,movie,running
+		activity2.add("reading");
+		activity2.add("dancing");
+		activity2.add("shopping");
+		
+		activity3.add("volunteering");
+		activity3.add("running");
+		activity3.add("dancing");
+	
+		
+		Person person = new Person("kfly4",	"Kermait", "Ffly", "8765672010", "KeroFfly10@yahoo.com", "Papine",
+							"UTECH", "none", 0, activity);
+		
+		Person person2 = new Person("jib1731", "Jim", "Bibby", "8765672032",	
+							"Jibibby032@gmail.com", "Papine", "UTECH", "none" , 0, activity2);
+		
+		Person person3 = new Person("Kareem235","Kareem", "Feather", "8764132519", "KaFeat56@gmail.com", "Portmore", 
+							"none", "none", 	0, activity3);
+		
 		if(!(socialNet.getNetwork().isEmpty())) {//For Testing purposes
-			System.out.println(socialNet.getNetwork().get(person));//For Testing purposes
+			//System.out.println(getSocialNet().getNetwork().get(person));
+			System.out.println(degreeOfSeperation(person, person2));	
 		}
-		//NOTE WELL: THE INFO BEING DISPLAYED IN THE CONSOLE IS THE FRIENDS OF THE 
-		//USER 'ACKEEM SCWARCT" THAT IS BEING RETRIEVED FROM THE NETWORK IN LINE 40
-		
-		
-		
 	}
 
 	FindSeperation(SocialNetworkService sns) {
 		socialNet = sns;
 	}
+	
+	//Getter
+	public SocialNetworkService getSocialNet() {
+		return socialNet;
+	}	
 	
 	/*public List<String> getActivities() {
 		return Activities;
@@ -66,13 +86,6 @@ public class FindSeperation {
 	
 	
 	// Returns the degree of separation between users in the social
-	// network via the Dijkstra's algorithm another shortest path algorithm
-	// or you could create your own conside the bidirectional search algorithm to
-	// reduce time complexity where first half is searched using BFS and second half
-	// search using
-	// DFS. Implication? you might visit one node twice that must be mitigated
-	// during
-	// divide bfs....bidirectional search employs divide and conquer techniques
 	public int degreeOfSeperation(Person user, Person user2) {
 		if (friendsMatch(user, user2) == true) {
 			System.out.print("Degree of seperation between" + user.getUsername() + " & " + user2.getUsername()
@@ -86,18 +99,32 @@ public class FindSeperation {
 		if (findFriends(user) != null) {// If user has friends then...
 			for (Person person : findFriends(user)) {
 				List<Person> matches = new ArrayList<>();
-				if (getSocialNet().getNetwork().get(user2).contains(person)) {
-					System.out.print("Degree of seperation between" + user.getUsername() + " & " + user2.getUsername()
-					+ " is 2. Because they share a mutual friend.");
+				//for all friends in the source list
+				//if that friends IDnumber equals to any frined in the destination
+				for(Person person2: getSocialNet().getNetwork().get(user2)) {
+				if (person2.getUsername().equals(person.getUsername())) {
+					System.out.print("Degree of seperation between " + user.getFirstName() + " & " + user2.getFirstName()
+					+ " is 2. Because they share a mutual friend.\nDegree: ");
 					return 2;
+				}
 				}
 			}					
 		}
+		return -1;
 		
-		PersonNode nodeA = new PersonNode(user, getSocialNet().getNetwork().get(user));
-		PersonNode nodeB = new PersonNode(user2, getSocialNet().getNetwork().get(user2));
+		/*PersonNode nodeA = new PersonNode(user);
+		for(Person src1: getSocialNet().getNetwork().get(user)) {
+			nodeA.addNeighbour(new PersonNode(src1));
+		}
+		
+		PersonNode nodeB = new PersonNode(user2);
+		for(Person src2: getSocialNet().getNetwork().get(user)) {
+			System.out.println(src2);
+			nodeB.addNeighbour(new PersonNode(src2));
+		}
+		
 		return new BreadthFirstSearch(nodeA, nodeB).separationDegree();
-		
+		*/
 		//Here we want to say, if we search and realize that the two person are not friends
 		//then we search their individual friends list and find that the are no mutual friends there
 		//we need to search the friends of the user's friends to see if any of them are friends with 
@@ -124,40 +151,28 @@ public class FindSeperation {
 								matches.add(userFriends);
 								
 							}
-						}
-				
+						}	
 				}
 				
 			}
 			
-			
-		}*/
-		
-		
+		}*/	
 		}
 	}
 
-	// This method returns a list of all the person in the network
-	// that is a friend of user passed to the method.
-	// It should jump to the person node and store the nodes that have direct
-	// connections
-	// to the user passed to the function
-	public List<Person> findFriends(Person user) {
+	
+	//This method returns a list of all the friends of a person in the network
+	public List<Person> findFriends(Person user) {//Working
 		Collection<Person> currentFriends = new ArrayList<>();
 		currentFriends = getSocialNet().getNetwork().get(user);// storing user's current friends
 		return (List<Person>) currentFriends;
 	}
 
-	// Getter
-	public SocialNetworkService getSocialNet() {
-		return socialNet;
-	}
-
 	// This method checks if one person is a friend of the other
-	public boolean friendsMatch(Person user, Person friend) {
+	public boolean friendsMatch(Person user, Person friend) {//working
 		if (findFriends(user) != null) {// If user has friends then...
 			for (Person person : findFriends(user)) {
-				if (friend.equals(person)) {
+				if (friend.getUsername().equalsIgnoreCase(person.getUsername())) {
 					return true;
 				}
 			}
@@ -165,14 +180,13 @@ public class FindSeperation {
 		return false;
 	}
 
-	// This method returns a list of users in the network that share the same
-	// employer, school or community. Ensure that each node is only checked once
-	// ensure that each node is check before stopping
+	//This method returns a list of users in the network that share the same
+	//employer, school or community. 
 	public List<Person> SuggestsFriends(Person user) {
 		List<Person> suggestedFriends = new ArrayList<>();
 		try {
 			Set<Map.Entry<Person, Collection<Person>>> entries = getSocialNet().getNetwork().entrySet();
-
+			
 			entries.forEach(entry -> {
 
 				// if person in the network is of same community, school or employer as user
@@ -186,9 +200,6 @@ public class FindSeperation {
 						suggestedFriends.add(entry.getKey());
 					}
 				}
-
-				// System.out.println(entry.getKey() + "->"
-				// + entry.getValue());
 			});
 
 		} catch (NullPointerException ne) {
@@ -205,9 +216,6 @@ public class FindSeperation {
 		return suggestedFriends;
 	}
 	
-	
-	
-	
 		//This method returns a list of activities suggestions to a user based 
 		//on the activities of the users in the network that share the same
 		// employer, school or community. Ensure that each node is only checked once
@@ -217,7 +225,6 @@ public class FindSeperation {
 		}*/
 		public List<String> SuggestsActivities(Person user) {
 			List<String> activities = new ArrayList<>();
-
 			try {
 				Set<Map.Entry<Person, Collection<Person>>> entries = getSocialNet().getNetwork().entrySet();
 				entries.forEach(entry -> {
@@ -264,8 +271,7 @@ public class FindSeperation {
 			return activities;
 		}
 	
-		//This method should determine the average degree of separation of the nodes in the tree
-		//then return the value
+		//This method determine the average degree of separation of the nodes in the tree
 		public int averageDegreeOfSeperation() {
 			
 			return 0;

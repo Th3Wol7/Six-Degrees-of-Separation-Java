@@ -29,16 +29,18 @@ public class BreadthFirstSearch/* <Person> */ {
 	}
 
 	public int separationDegree() {
+		List<PersonNode> printer = new ArrayList<>();///For testing
 		Queue<PersonNode> queue = new LinkedList<>();// queue to store nodes to be visited along the breadth
 		start.setVisited(true); // mark source node as visited
 		queue.add(start); // push src node to queue
 		while (!queue.isEmpty()) {
 			PersonNode currentNode = queue.poll();// traverse all nodes along the breadth
 			// traverse along the node's breadth
-			for (PersonNode node : currentNode.getFriends()) {
+			for (PersonNode node: currentNode.getFriends()) {
 				if (!node.isVisited()) {
 					node.setVisited(true);// // mark it visited
 					queue.add(node);
+					printer.add(node);
 					node.setPrevious(currentNode);
 					if (node == destination) {
 						queue.clear();
@@ -47,6 +49,7 @@ public class BreadthFirstSearch/* <Person> */ {
 				}
 			}
 		}
+		//System.out.println(printer);
 		return traceRoute();
 	}
 
@@ -65,10 +68,11 @@ public class BreadthFirstSearch/* <Person> */ {
 		Collections.reverse(route);
 		// Output the route
 		for (PersonNode links : route) {
-			System.out.print(links.getData().getUsername() + "-->");
+			//System.out.print(links.getData().getUsername() + "-->");
 		}
+		System.out.println(route);
 
-		return (route.size() - 1);
+		return (route.size()-1);
 	}
 
 	
