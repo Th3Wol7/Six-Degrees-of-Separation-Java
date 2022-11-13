@@ -159,7 +159,7 @@ public class FindSeperation {
 									 * true) { System.out.println("match:" + compare); } else {
 									 * System.out.println("The list of activity" + compare);
 									 */
-									if (entry.getKey().getActivity().contains(user.getActivity().get(i++))) {
+									if (entry.getKey().getActivity().containsIgnoreCase(user.getActivity().get(i++))) {
 										System.out.println("The user is participating in these activities already.");
 
 									} else {
@@ -183,7 +183,7 @@ public class FindSeperation {
 				System.out.println("Exception Thrown in friend finder class suggestedfriends methos");
 				ex.printStackTrace();
 			}
-
+			System.out.println(activities);
 			return activities;
 		}
 	
