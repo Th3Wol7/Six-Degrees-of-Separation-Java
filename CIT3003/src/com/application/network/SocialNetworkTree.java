@@ -36,7 +36,6 @@ public class SocialNetworkTree {
 	        	nodeB.setParent(node);
 	        return(nodeA);
 	    } 
-	 
-	 
+	 	 
 	
 }

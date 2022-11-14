@@ -2,17 +2,20 @@ package com.application.models;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 //new ShortestPath(node_A, node_E).bfs();
 
-public class PersonNode {
+public class PersonNode implements Comparable<PersonNode>{
 	private Person data;
     private boolean visited;
     private List<PersonNode> friends;
     private PersonNode previous;
-	
+    //private PersonNode left;
+	//private PersonNode right;
+	//private int colour;
+	//private PersonNode parent;
+
     
     public PersonNode(Person user) {
     	this.data = user;
@@ -30,8 +33,8 @@ public class PersonNode {
     }
     
     public void addNeighbour(PersonNode node) {
-    	this.friends.add(node);
-    	node.getFriends().add(this);
+    	friends.add(node);
+    	//node.getFriends().add(this);
     }
     
     public List<PersonNode> adjacent(Collection<Person> neighbours){
@@ -73,5 +76,14 @@ public class PersonNode {
 		return "PersonNode [getData()=" + getData() + ", isVisited()=" + isVisited() + ", getFriends()=" + getFriends()
 				+ ", getPrevious()=" + getPrevious() + "]";
 	}
+
+
+	@Override
+	public int compareTo(PersonNode obj) {
+		// TODO Auto-generated method stub
+		return this.getData().getFirstName().compareTo(obj.getData().getFirstName());
+	}
+
+
     
 }
