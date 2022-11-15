@@ -209,7 +209,10 @@ public class UserScreen {
 		activitiesButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// showActivitiesAndSuggestions();
+				primaryPanel.removeAll();
+				primaryPanel.add(new ActivityScreen());
+				primaryPanel.repaint();
+				primaryPanel.revalidate();
 			}
 		});
 
