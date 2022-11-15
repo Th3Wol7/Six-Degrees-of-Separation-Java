@@ -200,34 +200,6 @@ public class FindSeperation {
 	}
 
 	
-	
-	
-	
-	
-	
-
-	/*
-	 * public List<String> getActivities() { return Activities; }
-	 * 
-	 * 
-	 * private static List<String> getActivities(){ return new
-	 * ArrayList<>(Arrays.asList("run", "walk/jog", "Fascinated by nike",
-	 * "Listen to music", "Take photographs", "read", "playing game",
-	 * "eduactor","i am a advocate","i love designing" ,
-	 * "fascinated by art","Lifestyle is Everything", "i am a computer geek",
-	 * "fascinated by Pets", "Gardening", "Get a manicure or pedicure", "Cooking",
-	 * "volunteering"));
-	 * 
-	 * }
-	 */	
-	
-	// This method returns a list of activities suggestions to a user based
-	// on the activities of the users in the network that share the same
-	// employer, school or community. Ensure that each node is only checked once
-	// ensure that each node is check before stopping
-	/*
-	 * for(i=1; i<=n; i++) { activity = getActivities(); }
-	 */
 	public List<String> SuggestsActivities(Person user) {
 		List<String> activities = new ArrayList<>();
 		try {
@@ -258,7 +230,6 @@ public class FindSeperation {
 							}
 						}
 					}
-
 				}
 			});
 
