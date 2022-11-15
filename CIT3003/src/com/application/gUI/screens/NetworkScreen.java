@@ -35,6 +35,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 	private Font labelFont, fieldFont;
 	private String username;
 	private FindSeperation networkService = new FindSeperation();
+
 	
 	public NetworkScreen(String username) {
 		this.username = username;

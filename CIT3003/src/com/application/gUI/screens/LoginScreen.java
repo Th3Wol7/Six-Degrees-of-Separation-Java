@@ -148,7 +148,7 @@ public class LoginScreen {
     
     //Setting properties of user login screen attributes
     public void addLoginFields() {
-        //setting username input text field properties
+        //setting user name input text field properties
         userName = new JTextField(25);
         userName.setText("username");
         userName.setBounds(125, 270, 250, uih);//125, 350, 250, uih

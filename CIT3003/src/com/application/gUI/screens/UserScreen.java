@@ -200,7 +200,7 @@ public class UserScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				primaryPanel.removeAll();
-				primaryPanel.add(new FriendsScreen());
+				primaryPanel.add(new FriendsScreen(user));
 				primaryPanel.repaint();
 				primaryPanel.revalidate();
 			}

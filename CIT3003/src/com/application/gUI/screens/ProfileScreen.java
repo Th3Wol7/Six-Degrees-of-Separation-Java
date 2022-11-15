@@ -373,7 +373,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		FileWriter outFileStream = null;
 
 		File dataTempFile = new File("./database/tempDatabase.txt");
-		File databaseFile = new File("./database/people.txt");
+		File databaseFile = new File("./database/peopleCopy.txt");
 
 		try {
 			inFileStream = new Scanner(databaseFile);

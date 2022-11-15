@@ -3,16 +3,12 @@ package com.application.network;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import com.application.models.Person;
 
 public class SocialNetworkService {
@@ -29,8 +25,7 @@ public class SocialNetworkService {
 		this.network = network;
 	}
 
-	// This method retrieves user data from the file database and create the network
-	// and connections
+	// This method retrieves user data from the file database and create the network with connections
 	public void createNetwork() {
 		Scanner inFileStream1 = null;
 		Scanner inFileStream2 = null;
@@ -78,7 +73,7 @@ public class SocialNetworkService {
 				while (inFileStream2.hasNextLine()) {// Reading the friends list an entire line at a time
 					String[] friendsListing;
 					//System.out.println(inFileStream2.hasNextLine());//For Testing purposes
-					//Separating words in line to retrieve individual friend usernames
+					//Separating words in line to retrieve individual friend user names
 					friendsListing = inFileStream2.nextLine().split("\\s+");
 					
 					// If the first ID number of the line is equal to that of the current person
@@ -96,6 +91,7 @@ public class SocialNetworkService {
 							//System.out.println(employer2);///For testing
 							int privacy2 = inFileStream3.nextInt();
 							ArrayList<String> activities2 = new ArrayList<>(); // Accounting for activity
+							inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));
 							while (inFileStream4.hasNext()) {// #while 5
 								if (username2.equals(inFileStream4.next())) {
 									String actUser = inFileStream4.next();//this variables are necessary
@@ -106,7 +102,6 @@ public class SocialNetworkService {
 										activities2.add(act1[i]);
 									}
 									//resetting in file stream
-									inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));
 									break;// exit #while 2
 								}
 							}
