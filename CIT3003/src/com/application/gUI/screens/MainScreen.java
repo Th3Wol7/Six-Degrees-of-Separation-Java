@@ -19,7 +19,8 @@ public class MainScreen {
 	private static JFrame frame;
 
 	public MainScreen() {
-
+		NB: DO NOT PRESS THE BUTTONS ON THE FRIENDS SCREEN
+		SURROUND THIS TEXT WITH COMMENT SPECIFIERS TO RUN
 		// Try Catch block For frame creation
 		// Calls Function To create main background Plate
 		new FindSeperation();//For Testing purposes

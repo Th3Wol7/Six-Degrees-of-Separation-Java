@@ -200,7 +200,7 @@ public class UserScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				primaryPanel.removeAll();
-				primaryPanel.add(new FriendsScreen());
+				primaryPanel.add(new FriendsScreen(user));
 				primaryPanel.repaint();
 				primaryPanel.revalidate();
 			}
@@ -219,7 +219,11 @@ public class UserScreen {
 		networkButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// showNetwork();
+				primaryPanel.removeAll();
+				primaryPanel.add(new NetworkScreen(user));
+				primaryPanel.repaint();
+				primaryPanel.revalidate();
+
 			}
 		});
 
