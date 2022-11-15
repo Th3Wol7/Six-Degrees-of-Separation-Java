@@ -52,10 +52,10 @@ Stark20     Kira         Stark      8767493729  KiraStark89@gamil.com       Papi
 Mar402      Martin        Key       8763930134  MartinKey759@gmail.com      Papine 		UTECH 	none 	0
 Nle120       Nyla        Mcneil     8769350170  NylaMcneil@outlook.com      Liguanea 	CMU 	none    0
 Sage34       Sage        Crosby     8764375058  SageCrosby@gmail.com        Papine 		UTECH 	none 	0
-Lindsey57    Lindsey      Dodson    8763832890  LindseyDodson@gmail.com    Papine 		UTECH 	none 	0
-Donna39      Donna       Perkins    8763854664  DonnaPerkins@outlook.com   Liguanea 	CMU 	none    0
-Simon90      Saniya       Simon     8766304564  SaniyaSimon@uwi.mona.edu   MedowBrook 	UWI 	none 	1
-Gunnar503    Gunnar       Beard     8769587392  GunnarBeard2@gk.foods.co   Barbican 	none 	GKF		0
+Lindsey57    Lindsey      Dodson    8763832890  LindseyDodson@gmail.com    	Papine 		UTECH 	none 	0
+Donna39      Donna       Perkins    8763854664  DonnaPerkins@outlook.com   	Liguanea 	CMU 	none    0
+Simon90      Saniya       Simon     8766304564  SaniyaSimon@uwi.mona.edu   	MedowBrook 	UWI 	none 	1
+Gunnar503    Gunnar       Beard     8769587392  GunnarBeard2@gk.foods.co   	Barbican 	none 	GKF		0
 Ameri129     America      Valdez    8765092343  AmericaValdez@gk.foods.co   Barbican 	none 	GKF		0
 KashB302      Kash        Burgess   8768859304   KashBurgess@gk.foods.co    Barbican 	none 	GKF		0
 JacoG293      Jacob        Good     8768372049   JacobGood@gk.foods.co      Barbican 	none 	GKF		0
@@ -63,9 +63,9 @@ Shelby420     Shelby      Bolton    8768390385   ShelbyBolton@gk.foods.co   Barb
 Jamar392       Jamar     Raymond    8768739292 	 JamarRaymond@uwi.mona.edu 	MedowBrook 	UWI 	none 	0
 Yu492          Clayton     Yu       8768291080	 ClaytonYu@uwi.mona.edu 	MedowBrook 	UWI 	none 	0
 Ali283          Ali         Conner  8769283022	 AliConner@uwi.mona.edu 	MedowBrook 	UWI 	none 	0
-Garner2094      Reginald    Garner  8768020830        GarnerReginal@uwi.mona.edu 	MedowBrook 	UWI 	none 	0
-Darryl94        Darryl     Webster  8769289409	      WebsterDarryl@uwi.mona.edu    MedowBrook 	UWI 	none 	0
-Maya948         Maya        Sawyer    8763568899      MayaSawyer@uwi.mona.edu 	    MedowBrook 	UWI 	none 	0
+Garner2094      Reginald    Garner  8768020830   GarnerReginal@uwi.mona.edu 	MedowBrook 	UWI 	none 	0
+Darryl94        Darryl     Webster  8769289409	 WebsterDarryl@uwi.mona.edu    MedowBrook 	UWI 	none 	0
+Maya948         Maya        Sawyer    8763568899    MayaSawyer@uwi.mona.edu 	    MedowBrook 	UWI 	none 	0
 Nathaly90       Nathaly    Gallagher  8767893579      NathalyGallagher@uwi.mona.edu MedowBrook UWI    none 	0
 Kadyn403        Kadyn       Burke     8764578909      KadynBurke@uwi.mona.edu 	    MedowBrook 	UWI 	none 	0
 Ferrell39       Abdullah    Ferrell   8763085785      AbdullahFerrell@uwi.mona.edu  MedowBrook UWI     none 	0
@@ -362,7 +362,7 @@ Vance809        Mariana     Vance       8764093930     MarianaVance @yahoo.com 	
 Snow9089        Julien      Snow        8760940033     JulienSnow@yahoo.com 	    Papine 		UTECH 	none 	0
 Esparza97       Allen       Esparza     8763903988     AllenEsparza@yahoo.com 	    Papine 		UTECH 	none 	0
 Leblanc98       America     Leblanc     8769040430     AmericaLeblanc@yahoo.com 	Papine 		UTECH 	none 	0
-Barker875       Ryker       Barker      8764902033     RykerBarker    @yahoo.com 	Papine 		UTECH 	none 	0
+Barker875       Ryker       Barker      8764902033     RykerBarker@yahoo.com 	Papine 		UTECH 	none 	0
 Hancock98       Shania      Hancock     8764903030     ShaniaHancock@yahoo.com 	    Papine 		UTECH 	none 	0
 Deleon764       Julia       Deleon      8768409303     JuliaDeleon@yahoo.com 	    Papine 		UTECH 	none 	0
 Sloan589O       swaldo      Sloan       8764093039    swaldoSloan@yahoo.com 	    Papine 		UTECH 	none 	0
@@ -371,7 +371,7 @@ Stanton564      Jay         Stanton     8763454255      JayStanton@yahoo.com 	  
 Ross539         Maci        Ross        8764535322      MaciRoss@yahoo.com 	        Papine 		UTECH 	none 	0
 Reese954        Presley     Reese       8765643423      PresleyReese@yahoo.com 	    Papine 		UTECH 	none 	0
 Bradshaw2309     Addisyn     Bradshaw   8768958909      AddisynBradshaw@yahoo.com 	Papine 		UTECH 	none 	0
-Rubio923        Esther      Rubio       8763534093      EstherRubio     @yahoo.com 	Papine 		UTECH 	none 	0
+Rubio923        Esther      Rubio       8763534093      EstherRubio@yahoo.com 	Papine 		UTECH 	none 	0
 Hester092       Jasmin      Hester      8763893948      JasminHester@yahoo.com 	    Papine 		UTECH 	none 	0
 Saunders1032    Preston     Saunders    8763450200      PrestonSaunders@yahoo.com 	Papine 		UTECH 	none 	0
 Walton0022      Eva         Walton      8764080208      EvaWalton@yahoo.com 	    Papine 		UTECH 	none 	0
