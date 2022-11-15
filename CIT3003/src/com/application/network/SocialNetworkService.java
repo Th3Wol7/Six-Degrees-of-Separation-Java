@@ -54,6 +54,7 @@ public class SocialNetworkService {
 				int privacy = inFileStream1.nextInt();
 				
 				List<String> activities = new ArrayList<>(); // Accounting for activity
+				inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));
 				while (inFileStream4.hasNext()) {// #while 2
 					if (username.equals(inFileStream4.next())) {
 						String actUser = inFileStream4.next();//this variables are necessary
@@ -63,14 +64,14 @@ public class SocialNetworkService {
 						for(int i = 0; i <act1.length; i++) {
 							activities.add(act1[i]);
 						}
+						//System.out.println(activities); For testing
 						//resetting in file stream
-						inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));
 						break;// exit #while 2	
 						}
 				}
 				person = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
 						activities);
-				
+		
 				Collection<Person> friends = new ArrayList<>();
 				inFileStream2 = new Scanner(new File("./database/friends.txt"));
 				// #while 3
@@ -124,7 +125,6 @@ public class SocialNetworkService {
 						break;
 					}
 				}
-				//System.out.println(friends);//For testing
 				network.put(person, friends);
 			}
 		} catch (FileNotFoundException fnfe) {
