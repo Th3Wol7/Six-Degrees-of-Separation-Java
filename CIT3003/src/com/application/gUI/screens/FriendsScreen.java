@@ -101,7 +101,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 		friendList = new JComboBox<>(friendsName); // new GenerateFriendsList().getFriends()
 		friendList.setFont(fieldFont);
 		friendList.setBounds(200, 160, 230, 30);
-		;
+		
 		friendList.setOpaque(false);
 		friendList.setFocusable(false);
 
