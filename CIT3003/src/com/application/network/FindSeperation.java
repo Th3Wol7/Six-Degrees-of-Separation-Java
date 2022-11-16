@@ -45,11 +45,11 @@ public class FindSeperation {
 		// System.out.println(suggestActivities(person)); Testing suggested activities
 		// method
 
-		if (!(socialNet.getNetwork().isEmpty())) {// For Testing purposes
+		/*if (!(socialNet.getNetwork().isEmpty())) {// For Testing purposes
 			System.out.println(
 					"Degree of seperation between " + person.getFirstName() + " & " + person2.getFirstName() + " is: ");
 			System.out.print(degreeOfSeperation(person, person2));
-		}
+		}I*/
 	}
 
 	FindSeperation(SocialNetworkService sns) {
@@ -167,21 +167,7 @@ public class FindSeperation {
 		return suggestedFriends;
 	}
 
-	/*
-	 * public List<String> getActivities() { return Activities; }
-	 * 
-	 * 
-	 * private static List<String> getActivities(){ return new
-	 * ArrayList<>(Arrays.asList("run", "walk/jog", "Fascinated by nike",
-	 * "Listen to music", "Take photographs", "read", "playing game",
-	 * "eduactor","i am a advocate","i love designing" ,
-	 * "fascinated by art","Lifestyle is Everything", "i am a computer geek",
-	 * "fascinated by Pets", "Gardening", "Get a manicure or pedicure", "Cooking",
-	 * "volunteering"));
-	 * 
-	 * }
-	 */
-
+	
 	public List<String> suggestActivities(Person user) {
 		List<String> activitySuggestions = new ArrayList<>();
 		try {

@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 import com.application.models.Person;
 import com.application.network.FindSeperation;
 import com.application.utils.gUI.FrameUtility;
@@ -96,7 +98,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		friendsList.setBounds(310, 268, 230, 30);;
 		friendsList.setOpaque(false);
 		friendsList.setFocusable(false);
-		
+		AutoCompleteDecorator.decorate(friendsList); //Import swingx-all 1.6.4 to classpath from jar files
 		
 		info = new JTextArea();
 		info.setBounds(40, 330, 700, 250);

@@ -33,7 +33,7 @@ public class SocialNetworkService {
 		Scanner inFileStream4 = null;
 		Person person = null, person2 = null;
 		try {
-			inFileStream1 = new Scanner(new File("./database/people.txt"));
+			inFileStream1 = new Scanner(new File("./database/peopleCopy.txt"));
 			inFileStream2 = new Scanner(new File("./database/friends.txt"));
 			inFileStream3 = new Scanner(new File("./database/peopleCopy.txt"));
 			inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));

@@ -34,6 +34,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 import com.application.models.Person;
 import com.application.network.FindSeperation;
@@ -42,6 +43,7 @@ import com.application.utils.gUI.FrameUtility;
 public class FriendsScreen extends JPanel implements ActionListener {
 	private static Icon profileIcon;
 	private static JLabel Logo;
+	private final String[] tableHeaders = {"People"};
 	private JLabel titleLabel, friendsLabel, suggestionsLabel;
 	private JButton removeBtn, addBtn;
 	private JTextField lineSeparation;
@@ -50,20 +52,26 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	private JPanel content;
 	private JScrollPane tablePanel;
 	private JTable suggestionTable;
+    private DefaultTableModel model;
 	private FindSeperation networkService = new FindSeperation();
 	private String currentUser;
-	private String friendsName[], friendsID[];
-
+	private Person userObject = new Person();
+	private String friendsName[] = {}, friendsID[] = {};
+	
 	public FriendsScreen(String username) {
 		this.currentUser = username;
 		initializeComponents();
 		addComponentsToPanel();
 		setWindowProperties();
 		registerListeners();
+		
 	}
 
 	public void initializeComponents() {
-		// collectFriends();
+		model = new DefaultTableModel(tableHeaders, 0);
+        suggestionTable = new JTable(model);
+		findUser();
+		collectFriends();
 		FrameUtility.addExitButton();
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
@@ -75,6 +83,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 
 		content = new JPanel();
 		content.setBounds(0, 305, 800, 230);
+		content.setBackground(this.getBackground());
 
 		titleLabel = new JLabel("My Friends", SwingConstants.CENTER);
 		titleLabel.setBounds(280, 50, 200, 50);
@@ -119,34 +128,31 @@ public class FriendsScreen extends JPanel implements ActionListener {
 		removeBtn.setBackground(buttonColour);
 		removeBtn.setEnabled(false);
 		removeBtn.setFocusPainted(false);
-
-		String columns[] = { "Tyrien", "Gilpin" };
-		String data[][] = { { "Jamie Oliver" }, { "John Doe" } };
-
-		suggestionTable = new JTable();
-		suggestionTable.setBounds(content.getBounds());
-		// suggestionTable.setShowGrid(true);
-		// suggestionTable.setShowVerticalLines(true);
-
-		tablePanel = new JScrollPane();
-		tablePanel.getViewport().add(suggestionTable);
-		tablePanel.setOpaque(false);
-		tablePanel.getViewport().setOpaque(false);
-		tablePanel.setBackground(getBackground());
-
-		tablePanel.setBounds(content.getBounds());
-		tablePanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
+				
+		 //Setting Table properties
+        suggestionTable.setPreferredScrollableViewportSize(new Dimension(780, 200));
+        //setBounds(0, 305, 800, 230);
+        suggestionTable.setDefaultEditor(Object.class, null);
+        suggestionTable.setAutoCreateRowSorter(true);
+        //Removing background of table heading
+        suggestionTable.getTableHeader().setOpaque(false);
+        //Setting new background of table headings
+        suggestionTable.getTableHeader().setBackground(new Color(224, 224, 224));
+        suggestionTable.setBackground(Color.white);
+        suggestionTable.setForeground(Color.black);
+        suggestionTable.setFont(fieldFont);
+		suggestionTable.setRowHeight(40);
+		suggestionTable.setOpaque(true);
 		suggestionTable.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
 		suggestionTable.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
 
-		suggestionTable.setBackground(getBackground());
-		suggestionTable.setShowGrid(false);
-		suggestionTable.setShowHorizontalLines(true);
-
-		suggestionTable.setFont(fieldFont);
-		suggestionTable.setRowHeight(40);
-		suggestionTable.setOpaque(false);
-		suggestionTable.setEnabled(true);
+		tablePanel = new JScrollPane(suggestionTable, 
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tablePanel.setOpaque(true);
+		tablePanel.getViewport().setOpaque(true);
+		tablePanel.setBackground(this.getBackground());
+		tablePanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
+		
 	}
 
 	// adding the components to the panel
@@ -181,15 +187,39 @@ public class FriendsScreen extends JPanel implements ActionListener {
 		Set<Map.Entry<Person, Collection<Person>>> entries = getNetworkService().getSocialNet().getNetwork().entrySet();
 		entries.forEach(entry -> {
 			if (entry.getKey().getUsername().equals(getCurrentUser())) {
-				int i = 0;
+				int i =0;
+				String uNames[] = new String[entry.getValue().size()], 
+						uIDs[] = new String[entry.getValue().size()];
 				for (Person friend : entry.getValue()) {
-					friendsName[i] = friend.getFirstName() + " " + friend.getLastName();
-					friendsID[i] = friend.getUsername();
-					i++;
+					uNames[i] = friend.getFirstName() + " " + friend.getLastName();
+					uIDs[i] = friend.getUsername();
+					if(i < entry.getValue().size()) {
+						i++;
+					}else {
+						return;
+					}
 				}
+				friendsName = uNames;
+				friendsID = uIDs;
 				return;
 			}
 		});
+			int count = 0;
+	        int rowCount = model.getRowCount();
+	        int counter = 0;
+
+	        while (counter < rowCount) {
+	            model.removeRow(count);
+	            counter++;
+	        }
+
+	        for (int count1 = 0; count1 < getNetworkService().suggestFriends(userObject).size(); count1++) {
+	            model.insertRow(count1, new Object[]{
+	            		getNetworkService().suggestFriends(userObject).get(count1).getFirstName()+
+	            		"  " + getNetworkService().suggestFriends(userObject).get(count1).getLastName()
+	            });
+	        }
+
 	}
 
 	// removes an element from an array
@@ -240,7 +270,6 @@ public class FriendsScreen extends JPanel implements ActionListener {
 						}
 					}
 				}
-
 				for (int i = 0; i < userFriends.length; i++) {
 					record += userFriends[i] + "\t";
 				}
@@ -311,7 +340,53 @@ public class FriendsScreen extends JPanel implements ActionListener {
 				inFileStream.close();
 			}
 		}
-
+	}
+	
+	//Finds current user in file
+	public void findUser() {// NTS: Test this method
+		Scanner inFileStream = null;
+		Scanner inFileStream2 = null;
+		try {
+			inFileStream = new Scanner(new File("./database/people.txt"));
+			inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
+			while (inFileStream.hasNext()) {
+				String username = inFileStream.next();
+				String firstName = inFileStream.next();
+				String lastName = inFileStream.next();
+				String phone = inFileStream.next();
+				String email = inFileStream.next();
+				String community = inFileStream.next();
+				String school = inFileStream.next();
+				String employer = inFileStream.next();
+				int privacy = inFileStream.nextInt();
+				ArrayList<String> activities = new ArrayList<>(); // Accounting for activity
+				while (inFileStream2.hasNext()) {// #while 2
+					if (username.equals(inFileStream2.next())) {
+						String actUser = inFileStream2.next();// this variables are necessary
+						String actFName = inFileStream2.next();// this variables are necessary
+						String act = inFileStream2.next();
+						String act1[] = act.split(",");
+						for (int i = 0; i < act1.length; i++) {
+							activities.add(act1[i]);
+						}
+						// resetting in file stream
+						inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
+						break;// exit #while 2
+					}
+				}
+				userObject = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
+						activities);
+			}
+		} catch (FileNotFoundException fnfe) {
+			System.err.println("File could not be found: " + fnfe.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (inFileStream != null || inFileStream2 != null) {
+				inFileStream.close();
+				inFileStream.close();
+			}
+		}
 	}
 
 	public String getCurrentUser() {
