@@ -54,12 +54,11 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	private JTable suggestionTable;
     private DefaultTableModel model;
 	private FindSeperation networkService = new FindSeperation();
-	private String currentUser;
-	private Person userObject = new Person();
+	private Person user;
 	private String friendsName[] = {}, friendsID[] = {};
 	
-	public FriendsScreen(String username) {
-		this.currentUser = username;
+	public FriendsScreen(Person user) {
+		this.user = user;
 		initializeComponents();
 		addComponentsToPanel();
 		setWindowProperties();
@@ -70,7 +69,6 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	public void initializeComponents() {
 		model = new DefaultTableModel(tableHeaders, 0);
         suggestionTable = new JTable(model);
-		findUser();
 		collectFriends();
 		FrameUtility.addExitButton();
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
@@ -186,7 +184,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	public void collectFriends() {
 		Set<Map.Entry<Person, Collection<Person>>> entries = getNetworkService().getSocialNet().getNetwork().entrySet();
 		entries.forEach(entry -> {
-			if (entry.getKey().getUsername().equals(getCurrentUser())) {
+			if (entry.getKey().getUsername().equals(user.getUsername())) {
 				int i =0;
 				String uNames[] = new String[entry.getValue().size()], 
 						uIDs[] = new String[entry.getValue().size()];
@@ -212,11 +210,12 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	            model.removeRow(count);
 	            counter++;
 	        }
-
-	        for (int count1 = 0; count1 < getNetworkService().suggestFriends(userObject).size(); count1++) {
+	        
+	        System.out.println(getNetworkService().suggestFriends(user));
+	        for (int count1 = 0; count1 < getNetworkService().suggestFriends(user).size(); count1++) {
 	            model.insertRow(count1, new Object[]{
-	            		getNetworkService().suggestFriends(userObject).get(count1).getFirstName()+
-	            		"  " + getNetworkService().suggestFriends(userObject).get(count1).getLastName()
+	            		getNetworkService().suggestFriends(user).get(count1).getFirstName()+
+	            		"  " + getNetworkService().suggestFriends(user).get(count1).getLastName()
 	            });
 	        }
 
@@ -224,14 +223,13 @@ public class FriendsScreen extends JPanel implements ActionListener {
 
 	// removes an element from an array
 	private String[] removeElement(String persons[], int index) {
-		List<String> arrayList = Arrays.asList(persons);// Stream.of(persons).boxed().collect(Collectors.toList());
-		// Remove the specified element
+		List<String> arrayList = Arrays.asList(persons);//Stream.of(persons).boxed().collect(Collectors.toList());
+		//Remove the specified element
 		arrayList.remove(index);
 		String personUpdate[] = {};
-		// return the resultant array
+		//return the resultant array
 		personUpdate = arrayList.toArray(personUpdate);
 		return personUpdate;
-
 	}
 
 	// update the file if a user removes a person from his/her friends list
@@ -250,8 +248,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 				// System.out.println(inFileStream2.hasNextLine());//For Testing purposes
 				// Separating words in line to retrieve individual friend user names
 				userFriends = inFileStream.nextLine().split("\\s+");
-
-				if (userFriends[0].equals(currentUser)) {
+				if (userFriends[0].equals(user.getUsername())) {
 					for (int i = 1; i < userFriends.length; i++) {
 						if (userFriends[i].equals(friendsID[friendList.getSelectedIndex()])) {
 							userFriends[i] = "";
@@ -264,7 +261,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 
 				if (userFriends[0].equals(friendsID[friendList.getSelectedIndex()])) {
 					for (int i = 1; i < userFriends.length; i++) {
-						if (userFriends[i].equals(currentUser)) {
+						if (userFriends[i].equals(user.getUsername())) {
 							userFriends[i] = "";
 							break;
 						}
@@ -309,11 +306,20 @@ public class FriendsScreen extends JPanel implements ActionListener {
 				String record = "";
 				// Separating words in line to retrieve individual friend user names
 				userFriends = inFileStream.nextLine().split("\\s+");
-				if (userFriends[0].equals(currentUser)) {
-					// userFriends[userFriends.length+1] = insert username number of selected person
-					// here;
-					// friendsID[friendsName.length+1] = insert username of selected person here;
-					// friendsName[friendsName.length+1] = insert username of selected person here;
+				if (userFriends[0].equals(user.getUsername())) {
+					userFriends[userFriends.length+1] = getNetworkService().suggestFriends(user)
+							.get(suggestionTable.getSelectedRow())
+							.getUsername();
+					friendsID[friendsName.length+1] = getNetworkService().suggestFriends(user)
+					.get(suggestionTable.getSelectedRow())
+					.getUsername();
+					
+					friendsName[friendsName.length+1] = getNetworkService().suggestFriends(user)
+							.get(suggestionTable.getSelectedRow())
+							.getFirstName() + "  " +
+							getNetworkService().suggestFriends(user)
+							.get(suggestionTable.getSelectedRow())
+							.getLastName();
 				}
 				/*
 				 * if(userFriends[0].equals(insert username of selected person here)) {
@@ -342,59 +348,12 @@ public class FriendsScreen extends JPanel implements ActionListener {
 		}
 	}
 	
-	//Finds current user in file
-	public void findUser() {// NTS: Test this method
-		Scanner inFileStream = null;
-		Scanner inFileStream2 = null;
-		try {
-			inFileStream = new Scanner(new File("./database/people.txt"));
-			inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
-			while (inFileStream.hasNext()) {
-				String username = inFileStream.next();
-				String firstName = inFileStream.next();
-				String lastName = inFileStream.next();
-				String phone = inFileStream.next();
-				String email = inFileStream.next();
-				String community = inFileStream.next();
-				String school = inFileStream.next();
-				String employer = inFileStream.next();
-				int privacy = inFileStream.nextInt();
-				ArrayList<String> activities = new ArrayList<>(); // Accounting for activity
-				while (inFileStream2.hasNext()) {// #while 2
-					if (username.equals(inFileStream2.next())) {
-						String actUser = inFileStream2.next();// this variables are necessary
-						String actFName = inFileStream2.next();// this variables are necessary
-						String act = inFileStream2.next();
-						String act1[] = act.split(",");
-						for (int i = 0; i < act1.length; i++) {
-							activities.add(act1[i]);
-						}
-						// resetting in file stream
-						inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
-						break;// exit #while 2
-					}
-				}
-				userObject = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
-						activities);
-			}
-		} catch (FileNotFoundException fnfe) {
-			System.err.println("File could not be found: " + fnfe.getMessage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (inFileStream != null || inFileStream2 != null) {
-				inFileStream.close();
-				inFileStream.close();
-			}
-		}
+	public Person getUser() {
+		return user;
 	}
 
-	public String getCurrentUser() {
-		return currentUser;
-	}
-
-	public void setCurrentUser(String currentUser) {
-		this.currentUser = currentUser;
+	public void setUser(Person currentUser) {
+		this.user = currentUser;
 	}
 
 	public FindSeperation getNetworkService() {
@@ -417,18 +376,10 @@ public class FriendsScreen extends JPanel implements ActionListener {
 					"Remove Friend", JOptionPane.YES_NO_OPTION);
 
 			if (option == JOptionPane.YES_OPTION) {
-				Person user, newFriend;
+				Person newFriend;
 				List<Person> users = new ArrayList<>();
 				Set<Map.Entry<Person, Collection<Person>>> entries = getNetworkService().getSocialNet().getNetwork()
 						.entrySet();
-				entries.forEach(entry -> {
-					if (entry.getKey().getUsername().equals(getCurrentUser())) {
-						Person networkUser = entry.getKey();
-						users.add(networkUser);
-						return;
-					}
-				});
-
 				entries.forEach(entry -> {
 					if (entry.getKey().getUsername().equals(friendsID[friendList.getSelectedIndex()])) {
 						Person networkUser = entry.getKey();
@@ -437,10 +388,9 @@ public class FriendsScreen extends JPanel implements ActionListener {
 					}
 				});
 
-				user = users.get(0);
 				newFriend = users.get(1);
-				if (user != null && newFriend != null) {
-					getNetworkService().getSocialNet().removeFriend(user, newFriend);
+				if (getUser() != null && newFriend != null) {
+					getNetworkService().getSocialNet().removeFriend(getUser(), newFriend);
 					updateRemoval();
 				}
 
@@ -465,12 +415,12 @@ public class FriendsScreen extends JPanel implements ActionListener {
 			int option = JOptionPane.showConfirmDialog(null, "Are you sure ?", "Log Out", JOptionPane.YES_NO_OPTION);
 
 			if (option == JOptionPane.YES_OPTION) {
-				Person user, newFriend;
+				Person newFriend;
 				List<Person> users = new ArrayList<>();
 				Set<Map.Entry<Person, Collection<Person>>> entries = getNetworkService().getSocialNet().getNetwork()
 						.entrySet();
 				entries.forEach(entry -> {
-					if (entry.getKey().getUsername().equals(getCurrentUser())) {
+					if (entry.getKey().getUsername().equals(user.getUsername())) {
 						Person networkUser = entry.getKey();
 						users.add(networkUser);
 						return;

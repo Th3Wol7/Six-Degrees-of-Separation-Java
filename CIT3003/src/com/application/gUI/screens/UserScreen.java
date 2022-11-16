@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import com.application.models.Person;
 import com.application.utils.gUI.FrameUtility;
 
 import java.awt.BorderLayout;
@@ -47,9 +48,9 @@ public class UserScreen {
 	
 	private static JFrame parentFrame;
 
-	private String user;
+	private Person user;
 	
-	public UserScreen(JFrame frame, String user) {
+	public UserScreen(JFrame frame, Person user) {
 
 		frame.setShape(new RoundRectangle2D.Double(0, 0, panWidth, panHeight, 30, 30));
 		frame.setSize(panWidth, panHeight);

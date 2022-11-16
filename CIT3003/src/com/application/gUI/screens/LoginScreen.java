@@ -12,6 +12,11 @@ import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.geom.RoundRectangle2D;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import com.application.models.Person;
 import com.application.utils.gUI.FrameUtility;
 
 public class LoginScreen {
@@ -64,7 +70,8 @@ public class LoginScreen {
     private static JToggleButton registerButton;
     private static JButton loginButton; 
     private  JFrame frame;
-
+    private Person user = new Person();
+    
     public LoginScreen(JFrame frame) {
     	this.frame = frame;
     	initializeComponents(); 
@@ -145,6 +152,56 @@ public class LoginScreen {
         loginPanel.setLayout(null);
 
     }
+    public void finduser() {
+		Scanner inFileStream = null;
+		Scanner inFileStream2 = null;
+		try {
+			inFileStream = new Scanner(new File("./database/peopleCopy.txt"));
+			inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
+			while (inFileStream.hasNext()) {
+				Person person;
+				String username = inFileStream.next();
+				String firstName = inFileStream.next();
+				String lastName = inFileStream.next();
+				String phone = inFileStream.next();
+				String email = inFileStream.next();
+				String community = inFileStream.next();
+				String school = inFileStream.next();
+				String employer = inFileStream.next();
+				int privacy = inFileStream.nextInt();
+				ArrayList<String> activities = new ArrayList<>(); // Accounting for activity
+				while (inFileStream2.hasNext()) {// #while 2
+					if (username.equals(inFileStream2.next())) {
+						String actUser = inFileStream2.next();// this variables are necessary
+						String actFName = inFileStream2.next();// this variables are necessary
+						String act = inFileStream2.next();
+						String act1[] = act.split(",");
+						for (int i = 0; i < act1.length; i++) {
+							activities.add(act1[i]);
+						}
+						// resetting in file stream
+						inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
+						break;// exit #while 2
+					}
+				}
+				person = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
+						activities);
+				if(userName.getText().trim().equals(person.getUsername())) {
+					user = person;
+					break;
+				}
+			}
+		} catch (FileNotFoundException fnfe) {
+			System.err.println("File could not be found: " + fnfe.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (inFileStream != null) {
+				inFileStream.close();
+			}
+		}
+	}
+    
     
     //Setting properties of user login screen attributes
     public void addLoginFields() {
@@ -278,7 +335,8 @@ public class LoginScreen {
                     loginPanel.setVisible(false);
                     loginPanel.removeAll();
                     frame.remove(loginPanel);
-                   new UserScreen(frame, userName.getText().trim());
+                    finduser();
+                   new UserScreen(frame, user);
             }
 
         });

@@ -44,12 +44,10 @@ public class FindSeperation {
 
 		// System.out.println(suggestActivities(person)); Testing suggested activities
 		// method
-
-		/*if (!(socialNet.getNetwork().isEmpty())) {// For Testing purposes
-			System.out.println(
-					"Degree of seperation between " + person.getFirstName() + " & " + person2.getFirstName() + " is: ");
+		
+		if (!(socialNet.getNetwork().isEmpty())) {// For Testing purposes
 			System.out.print(degreeOfSeperation(person, person2));
-		}I*/
+		}
 	}
 
 	FindSeperation(SocialNetworkService sns) {
@@ -62,11 +60,12 @@ public class FindSeperation {
 	}
 
 	// Returns the degree of separation between users in the social
-	public int degreeOfSeperation(Person user, Person user2) {
+	public String degreeOfSeperation(Person user, Person user2) {
+		String output = "";
 		if (friendsMatch(user, user2) == true) {
-			System.out.print("Degree of seperation between" + user.getUsername() + " & " + user2.getUsername()
-					+ " is 1. Because they are direct friends");
-			return 1;
+			output+= "Degree of seperation between" + user.getUsername() + " & " + user2.getUsername()
+					+ " is 1. Because they are direct friends" + "\n1";
+			return output;
 		} else {
 			// If any of of the users friends is a friend of user2 return 2 degrees of
 			// separation because they both have a mutual friend that they is 1 degree from
@@ -77,9 +76,9 @@ public class FindSeperation {
 					// if that friends Username = any Friend friends Username
 					for (Person person2 : getSocialNet().getNetwork().get(user2)) {
 						if (person2.getUsername().equals(person.getUsername())) {
-							System.out.print("Degree of seperation between " + user.getFirstName() + " & "
-									+ user2.getFirstName() + " is 2. Because they share a mutual friend.\nDegree: ");
-							return 2;
+							output+= "Degree of seperation between " + user.getFirstName() + " & "
+									+ user2.getFirstName() + " is 2 because they share a mutual friend.\nDegree:\n2";
+							return output;
 						}
 					}
 				}

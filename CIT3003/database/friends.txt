@@ -1,6 +1,6 @@
-aks1738	jib1731	wigor1732	pabon1733	dawoo1734	kfly4
-jib1731	aks1738				
-wigor1732	aks1738				
+aks1738	wigor1732	pabon1733	dawoo1734	kfly4
+jib1731	wigor1732			
+wigor1732	aks1738 jib1731				
 pabon1733	aks1738				
 dawoo1734	georop1	kensup2	aks1738		
 georop1	dawoo1734				
