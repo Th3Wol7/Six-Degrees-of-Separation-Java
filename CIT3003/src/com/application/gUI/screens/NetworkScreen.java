@@ -7,18 +7,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
@@ -61,6 +60,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
 		this.add(FrameUtility.exitButton);
+
 		fieldFont = new Font("Oswald", Font.TYPE1_FONT, 15);
 		labelFont = new Font("Oswald", Font.TYPE1_FONT, 16);
 
@@ -96,7 +96,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		friendsList = new JComboBox<>(userName); // new GenerateFriendsList().getFriends()
 		friendsList.setFont(fieldFont);
 		friendsList.setBounds(310, 268, 230, 30);
-		;
+
 		friendsList.setOpaque(false);
 		friendsList.setFocusable(true);
 		friendsList.setEditable(true);
@@ -176,15 +176,30 @@ public class NetworkScreen extends JPanel implements ActionListener {
 	public void displaySeparation() {
 		List<Person> userList = new ArrayList<>(getNetworkService().getSocialNet().getNetwork().keySet());
 		Person friend = null;
-		int i = 0;
-		for (Person person : userList) {
-			if (person.getUsername().equals(userID[friendsList.getSelectedIndex()])) {
-				friend = person;
+		if (!getUser().getUsername().equals("")) {
+			for (Person person : userList) {
+				if (person.getUsername().equals(userID[friendsList.getSelectedIndex()])) {
+					friend = person;
+				}
 			}
-		}
 
-		if (friend != null && getUser() != null) {
-			info.setText(String.valueOf(getNetworkService().degreeOfSeperation(getUser(), friend)));
+			if (friend != null) {
+				info.setText(String.valueOf(getNetworkService().degreeOfSeperation(getUser(), friend)));
+			}
+		} else {
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, "User is not apart of our social network", "Unknown User",
+					JOptionPane.INFORMATION_MESSAGE);
+			try {
+				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
 		}
 	}
 

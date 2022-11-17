@@ -69,7 +69,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	public void initializeComponents() {
 		model = new DefaultTableModel(tableHeaders, 0);
         suggestionTable = new JTable(model);
-		collectFriends();
+        collectFriends();
 		FrameUtility.addExitButton();
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
@@ -134,23 +134,23 @@ public class FriendsScreen extends JPanel implements ActionListener {
         suggestionTable.setAutoCreateRowSorter(true);
         //Removing background of table heading
         suggestionTable.getTableHeader().setOpaque(false);
+        suggestionTable.getTableHeader().setFont(fieldFont);
         //Setting new background of table headings
-        suggestionTable.getTableHeader().setBackground(new Color(224, 224, 224));
+        suggestionTable.getTableHeader().setBackground(Color.white);
         suggestionTable.setBackground(Color.white);
         suggestionTable.setForeground(Color.black);
         suggestionTable.setFont(fieldFont);
 		suggestionTable.setRowHeight(40);
-		suggestionTable.setOpaque(true);
+		suggestionTable.setOpaque(false);
 		suggestionTable.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
 		suggestionTable.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
 
 		tablePanel = new JScrollPane(suggestionTable, 
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		tablePanel.setOpaque(true);
-		tablePanel.getViewport().setOpaque(true);
+		tablePanel.getViewport().setOpaque(false);
 		tablePanel.setBackground(this.getBackground());
 		tablePanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
-		
 	}
 
 	// adding the components to the panel
@@ -209,9 +209,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	        while (counter < rowCount) {
 	            model.removeRow(count);
 	            counter++;
-	        }
-	        
-	        System.out.println(getNetworkService().suggestFriends(user));
+	        } 
 	        for (int count1 = 0; count1 < getNetworkService().suggestFriends(user).size(); count1++) {
 	            model.insertRow(count1, new Object[]{
 	            		getNetworkService().suggestFriends(user).get(count1).getFirstName()+

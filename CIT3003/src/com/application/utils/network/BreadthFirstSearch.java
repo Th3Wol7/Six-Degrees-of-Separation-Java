@@ -124,6 +124,9 @@ public class BreadthFirstSearch/* <Person> */ {
 		for (PersonNode links : route) {
 			output += links.getData().getFirstName() + "-->";
 		}
+		if((route.size()-1) < 0) {
+			return "No connection";
+		}
 		return output+= "\n" + String.valueOf((route.size()-1));
 	}
 
