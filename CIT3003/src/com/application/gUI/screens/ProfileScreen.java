@@ -20,10 +20,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import com.application.models.Person;
 import com.application.utils.gUI.FrameUtility;
@@ -42,7 +44,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	private ButtonGroup buttonGroup;
 	private Font fieldFont, labelFont;
 	private Person user;
-	
+
 	public ProfileScreen(Person user) {
 		this.user = user;
 		initializeComponents();
@@ -118,7 +120,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		usernameField.setBackground(getBackground());
 		usernameField.setForeground(Color.black);
 		usernameField.setFont(fieldFont);
-		
+
 		firstNameField = new JTextField(30);
 		firstNameField.setBounds(40, 275, 250, 25);// 125, 350, 250, uih
 		firstNameField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -126,7 +128,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		firstNameField.setBackground(null);
 		firstNameField.setForeground(Color.black);
 		firstNameField.setFont(fieldFont);
-		
+
 		lastNameField = new JTextField(30);
 		lastNameField.setBounds(430, 275, 250, 25);// 125, 350, 250, uih
 		lastNameField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -134,7 +136,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		lastNameField.setBackground(null);
 		lastNameField.setForeground(Color.black);
 		lastNameField.setFont(fieldFont);
-		
+
 		phoneField = new JTextField(20);
 		phoneField.setBounds(430, 445, 250, 25);// 125, 350, 250, uih
 		phoneField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -142,7 +144,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		phoneField.setBackground(null);
 		phoneField.setForeground(Color.black);
 		phoneField.setFont(fieldFont);
-		
+
 		emailField = new JTextField(30);
 		emailField.setBounds(430, 190, 250, 25);// 125, 350, 250, uih
 		emailField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -150,7 +152,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		emailField.setBackground(null);
 		emailField.setForeground(Color.black);
 		emailField.setFont(fieldFont);
-		
+
 		communityField = new JTextField(30);
 		communityField.setBounds(430, 360, 250, 25);// 125, 350, 250, uih
 		communityField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -158,7 +160,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		communityField.setBackground(null);
 		communityField.setForeground(Color.black);
 		communityField.setFont(fieldFont);
-		
+
 		schoolField = new JTextField(30);
 		schoolField.setBounds(40, 360, 250, 25);// 125, 350, 250, uih
 		schoolField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -166,7 +168,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		schoolField.setBackground(null);
 		schoolField.setForeground(Color.black);
 		schoolField.setFont(fieldFont);
-		
+
 		employerField = new JTextField(30);
 		employerField.setBounds(40, 445, 250, 25);// 125, 350, 250, uih
 		employerField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -174,7 +176,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		employerField.setBackground(null);
 		employerField.setForeground(Color.black);
 		employerField.setFont(fieldFont);
-		
+
 		yesBtn = new JRadioButton("Yes");
 		yesBtn.setBounds(140, 510, 65, 20);
 		yesBtn.setFont(labelFont);
@@ -278,26 +280,27 @@ public class ProfileScreen extends JPanel implements ActionListener {
 
 	// This method adds the users data to the respective fields on the screen
 	public void setupProfile() {
-			if (user!= null) {
-					usernameField.setText(user.getUsername());
-					firstNameField.setText(user.getFirstName());
-					lastNameField.setText(user.getLastName());
-					phoneField.setText(user.getPhone());
-					emailField.setText(user.getEmail());
-					communityField.setText(user.getCommunity());
-					schoolField.setText(user.getSchool());
-					employerField.setText(user.getEmployer());
-					if (user.getPrivacy() == 1) {
-						yesBtn.setSelected(true);
-						noBtn.setSelected(false);
-					} else {
-						noBtn.setSelected(true);
-						yesBtn.setSelected(false);
-					}
-				}
+		if (user != null) {
+			usernameField.setText(user.getUsername());
+			firstNameField.setText(user.getFirstName());
+			lastNameField.setText(user.getLastName());
+			phoneField.setText(user.getPhone());
+			emailField.setText(user.getEmail());
+			communityField.setText(user.getCommunity());
+			schoolField.setText(user.getSchool());
+			employerField.setText(user.getEmployer());
+			if (user.getPrivacy() == 1) {
+				yesBtn.setSelected(true);
+				noBtn.setSelected(false);
+			} else {
+				noBtn.setSelected(true);
+				yesBtn.setSelected(false);
 			}
+		}
+	}
 
 	// This method updates the new info entered by the user;
+	// This method only updates the user in the file not in the network
 	public void updateUser() {// NTS: Test this method
 		String username = usernameField.getText().trim().replaceAll("\\s", "");
 		String firstName = firstNameField.getText().trim().replaceAll("\\s", "");
@@ -314,12 +317,12 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		Scanner inFileStream = null;
 		FileWriter outFileStream = null;
 
-		File dataTempFile = new File("./database/tempDatabase.txt");
+		File dataTempFile = new File("./database/tempPeopleDatabase.txt");
 		File databaseFile = new File("./database/peopleCopy.txt");
 
 		try {
 			inFileStream = new Scanner(databaseFile);
-			outFileStream = new FileWriter(dataTempFile, true);
+			outFileStream = new FileWriter(dataTempFile);
 			while (inFileStream.hasNext()) {
 				String username2 = inFileStream.next();
 				String firstName2 = inFileStream.next();
@@ -334,8 +337,8 @@ public class ProfileScreen extends JPanel implements ActionListener {
 						+ community2 + "\t" + school2 + "\t" + employer2 + "\t" + privacy2 + "\n";
 
 				if (username2.equals(getUser().getUsername())) {
-					Person person1 = new Person(username, firstName, lastName, phone, email, 
-							community, school, employer, privacy, getUser().getActivity());
+					Person person1 = new Person(username, firstName, lastName, phone, email, community, school,
+							employer, privacy, getUser().getActivity());
 					record = username + "\t" + firstName + "\t" + lastName + "\t" + phone + "\t" + email + "\t"
 							+ community + "\t" + school + "\t" + employer + "\t" + privacy + "\n";
 					setUser(person1);
@@ -378,7 +381,41 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		if (e.getSource() == saveBtn) {
 			// remove spaces from address, school, employer and name entered
 			// update file database, update tree
-			//updateUser();
+			if (!usernameField.getText().equals("") && !firstNameField.getText().equals("")
+					&& !lastNameField.getText().equals("") && !phoneField.getText().equals("")
+					 && !emailField.getText().equals("") && !communityField.getText().equals("")
+					&& !schoolField.getText().equals("") && !employerField.getText().equals("")) {
+				updateUser();
+				this.add(editBtn);
+				cancelBtn.setVisible(false);
+				this.remove(cancelBtn);
+				this.remove(saveBtn);
+				editBtn.setVisible(true);
+				usernameField.setEnabled(false);
+				firstNameField.setEnabled(false);
+				lastNameField.setEnabled(false);
+				phoneField.setEnabled(false);
+				emailField.setEnabled(false);
+				communityField.setEnabled(false);
+				schoolField.setEnabled(false);
+				employerField.setEnabled(false);
+				yesBtn.setEnabled(false);
+				noBtn.setEnabled(false);
+			} else {
+				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "One or more field empty", "Missing info",
+						JOptionPane.INFORMATION_MESSAGE);
+
+				try {
+					UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
 		}
 		if (e.getSource() == cancelBtn) {
 			this.add(editBtn);

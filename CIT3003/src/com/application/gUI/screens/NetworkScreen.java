@@ -110,7 +110,6 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		info.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.black));
 		info.setBackground(null);
 		info.setForeground(Color.black);
-		info.setCaretColor(Color.black);
 
 		searchBtn = new JButton("search");
 		searchBtn.setBounds(580, 268, 120, 30);
@@ -122,6 +121,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		searchBtn.setFocusPainted(false);
 	}
 
+	// adding components to panel
 	public void addComponentsToPanel() {
 		this.add(titleLabel);
 		this.add(lineSeparation);
@@ -133,6 +133,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		this.add(info);
 	}
 
+	// setting window properties
 	public void setWindowProperties() {
 		this.setSize(800, 600);
 		this.setBackground(new Color(253, 252, 252));/// (new Color(216, 227, 241));
@@ -159,7 +160,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		this.networkService = networkService;
 	}
 
-	// collect data of the users friend
+	// collect data of the users friend and store in combobox on screen
 	public void collectUsers() {
 		List<Person> userList = new ArrayList<>(getNetworkService().getSocialNet().getNetwork().keySet());
 		int i = 0;
@@ -174,6 +175,10 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		}
 	}
 
+	// This method call other methods to calculate the degree of separation between
+	// user and
+	// a selected target then displays it to the text area on the bottom half of the
+	// screen
 	public void displaySeparation() {
 		List<Person> userList = new ArrayList<>(getNetworkService().getSocialNet().getNetwork().keySet());
 		Person friend = null;

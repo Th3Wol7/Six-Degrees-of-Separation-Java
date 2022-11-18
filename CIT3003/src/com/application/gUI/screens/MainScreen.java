@@ -30,7 +30,7 @@ public class MainScreen {
 		// Try Catch block For frame creation
 		// Calls Function To create main background Plate
 		FindSeperation socialNet = new FindSeperation();
-		socialNet.getSocialNet().createNetwork();
+		//socialNet.getSocialNet().createNetwork();
 		try {
 			BaseScreen baseFrame = new BaseScreen();
 			frame = baseFrame.getBaseFrame();

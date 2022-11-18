@@ -47,13 +47,12 @@ public class UserScreen {
 	private static JButton networkButton;
 	private static JButton LogOutButton;
 	private static JButton quitButton;
-	
+
 	private static JFrame parentFrame;
 
 	private Person user;
 	private FindSeperation network;
-	
-	
+
 	public UserScreen(JFrame frame, Person user, FindSeperation network) {
 		this.network = network;
 		frame.setShape(new RoundRectangle2D.Double(0, 0, panWidth, panHeight, 30, 30));

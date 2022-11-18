@@ -277,76 +277,79 @@ public class ActivityScreen extends JPanel implements ActionListener {
 				}
 			}
 		}
-		int count = 0;
-		int rowCount = model.getRowCount();
-		int counter = 0;
-
-		while (counter < rowCount) {
-			model.removeRow(count);
-			counter++;
-		}
-		for (int count1 = 0; count1 < getNetworkService().suggestActivities(user).size(); count1++) {
-			model.insertRow(count1, new Object[] { getNetworkService().suggestActivities(user).get(count1) });
+		// If users privacy is turned off make suggestions
+		if (user.getPrivacy() != 1) {
+			int count = 0;
+			int rowCount = model.getRowCount();
+			int counter = 0;
+			while (counter < rowCount) {
+				model.removeRow(count);
+				counter++;
+			}
+			for (int count1 = 0; count1 < getNetworkService().suggestActivities(user).size(); count1++) {
+				model.insertRow(count1, new Object[] { getNetworkService().suggestActivities(user).get(count1) });
+			}
 		}
 	}
 
-	public void updateUserActivites(){
+	// This method accepts changes user makes to his or her activities and update
+	// them in real time
+	public void updateUserActivites() {
 		int selectionCount = 0;
 		List<String> newActivities = new ArrayList<>();
-		if(movie.isSelected()) {
-			selectionCount+= 1;
+		if (movie.isSelected()) {
+			selectionCount += 1;
 			newActivities.add("movie");
 		}
-		if(running.isSelected()) {
-			selectionCount+= 1;
+		if (running.isSelected()) {
+			selectionCount += 1;
 			newActivities.add("running");
 		}
-		if(reading.isSelected()) {
-			selectionCount+= 1;
+		if (reading.isSelected()) {
+			selectionCount += 1;
 			newActivities.add("reading");
 		}
-		if(volunteering.isSelected()) {
-			selectionCount+= 1;
+		if (volunteering.isSelected()) {
+			selectionCount += 1;
 			newActivities.add("volunteering");
 		}
-		if(dancing.isSelected()) {
-			selectionCount+= 1;
+		if (dancing.isSelected()) {
+			selectionCount += 1;
 			newActivities.add("dancing");
 		}
-		if(shopping.isSelected()) {
-			selectionCount+= 1;
+		if (shopping.isSelected()) {
+			selectionCount += 1;
 			newActivities.add("shopping");
 		}
-		if(!(userDefinedField.getText().equals("")) && !(userDefinedField.getText().equals(" "))) {
-			selectionCount+= 1;
+		if (!(userDefinedField.getText().equals("")) && !(userDefinedField.getText().equals(" "))) {
+			selectionCount += 1;
 			newActivities.add(userDefinedField.getText().trim().replaceAll("\\s", ""));
 		}
-		
-		
-		if(suggestionTable.getSelectedRow() != -1) {
-			selectionCount+= 1;
-			newActivities.add((String)suggestionTable.getValueAt(suggestionTable.getSelectedRow(), 
-									  suggestionTable.getSelectedColumn()));
+
+		if (suggestionTable.getSelectedRow() != -1) {
+			selectionCount += 1;
+			newActivities.add((String) suggestionTable.getValueAt(suggestionTable.getSelectedRow(),
+					suggestionTable.getSelectedColumn()));
 		}
-		
-		if(selectionCount > 3 || newActivities.size() >3) {	
+
+		if (selectionCount > 3 || newActivities.size() > 3) {
 			try {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
+
 			JOptionPane.showMessageDialog(null, "You can ony engage in 3 activties at a time", "You Activities",
 					JOptionPane.INFORMATION_MESSAGE);
 			addSuggestions();
-			
+
 			try {
 				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 		} else {
-			user.setActivity( new ArrayList<>());
+			user.setActivity(new ArrayList<>());
 			user.setActivity(newActivities);
 			addSuggestions();
 			Scanner inFileStream = null;
@@ -359,26 +362,26 @@ public class ActivityScreen extends JPanel implements ActionListener {
 				outFileStream = new FileWriter(dataTempFile);
 				while (inFileStream.hasNext()) {// #while 2
 					String record = "";
-					String username = inFileStream.next(); 
+					String username = inFileStream.next();
 					String fName = inFileStream.next();
 					String lName = inFileStream.next();
 					String activities = inFileStream.next();
-					record += username+"\t"+fName+"\t"+lName+"\t"+activities; 
-					
+					record += username + "\t" + fName + "\t" + lName + "\t" + activities;
+
 					if (user.getUsername().equals(username)) {
 						record = "";
-						//String actFName = inFileStream.next();//this variables are necessary
-						//String actLName = inFileStream.next();//this variables are necessary
-						//String act = inFileStream.next();
-						record += user.getUsername()+"\t"+fName+"\t"+lName+"\t";
-						for(int i = 0; i< newActivities.size(); i++) {
-							record+= newActivities.get(i);
-							if(i <(newActivities.size()-1)) {
+						// String actFName = inFileStream.next();//this variables are necessary
+						// String actLName = inFileStream.next();//this variables are necessary
+						// String act = inFileStream.next();
+						record += user.getUsername() + "\t" + fName + "\t" + lName + "\t";
+						for (int i = 0; i < newActivities.size(); i++) {
+							record += newActivities.get(i);
+							if (i < (newActivities.size() - 1)) {
 								record += ",";
 							}
 						}
 					}
-						
+
 					record += "\n";
 					outFileStream.write(record);
 				}
@@ -409,8 +412,8 @@ public class ActivityScreen extends JPanel implements ActionListener {
 		if (e.getSource() == cancelBtn) {
 			addSuggestions();
 		}
-		if(e.getSource() == addBtn) {
-			updateUserActivites();			
+		if (e.getSource() == addBtn) {
+			updateUserActivites();
 		}
 	}
 
