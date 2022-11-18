@@ -1,4 +1,9 @@
 package com.application.gUI.screens;
+/*This class represents the look, feel and fucntionality of the 
+ * GUI User Friends Screen
+ * @author Tyrien Gilpin
+ * Version 3
+ */
 
 import java.awt.Color;
 import java.awt.Dimension;

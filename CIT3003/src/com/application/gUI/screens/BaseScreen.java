@@ -1,4 +1,9 @@
 package com.application.gUI.screens;
+/*This class represents the look, feel and fucntionality of the 
+ * GUI  Frame
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.awt.geom.RoundRectangle2D;
 import java.io.IOException;

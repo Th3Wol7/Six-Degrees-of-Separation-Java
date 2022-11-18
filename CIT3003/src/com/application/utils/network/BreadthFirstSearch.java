@@ -1,20 +1,21 @@
 package com.application.utils.network;
+/*This class represents the customized implementation of the Breadth First Search
+ * algorithm taken from  
+ * https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
-import java.util.Set;
 import java.util.TreeMap;
 
 
-import com.application.models.Person;
 import com.application.models.PersonNode;
-import com.application.models.Vertex;
-import com.application.network.SocialNetworkTree;
 
 public class BreadthFirstSearch/* <Person> */ {
 	private PersonNode start;

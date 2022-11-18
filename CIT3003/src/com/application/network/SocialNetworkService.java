@@ -1,4 +1,8 @@
 package com.application.network;
+/*This class represents the model and attributes of the network
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.io.File;
 import java.io.FileNotFoundException;

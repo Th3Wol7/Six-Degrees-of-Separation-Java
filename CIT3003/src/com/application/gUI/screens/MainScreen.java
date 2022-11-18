@@ -1,4 +1,8 @@
 package com.application.gUI.screens;
+/*This class domain class in which the application runs
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.io.IOException;
 

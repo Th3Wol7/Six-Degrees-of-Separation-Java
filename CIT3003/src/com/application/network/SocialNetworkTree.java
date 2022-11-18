@@ -1,4 +1,8 @@
 package com.application.network;
+/*This class represents  a user defined Red Black Tree
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import com.application.models.Node;
 

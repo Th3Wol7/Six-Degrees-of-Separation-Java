@@ -1,4 +1,9 @@
 package com.application.gUI.screens;
+/*This class represents the look, feel and fucntionality of the 
+ * GUI Login Screen upon start
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -94,7 +99,7 @@ public class LoginScreen {
 		userLogColor = new Color(65, 172, 158);
 
 		Oswald = new Font("Oswald", Font.TYPE1_FONT, 15);
-
+		
 		users = new ImageIcon(new ImageIcon(MainScreen.class.getResource("loginLogo.png")).getImage()
 				.getScaledInstance(500, 550, Image.SCALE_DEFAULT));
 

@@ -1,4 +1,8 @@
 package com.application.gUI.screens;
+/*This class represents the Initial home Screen of the application
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.awt.geom.RoundRectangle2D;
 
@@ -22,6 +26,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,7 +35,8 @@ public class UserScreen {
 	final int panHeight = 600;
 	final int uih = 25;
 	final int sideButtons = 220;
-
+	private static Icon homePageImage;
+	
 	private static Font Oswald;
 	private static Color buttonColor;
 
@@ -62,9 +68,18 @@ public class UserScreen {
 		Oswald = new Font("Oswald", Font.TYPE1_FONT, 15);
 
 		this.user = user;
-		// Assigns default image to variable
-		defaultLogoIcon = new ImageIcon();
-		Logo = new JLabel(defaultLogoIcon);
+		try {
+			// Assigns default image to variable
+			defaultLogoIcon = new ImageIcon(new ImageIcon(getClass().getResource("HomePageLogo.png")).getImage()
+					.getScaledInstance(500, 458, Image.SCALE_DEFAULT));
+
+			Logo = new JLabel(defaultLogoIcon);
+			Logo.setBounds(150, 50, 500, 458);
+		} catch (Exception e) {
+			System.out.println("Home Screen Image could not be found");
+		}
+
+		
 		buttonColor = new Color(0, 0, 0);
 
 		createPanel();
@@ -84,7 +99,7 @@ public class UserScreen {
 		sidePanel.setLayout(null);
 
 		// sets layout to be null, to allow for free placement of JAttributes
-		primaryPanel.setBackground(new Color(216, 227, 241));// (new Color(216, 227, 241));
+		primaryPanel.setBackground(new Color(242, 242, 242));//new Color(216, 227, 241));// (new Color(216, 227, 241));
 		primaryPanel.setLayout(null);
 
 		userPanel.setBounds(0, 0, panWidth, panHeight);
@@ -97,12 +112,12 @@ public class UserScreen {
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(buttonColor);
 		primaryPanel.add(FrameUtility.exitButton);
-
+		
 		// Sets size and location of logo
-		Logo.setBounds(0, 0, 200, 150);
+		//Logo.setBounds(0, 0, 200, 150);
 
 		// adding Logo to top of side panel
-		sidePanel.add(Logo);
+		primaryPanel.add(Logo);
 
 		// adds created panels to main Panel
 		sidePanel.setPreferredSize(new Dimension(200, 600));

@@ -1,4 +1,9 @@
 package com.application.models;
+/*This class represents a person node utilized in 
+ * calculating degree of separation
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.util.ArrayList;
 import java.util.Collection;

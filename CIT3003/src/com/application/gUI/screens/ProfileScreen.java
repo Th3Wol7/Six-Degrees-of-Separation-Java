@@ -1,4 +1,9 @@
 package com.application.gUI.screens;
+/*This class represents the look, feel and functionality of the 
+ * GUI Users Profile Screen
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.awt.Color;
 import java.awt.Dimension;

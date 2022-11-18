@@ -1,4 +1,9 @@
 package com.application.gUI.screens;
+/*This class represents the look, feel and fucntionality of the 
+ * GUI Network Screen
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.awt.Color;
 import java.awt.Font;

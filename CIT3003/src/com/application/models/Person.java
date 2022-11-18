@@ -1,4 +1,8 @@
 package com.application.models;
+/*This class represents the model of a person 
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.io.Serializable;
 import java.util.ArrayList;

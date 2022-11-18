@@ -1,4 +1,9 @@
 package com.application.network;
+/*This class represents the functionality of making 
+ * recommendations and calculating degrees of separation
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.util.ArrayList;
 import java.util.Collection;

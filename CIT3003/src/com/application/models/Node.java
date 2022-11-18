@@ -1,4 +1,8 @@
 package com.application.models;
+/*This class represents A user node and it's attributes 
+ * @author Tyrien Gilpin
+ * Version 1
+ */
 
 import java.util.HashMap;
 import java.util.LinkedList;
