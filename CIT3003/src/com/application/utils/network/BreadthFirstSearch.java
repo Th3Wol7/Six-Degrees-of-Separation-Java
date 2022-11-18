@@ -5,16 +5,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
-import java.util.Set;
 import java.util.TreeMap;
-
 
 import com.application.models.Person;
 import com.application.models.PersonNode;
 import com.application.models.Vertex;
-import com.application.network.SocialNetworkTree;
 
 public class BreadthFirstSearch/* <Person> */ {
 	private Vertex<Person> source;
@@ -23,21 +19,21 @@ public class BreadthFirstSearch/* <Person> */ {
 	private PersonNode destination;
 	private TreeMap<PersonNode, Collection<PersonNode>> RBTree;
 	private List<PersonNode> printer = new ArrayList<>();
-	
+
 	public BreadthFirstSearch(Vertex<Person> startVertex, Vertex<Person> endVertex) {
 		this.source = startVertex;
 		this.end = endVertex;
 		traverse();
 	}
-	
-	public BreadthFirstSearch(PersonNode begin, PersonNode stop, 
+
+	public BreadthFirstSearch(PersonNode begin, PersonNode stop,
 			TreeMap<PersonNode, Collection<PersonNode>> tree) {
 		this.start = begin;
 		this.destination = stop;
 		this.RBTree = tree;
 	}
 
-	
+
 	public Vertex<Person> getSource() {
 		return source;
 	}
@@ -85,9 +81,9 @@ public class BreadthFirstSearch/* <Person> */ {
 		while (!(queue.isEmpty())) {
 			PersonNode currentNode = queue.poll();// traverse all nodes along the breadth
 			for(PersonNode node: getRBTree().get(currentNode)) {//currentNode.getFriends()
-				if (node.isVisited() == false) {
+				if (!node.isVisited()) {
 					node.setVisited(true);// // mark it visited
-					queue.add(node);	
+					queue.add(node);
 					node.setPrevious(currentNode);
 					printer.add(node);
 					//update the key of the node to this now
@@ -98,12 +94,12 @@ public class BreadthFirstSearch/* <Person> */ {
 					}
 				}
 			}
-			
+
 		}
 		return traceRoute();
 	}
 
-	
+
 	// Computes and prints shortest path
 	private int traceRoute() {
 		//List<PersonNode> node1 = new ArrayList<>();
@@ -116,13 +112,13 @@ public class BreadthFirstSearch/* <Person> */ {
 				 node1.add(entry.getKey());
 				//break;
 			}
-			
+
 		});
 		List<PersonNode> printer = new ArrayList<>();
-		
+
 		node = node1.get(0);
 		*/
-		
+
 		for(PersonNode node: printer) {
 			if(node.getData().getUsername()
 					.equalsIgnoreCase(destination.getData().getUsername())) {
@@ -131,7 +127,7 @@ public class BreadthFirstSearch/* <Person> */ {
 					node = node.getPrevious();
 				}
 			}
-		}	
+		}
 		// Reverse the route - bring start to the front
 		Collections.reverse(route);
 		// Output the route
@@ -142,7 +138,7 @@ public class BreadthFirstSearch/* <Person> */ {
 		return (route.size()-1);
 	}
 
-	
+
 
 	public int traverse() {
 		if (source == null) {

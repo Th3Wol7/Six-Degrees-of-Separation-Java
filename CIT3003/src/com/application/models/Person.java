@@ -15,8 +15,8 @@ public class Person implements Serializable, Comparable<Person>{
 	private String employer;
 	private int privacy;
 	private List<String> activity;
-	
-	
+
+
 
 	//Default Constructor
 	public Person() {
@@ -33,7 +33,7 @@ public class Person implements Serializable, Comparable<Person>{
 	}
 
 	// Primary Constructor
-	public Person(String username, String firstName, String lastName, String phone, String email, 
+	public Person(String username, String firstName, String lastName, String phone, String email,
 			String community, String school, String employer, int privacy, List<String> activity) {
 		this.username = username;
 		this.firstName = firstName;

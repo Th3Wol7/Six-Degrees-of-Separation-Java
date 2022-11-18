@@ -9,7 +9,7 @@ import com.application.network.FindSeperation;
 public class MainScreen {
 
 	final int panWidth = 1000;
-	final int panHeight = 600; 
+	final int panHeight = 600;
 	final int uih = 25;
 	final int newUserSetX = 140;
 	final int newUserSetY = 520;
@@ -19,12 +19,12 @@ public class MainScreen {
 	private static JFrame frame;
 
 	public MainScreen() {
-		NB: DO NOT PRESS THE BUTTONS ON THE FRIENDS SCREEN
-		SURROUND THIS TEXT WITH COMMENT SPECIFIERS TO RUN
+		/*NB: DO NOT PRESS THE BUTTONS ON THE FRIENDS SCREEN
+		SURROUND THIS TEXT WITH COMMENT SPECIFIERS TO RUN*/
 		// Try Catch block For frame creation
 		// Calls Function To create main background Plate
 		new FindSeperation();//For Testing purposes
-		new ActivityScreen();
+		//new ActivityScreen();
 		try {
 			BaseScreen baseFrame = new BaseScreen();
 			frame = baseFrame.getBaseFrame();
@@ -37,8 +37,8 @@ public class MainScreen {
 
 	public static void main(String[] args) {
 		new MainScreen();
-		
-		
+
+
 	}
 
 }

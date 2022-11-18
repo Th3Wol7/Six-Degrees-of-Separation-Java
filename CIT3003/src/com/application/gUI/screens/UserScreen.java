@@ -1,5 +1,12 @@
 package com.application.gUI.screens;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.BorderFactory;
@@ -13,14 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import com.application.utils.gUI.FrameUtility;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UserScreen {
 	final int panWidth = 1000;
@@ -44,11 +43,11 @@ public class UserScreen {
 	private static JButton networkButton;
 	private static JButton LogOutButton;
 	private static JButton quitButton;
-	
+
 	private static JFrame parentFrame;
 
 	private String user;
-	
+
 	public UserScreen(JFrame frame, String user) {
 
 		frame.setShape(new RoundRectangle2D.Double(0, 0, panWidth, panHeight, 30, 30));
@@ -210,7 +209,7 @@ public class UserScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				primaryPanel.removeAll();
-				primaryPanel.add(new ActivityScreen());
+				primaryPanel.add(new ActivityScreen(user));
 				primaryPanel.repaint();
 				primaryPanel.revalidate();
 			}

@@ -1,14 +1,12 @@
 package com.application.gUI.screens;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,12 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.DefaultCellEditor;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -33,7 +27,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import com.application.models.Person;
 import com.application.network.FindSeperation;
@@ -94,7 +87,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 		friendList = new JComboBox<>(friendsName); // new GenerateFriendsList().getFriends()
 		friendList.setFont(fieldFont);
 		friendList.setBounds(200, 160, 230, 30);
-		;
+
 		friendList.setOpaque(false);
 		friendList.setFocusable(false);
 
@@ -241,8 +234,8 @@ public class FriendsScreen extends JPanel implements ActionListener {
 					}
 				}
 
-				for (int i = 0; i < userFriends.length; i++) {
-					record += userFriends[i] + "\t";
+				for (String userFriend : userFriends) {
+					record += userFriend + "\t";
 				}
 				record += "\n";
 				outFileStream.write(record);
@@ -290,8 +283,8 @@ public class FriendsScreen extends JPanel implements ActionListener {
 				 * if(userFriends[0].equals(insert username of selected person here)) {
 				 * //userFriends[userFriends.length+1] = currentUser; }
 				 */
-				for (int i = 0; i < userFriends.length; i++) {
-					record += userFriends[i] + "\t";
+				for (String userFriend : userFriends) {
+					record += userFriend + "\t";
 				}
 				record += "\n";
 				outFileStream.write(record);

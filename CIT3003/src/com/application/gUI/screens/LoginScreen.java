@@ -12,6 +12,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.geom.RoundRectangle2D;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -62,17 +63,17 @@ public class LoginScreen {
     private static JPasswordField passwordText;
 
     private static JToggleButton registerButton;
-    private static JButton loginButton; 
+    private static JButton loginButton;
     private  JFrame frame;
 
     public LoginScreen(JFrame frame) {
     	this.frame = frame;
-    	initializeComponents(); 
+    	initializeComponents();
     	setAll();
     }
-    
-    
-    public void initializeComponents() {	
+
+
+    public void initializeComponents() {
         frame.setShape(new RoundRectangle2D.Double(0, 0, panWidth, panHeight, 30, 30));
         frame.setSize(panWidth, panHeight);
         createPanel(frame);
@@ -90,7 +91,7 @@ public class LoginScreen {
 
         prospects  = new ImageIcon(new ImageIcon(MainScreen.class.getResource("logo2.png")).getImage()
                 .getScaledInstance(500, 550, Image.SCALE_DEFAULT));
-        
+
         loginPanel.setLayout(new GridLayout(1, 2));
 
         imagePanel = new JPanel();
@@ -102,7 +103,7 @@ public class LoginScreen {
 
         //adds created panels to main Panel
         loginPanel.add(mainPanel);
-        loginPanel.add(imagePanel);       
+        loginPanel.add(imagePanel);
 
         // sets layout to be null, to allow for free placement of JAttributes
         imagePanel.setLayout(null);
@@ -120,21 +121,21 @@ public class LoginScreen {
         welcomeLabel.setBounds(150, 150, 200, 50);
         welcomeLabel.setForeground(Color.white);
         welcomeLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 34));
-        
-        
+
+
         welcomeNewUserLabel = new JLabel("USER!", SwingConstants.CENTER);
         welcomeNewUserLabel.setBounds(150, 200, 200, 50);
         welcomeNewUserLabel.setForeground(Color.white);
-        welcomeNewUserLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 34));		
-        
+        welcomeNewUserLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 34));
+
         // adds welcomeLabel! message and adds picture to right panel
         mainPanel.add(welcomeLabel);
         mainPanel.add(welcomeNewUserLabel);
         imagePanel.add(picLabel);
-        
+
         imagePanel.setBackground(userPicColor);
         mainPanel.setBackground(userLogColor);
-       
+
         frame.add(loginPanel);
     }
 
@@ -145,7 +146,7 @@ public class LoginScreen {
         loginPanel.setLayout(null);
 
     }
-    
+
     //Setting properties of user login screen attributes
     public void addLoginFields() {
         //setting user name input text field properties
@@ -176,7 +177,7 @@ public class LoginScreen {
             }
 
         });
-       
+
 
         //setting password text field properties
         passwordText = new JPasswordField("password");
@@ -207,7 +208,7 @@ public class LoginScreen {
             }
 
         });
-        
+
         mainPanel.add(userName);
         mainPanel.add(passwordText);
 
@@ -225,7 +226,7 @@ public class LoginScreen {
         // Sets text area so that the words wrap properly in the box
         userSwap.setLineWrap(true);
         userSwap.setWrapStyleWord(true);
-        
+
         // Sets the text box to the style of the ui
         userSwap.setOpaque(false);
         userSwap.setFont(oswald_Small);
@@ -235,7 +236,7 @@ public class LoginScreen {
 
         // Adds Functionality to the button
         registerButton = new JToggleButton("<HTML><U>Click Here</U></HTML>");
-        
+
         registerButton.setBounds(newUserOffsetX, newUserOffsetY, 100, uih);
         // Setting button to look and feel of main ui
         registerButton.setForeground(Color.white);
@@ -251,8 +252,8 @@ public class LoginScreen {
                 registerPressed(itemEvent);
             }
         });
-       
-        // Adding fields to login panel 
+
+        // Adding fields to login panel
         mainPanel.add(userName);
         mainPanel.add(registerButton);
         mainPanel.add(userSwap);
@@ -274,7 +275,7 @@ public class LoginScreen {
         loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         loginButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                  
+            public void actionPerformed(ActionEvent e) {
                     loginPanel.setVisible(false);
                     loginPanel.removeAll();
                     frame.remove(loginPanel);
@@ -284,13 +285,13 @@ public class LoginScreen {
         });
 
     }
-    
+
     public void setAll() {
     	addLoginFields();
     	screenSwitch();
-    	addLoginButton(frame);    
+    	addLoginButton(frame);
     }
-    
+
     //specifying actions based on user type
     protected void registerPressed(ItemEvent itemEvent) {
 
@@ -313,7 +314,7 @@ public class LoginScreen {
             picLabel.setBounds(0, 0, 500, 600);
             imagePanel.setBackground(userPicColor);
             mainPanel.setBackground(userLogColor);
-            
+
             picLabel.setIcon(users);
 
             welcomeLabel.setText("WELCOME");

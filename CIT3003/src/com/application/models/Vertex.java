@@ -10,23 +10,23 @@ public class Vertex<Person> {
     private boolean visited;
     private List<Vertex<Person>> friends;
     private Vertex<Person> previous;
-    
-    
+
+
     public Vertex(Person user) {
     	this.data = user;
     	this.visited = false;
-    	this.friends =new LinkedList<Vertex<Person>>();
+    	this.friends =new LinkedList<>();
     	this.previous = null;
     }
-    
+
     public Vertex(Person user, Collection<Person> friends){
     	this.data = user;
     	this.friends = convertToVectorList(friends);
      	this.visited = false;
      	this.previous = null;
     }
-  
-    
+
+
     public Vertex<Person> getPrevious() {
 		return previous;
 	}
@@ -35,7 +35,7 @@ public class Vertex<Person> {
 		this.previous = previous;
 	}
 
-	
+
 	public boolean isVisited() {
 		return visited;
 	}
@@ -55,13 +55,13 @@ public class Vertex<Person> {
 	public Person getData() {
 		return data;
 	}
-	
+
 	public 	List<Vertex<Person>>  convertToVectorList(Collection<Person> friends) {
-		List<Vertex<Person>> converted =  new LinkedList<Vertex<Person>>();
+		List<Vertex<Person>> converted =  new LinkedList<>();
     	for(Person person: friends) {
-    		converted.add(new Vertex<Person>(person));
+    		converted.add(new Vertex<>(person));
     	}
     	return converted;
 	}
-    
+
 }

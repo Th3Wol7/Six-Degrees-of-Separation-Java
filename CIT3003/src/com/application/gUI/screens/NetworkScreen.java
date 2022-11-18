@@ -36,7 +36,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 	private String username;
 	private FindSeperation networkService = new FindSeperation();
 
-	
+
 	public NetworkScreen(String username) {
 		this.username = username;
 		initializeComponents();
@@ -50,11 +50,11 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		// ImageIcon(ShowProfile.class.getResource("image file path here")).getImage()
 		// .getScaledInstance(100, 60, Image.SCALE_DEFAULT));
 		// Logo = new JLabel(profileIcon);
-		
+
 		labelFont = new Font("Oswald", Font.TYPE1_FONT, 18);
 		fieldFont = new Font("Oswald", Font.TYPE1_FONT, 15);
 		Color buttonColour = new Color(224, 224, 224);
-		
+
 		FrameUtility.addExitButton();
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
@@ -65,7 +65,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		titleLabel = new JLabel("Network", SwingConstants.CENTER);
 		titleLabel.setBounds(280, 50, 200, 50);
 		titleLabel.setFont(new Font("Oswald", Font.TYPE1_FONT, 34));
-		
+
 		lineSeparation = new JTextField(20);
 		lineSeparation.setBounds(0, 100, 800, 25);// 125, 350, 250, uih
 		lineSeparation.setHorizontalAlignment(SwingConstants.CENTER);
@@ -76,7 +76,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		averageLabel = new JLabel("Average Degree of seperation in network", SwingConstants.LEFT);
 		averageLabel.setBounds(40, 150, 350, 50);
 		averageLabel.setFont(labelFont);
-		
+
 		averageField = new JTextField(20);
 		averageField.setBounds(400, 160, 200, 30);
 		averageField.setFont(fieldFont);
@@ -86,18 +86,18 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		averageField.setForeground(Color.black);
 		averageField.setCaretColor(Color.black);
 		//averageField.setText(String.valueOf(getNetworkService().averageDegreeOfSeperation()));
-		
+
 		separationLabel = new JLabel("Find Seperation between you and", SwingConstants.LEFT);
 		separationLabel.setBounds(40, 255, 280, 50);
 		separationLabel.setFont(labelFont);
-		
+
 		friendsList = new JComboBox<>(); // new GenerateFriendsList().getFriends()
 		friendsList.setFont(fieldFont);
-		friendsList.setBounds(310, 268, 230, 30);;
+		friendsList.setBounds(310, 268, 230, 30);
 		friendsList.setOpaque(false);
 		friendsList.setFocusable(false);
-		
-		
+
+
 		info = new JTextArea();
 		info.setBounds(40, 330, 700, 250);
 		info.setFont(fieldFont);
@@ -105,7 +105,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		info.setBackground(null);
 		info.setForeground(Color.black);
 		info.setCaretColor(Color.black);
-		
+
 		searchBtn = new JButton("search");
 		searchBtn.setBounds(580, 268, 120, 30);
 		searchBtn.setFont(labelFont);
@@ -137,7 +137,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 	public void registerListeners() {
 		searchBtn.addActionListener(this);
 	}
-	
+
 
 	public String getUsername() {
 		return username;
@@ -154,31 +154,31 @@ public class NetworkScreen extends JPanel implements ActionListener {
 	public void setNetworkService(FindSeperation networkService) {
 		this.networkService = networkService;
 	}
-	
-	
+
+
 	public void displaySeparation() {
 		Person currentUser, searchValue;
 		List<Person> users = new ArrayList<>();
 		Set<Map.Entry<Person, Collection<Person>>> entries = getNetworkService().getSocialNet().getNetwork().entrySet();
 		entries.forEach(entry -> {
-			if(entry.getKey().getUsername().equals(username)) { 
+			if(entry.getKey().getUsername().equals(username)) {
 				Person user = entry.getKey();
 				users.add(user);
 			}
 		});
 		entries.forEach(entry -> {
-			if(entry.getKey().getUsername().equals(friendsList.getSelectedItem())) { 
+			if(entry.getKey().getUsername().equals(friendsList.getSelectedItem())) {
 				Person user = entry.getKey();
 				users.add(user);
 			}
 		});
-		
+
 		currentUser = users.get(0);
 		searchValue = users.get(1);
 		//NTS: Check fix this to display data in textArea on screen
 		getNetworkService().degreeOfSeperation(currentUser, searchValue);
 	}
-	
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

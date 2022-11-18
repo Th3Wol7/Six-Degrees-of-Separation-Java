@@ -16,35 +16,35 @@ public class PersonNode implements Comparable<PersonNode>{
 	//private int colour;
 	//private PersonNode parent;
 
-    
+
     public PersonNode(Person user) {
     	this.data = user;
     	this.visited = false;
-    	this.friends = new ArrayList<PersonNode>();
+    	this.friends = new ArrayList<>();
     	this.previous = null;
     }
-    
-    
+
+
     public PersonNode(Person user, Collection<Person> neighbours){
     	this.data = user;
     	this.friends = adjacent(neighbours);
     	this.visited = false;
     	this.previous = null;
     }
-    
+
     public void addNeighbour(PersonNode node) {
     	friends.add(node);
     	//node.getFriends().add(this);
     }
-    
+
     public List<PersonNode> adjacent(Collection<Person> neighbours){
-    	List<PersonNode> converted =  new ArrayList<PersonNode>();
+    	List<PersonNode> converted =  new ArrayList<>();
     	for(Person person: neighbours) {
     		converted.add(new PersonNode(person));
     	}
     	return converted;
     }
- 
+
     public Person getData() {
 		return data;
 	}
@@ -85,5 +85,5 @@ public class PersonNode implements Comparable<PersonNode>{
 	}
 
 
-    
+
 }

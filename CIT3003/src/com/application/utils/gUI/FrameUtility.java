@@ -1,12 +1,22 @@
 package com.application.utils.gUI;
 
-import java.awt.geom.RoundRectangle2D;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
 
-import javax.swing.*;
-
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class FrameUtility {
@@ -42,18 +52,21 @@ public class FrameUtility {
             setOpaque(false);
         }
 
-        protected void paintComponent(Graphics g) {
+        @Override
+		protected void paintComponent(Graphics g) {
             g.setColor(getBackground());
             g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             super.paintComponent(g);
         }
 
-        protected void paintBorder(Graphics g) {
+        @Override
+		protected void paintBorder(Graphics g) {
             g.setColor(getForeground());
             g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
         }
 
-        public boolean contains(int x, int y) {
+        @Override
+		public boolean contains(int x, int y) {
             if (shape == null || !shape.getBounds().equals(getBounds())) {
                 shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             }
@@ -71,15 +84,18 @@ public class FrameUtility {
             this.radius = radius;
         }
 
-        public Insets getBorderInsets(Component c) {
+        @Override
+		public Insets getBorderInsets(Component c) {
             return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
         }
 
-        public boolean isBorderOpaque() {
+        @Override
+		public boolean isBorderOpaque() {
             return true;
         }
 
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        @Override
+		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
         // got from
@@ -96,15 +112,18 @@ public class FrameUtility {
             this.frame = frame;
         }
 
-        public void mouseReleased(MouseEvent e) {
+        @Override
+		public void mouseReleased(MouseEvent e) {
             mouseDownCompCoords = null;
         }
 
-        public void mousePressed(MouseEvent e) {
+        @Override
+		public void mousePressed(MouseEvent e) {
             mouseDownCompCoords = e.getPoint();
         }
 
-        public void mouseDragged(MouseEvent e) {
+        @Override
+		public void mouseDragged(MouseEvent e) {
             Point currCoords = e.getLocationOnScreen();
             frame.setLocation(currCoords.x - mouseDownCompCoords.x, currCoords.y - mouseDownCompCoords.y);
         }

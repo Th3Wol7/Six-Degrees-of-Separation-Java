@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+
 import com.application.models.Person;
 import com.application.models.PersonNode;
 import com.application.utils.network.BreadthFirstSearch;
@@ -20,6 +21,7 @@ public class FindSeperation {
 		List<String> activity = new ArrayList<>();
 		List<String> activity2 = new ArrayList<>();
 		List<String> activity3 = new ArrayList<>();
+		List<String> activity4 = new ArrayList<>();
 		activity.add("reading");// For Testing purposes
 		activity.add("movie");// For Testing purposes
 		activity.add("running");// For Testing purposes
@@ -33,22 +35,29 @@ public class FindSeperation {
 		activity3.add("running");
 		activity3.add("dancing");
 
-		Person person = new Person("kfly4", "Kermait", "Ffly", "8765672010", "KeroFfly10@yahoo.com", "Papine", "UTECH",
+		activity4.add("running");
+		activity4.add("reading");
+		activity4.add("volunteering");
+		/*Person person = new Person("kfly4", "Kermait", "Ffly", "8765672010", "KeroFfly10@yahoo.com", "Papine", "UTECH",
 				"none", 0, activity);
 
 		Person person2 = new Person("jib1731", "Jim", "Bibby", "8765672032", "Jibibby032@gmail.com", "Papine", "UTECH",
 				"none", 0, activity2);
 
 		Person person3 = new Person("Kareem235", "Kareem", "Feather", "8764132519", "KaFeat56@gmail.com", "Portmore",
-				"none", "none", 0, activity3);
+				"none", "none", 0, activity3);*/
 
-		// System.out.println(suggestActivities(person)); Testing suggested activities
+		Person person4 = new Person("aks1738", "Ackeem", "shwarct", "8765672033", "Ackshwarct033@gmail.com", "Papine",
+				"UTECH", "none", 0, activity4);
+
+		 //System.out.println(suggestActivities(person)); //Testing suggested activities
+		 System.out.println(suggestFriends(person4));
 		// method
 
 		if (!(socialNet.getNetwork().isEmpty())) {// For Testing purposes
-			System.out.println(
+			/*System.out.println(
 					"Degree of seperation between " + person.getFirstName() + " & " + person2.getFirstName() + " is: ");
-			System.out.print(degreeOfSeperation(person, person2));
+			System.out.print(degreeOfSeperation(person, person2));*/
 		}
 	}
 
@@ -63,7 +72,7 @@ public class FindSeperation {
 
 	// Returns the degree of separation between users in the social
 	public int degreeOfSeperation(Person user, Person user2) {
-		if (friendsMatch(user, user2) == true) {
+		if (friendsMatch(user, user2)) {
 			System.out.print("Degree of seperation between" + user.getUsername() + " & " + user2.getUsername()
 					+ " is 1. Because they are direct friends");
 			return 1;
@@ -85,7 +94,7 @@ public class FindSeperation {
 				}
 			}
 
-			TreeMap<PersonNode, Collection<PersonNode>> RBTree = new TreeMap<PersonNode, Collection<PersonNode>>();
+			TreeMap<PersonNode, Collection<PersonNode>> RBTree = new TreeMap<>();
 			Set<Map.Entry<Person, Collection<Person>>> entries = getSocialNet().getNetwork().entrySet();
 			entries.forEach(entry -> {
 				PersonNode NodeA = new PersonNode(entry.getKey());
@@ -147,7 +156,7 @@ public class FindSeperation {
 
 					// if current person in network is not on users friends list
 					// then add the user to the suggested friends list
-					if (friendsMatch(user, entry.getKey()) == false) {
+					if (!friendsMatch(user, entry.getKey())) {
 						suggestedFriends.add(entry.getKey());
 					}
 				}
@@ -163,7 +172,7 @@ public class FindSeperation {
 			System.out.println("Exception Thrown in friend finder class suggestedfriends methos");
 			ex.printStackTrace();
 		}
-
+		System.out.println(suggestedFriends);
 		return suggestedFriends;
 	}
 
@@ -181,10 +190,10 @@ public class FindSeperation {
 						for (String entryActivity : entry.getKey().getActivity()) {// for every string in the user
 																					// activity list
 							boolean contains = user.getActivity().stream().anyMatch(entryActivity::equalsIgnoreCase);
-							if (contains == false) {// if on users activity list
+							if (!contains) {// if on users activity list
 								boolean addCheck = activitySuggestions.stream()
 										.anyMatch(entryActivity::equalsIgnoreCase);
-								if (addCheck == false) {// if activity is not already added to suggested activity list
+								if (!addCheck) {// if activity is not already added to suggested activity list
 									activitySuggestions.add(entryActivity);
 								}
 							}
@@ -193,7 +202,7 @@ public class FindSeperation {
 						for (String entryActivity : entry.getKey().getActivity()) {// for every string in the user
 																					// activity list
 							boolean addCheck = activitySuggestions.stream().anyMatch(entryActivity::equalsIgnoreCase);
-							if (addCheck == false) {// if activity is not already added to suggested activity list
+							if (!addCheck) {// if activity is not already added to suggested activity list
 								activitySuggestions.add(entryActivity);
 							}
 						}

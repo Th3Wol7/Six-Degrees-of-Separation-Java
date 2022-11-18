@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.application.models.Node;
-import com.application.models.Person;
 
 public class DijkstrasSearch<Person> {
 

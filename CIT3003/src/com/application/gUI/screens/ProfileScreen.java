@@ -1,10 +1,7 @@
 package com.application.gUI.screens;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -16,9 +13,7 @@ import java.util.Scanner;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -313,8 +308,8 @@ public class ProfileScreen extends JPanel implements ActionListener {
 						String actFName = inFileStream2.next();// this variables are necessary
 						String act = inFileStream2.next();
 						String act1[] = act.split(",");
-						for (int i = 0; i < act1.length; i++) {
-							activities.add(act1[i]);
+						for (String element : act1) {
+							activities.add(element);
 						}
 						// resetting in file stream
 						inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
@@ -366,7 +361,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		String school = schoolField.getText().trim();
 		String employer = employerField.getText().trim();
 		int privacy = 0;
-		if (yesBtn.isSelected() == true) {
+		if (yesBtn.isSelected()) {
 			privacy = 1;
 		}
 		Scanner inFileStream = null;

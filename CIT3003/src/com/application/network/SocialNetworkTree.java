@@ -10,7 +10,7 @@ public class SocialNetworkTree {
 		super();
 		root = null;
 	}
-	
+
 	 Node rotateLeft(Node node)
 	    {
 		 Node x = node.getRight();
@@ -22,8 +22,8 @@ public class SocialNetworkTree {
 	            y.setParent(node);
 	        return(x);
 	    }
-	 
-	 
+
+
 	    //method to performs right rotation
 	 Node rotateRight(Node node)
 	    {
@@ -35,7 +35,7 @@ public class SocialNetworkTree {
 	        if(nodeB != null)
 	        	nodeB.setParent(node);
 	        return(nodeA);
-	    } 
-	 	 
-	
+	    }
+
+
 }

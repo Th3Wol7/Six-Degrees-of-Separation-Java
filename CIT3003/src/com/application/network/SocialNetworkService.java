@@ -9,11 +9,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
+
 import com.application.models.Person;
 
 public class SocialNetworkService {
 
-	private TreeMap<Person, Collection<Person>> network = new TreeMap<Person, Collection<Person>>();
+	private TreeMap<Person, Collection<Person>> network = new TreeMap<>();
 	// you might want to write a helper method; you might want to make it recursive;
 	// and you might want to read about in-order tree
 
@@ -47,7 +48,7 @@ public class SocialNetworkService {
 				String school = inFileStream1.next();
 				String employer = inFileStream1.next();
 				int privacy = inFileStream1.nextInt();
-				
+
 				List<String> activities = new ArrayList<>(); // Accounting for activity
 				inFileStream4 = new Scanner(new File("./database/ActivitiesCopy.txt"));
 				while (inFileStream4.hasNext()) {// #while 2
@@ -56,17 +57,17 @@ public class SocialNetworkService {
 						String actFName = inFileStream4.next();//this variables are necessary
 						String act = inFileStream4.next();
 						String act1[] = act.split(",");
-						for(int i = 0; i <act1.length; i++) {
-							activities.add(act1[i]);
+						for (String element : act1) {
+							activities.add(element);
 						}
 						//System.out.println(activities); For testing
 						//resetting in file stream
-						break;// exit #while 2	
+						break;// exit #while 2
 						}
 				}
 				person = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
 						activities);
-		
+
 				Collection<Person> friends = new ArrayList<>();
 				inFileStream2 = new Scanner(new File("./database/friends.txt"));
 				// #while 3
@@ -75,7 +76,7 @@ public class SocialNetworkService {
 					//System.out.println(inFileStream2.hasNextLine());//For Testing purposes
 					//Separating words in line to retrieve individual friend user names
 					friendsListing = inFileStream2.nextLine().split("\\s+");
-					
+
 					// If the first ID number of the line is equal to that of the current person
 					if (friendsListing[0].equalsIgnoreCase(person.getUsername())) {
 						inFileStream3 = new Scanner(new File("./database/peopleCopy.txt"));
@@ -98,8 +99,8 @@ public class SocialNetworkService {
 									String actFName = inFileStream4.next();//this variables are necessary
 									String act = inFileStream4.next();
 									String act1[] = act.split(",");
-									for(int i = 0; i <act1.length; i++) {
-										activities2.add(act1[i]);
+									for (String element : act1) {
+										activities2.add(element);
 									}
 									//resetting in file stream
 									break;// exit #while 2
@@ -190,9 +191,9 @@ public class SocialNetworkService {
 		network.get(user).remove(friend);
 		network.get(friend).remove(user);
 	}
-	
-	
-	
+
+
+
 
 }
 
