@@ -36,11 +36,10 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	private JButton editBtn, saveBtn, cancelBtn;
 	private ButtonGroup buttonGroup;
 	private Font fieldFont, labelFont;
-	private String user;
-	private Person currentUser;
-
-	public ProfileScreen(String username) {
-		this.user = username;
+	private Person user;
+	
+	public ProfileScreen(Person user) {
+		this.user = user;
 		initializeComponents();
 		addComponentsToPanel();
 		setWindowProperties();
@@ -49,7 +48,6 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	}
 
 	public void initializeComponents() {
-
 		// profileIcon = new ImageIcon(new
 		// ImageIcon(ShowProfile.class.getResource("image file path here")).getImage()
 		// .getScaledInstance(100, 60, Image.SCALE_DEFAULT));
@@ -233,12 +231,12 @@ public class ProfileScreen extends JPanel implements ActionListener {
 
 	}
 
-	public Person getCurrentUser() {
-		return currentUser;
+	public Person getUser() {
+		return user;
 	}
 
-	public void setCurrentUser(Person currentUser) {
-		this.currentUser = currentUser;
+	public void setUser(Person user) {
+		this.user = user;
 	}
 
 	public void addComponentsToPanel() {
@@ -282,6 +280,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 	}
 
 	// This method adds the users data to the respective fields on the screen
+
 	public void setupProfile() {// NTS: Test this method
 
 		Scanner inFileStream = null;
@@ -329,37 +328,37 @@ public class ProfileScreen extends JPanel implements ActionListener {
 					schoolField.setText(person.getSchool());
 					employerField.setText(person.getEmployer());
 					if (privacy == 1) {
+
+	public void setupProfile() {
+			if (user!= null) {
+					usernameField.setText(user.getUsername());
+					firstNameField.setText(user.getFirstName());
+					lastNameField.setText(user.getLastName());
+					phoneField.setText(user.getPhone());
+					emailField.setText(user.getEmail());
+					communityField.setText(user.getCommunity());
+					schoolField.setText(user.getSchool());
+					employerField.setText(user.getEmployer());
+					if (user.getPrivacy() == 1) {
 						yesBtn.setSelected(true);
 						noBtn.setSelected(false);
 					} else {
 						noBtn.setSelected(true);
 						yesBtn.setSelected(false);
 					}
-					currentUser = person;
-					return;
 				}
 			}
-		} catch (FileNotFoundException fnfe) {
-			System.err.println("File could not be found: " + fnfe.getMessage());
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (inFileStream != null) {
-				inFileStream.close();
-			}
-		}
-	}
 
 	// This method updates the new info entered by the user;
 	public void updateUser() {// NTS: Test this method
-		String username = usernameField.getText().trim();
-		String firstName = firstNameField.getText().trim();
-		String lastName = lastNameField.getText().trim();
-		String phone = phoneField.getText().trim();
-		String email = emailField.getText().trim();
-		String community = communityField.getText().trim();
-		String school = schoolField.getText().trim();
-		String employer = employerField.getText().trim();
+		String username = usernameField.getText().trim().replaceAll("\\s", "");
+		String firstName = firstNameField.getText().trim().replaceAll("\\s", "");
+		String lastName = lastNameField.getText().trim().replaceAll("\\s", "");
+		String phone = phoneField.getText().trim().replaceAll("\\s", "");
+		String email = emailField.getText().trim().replaceAll("\\s", "");
+		String community = communityField.getText().trim().replaceAll("\\s", "");
+		String school = schoolField.getText().trim().replaceAll("\\s", "");
+		String employer = employerField.getText().trim().replaceAll("\\s", "");
 		int privacy = 0;
 		if (yesBtn.isSelected()) {
 			privacy = 1;
@@ -386,9 +385,12 @@ public class ProfileScreen extends JPanel implements ActionListener {
 				String record = username2 + "\t" + firstName2 + "\t" + lastName2 + "\t" + phone2 + "\t" + email2 + "\t"
 						+ community2 + "\t" + school2 + "\t" + employer2 + "\t" + privacy2 + "\n";
 
-				if (username2.equals(currentUser.getUsername())) {
+				if (username2.equals(getUser().getUsername())) {
+					Person person1 = new Person(username, firstName, lastName, phone, email, 
+							community, school, employer, privacy, getUser().getActivity());
 					record = username + "\t" + firstName + "\t" + lastName + "\t" + phone + "\t" + email + "\t"
 							+ community + "\t" + school + "\t" + employer + "\t" + privacy + "\n";
+					setUser(person1);
 				}
 				outFileStream.write(record);
 			}
@@ -414,7 +416,6 @@ public class ProfileScreen extends JPanel implements ActionListener {
 			this.add(saveBtn);
 			this.add(cancelBtn);
 			cancelBtn.setVisible(true);
-
 			usernameField.setEnabled(true);
 			firstNameField.setEnabled(true);
 			lastNameField.setEnabled(true);
@@ -427,9 +428,9 @@ public class ProfileScreen extends JPanel implements ActionListener {
 			noBtn.setEnabled(true);
 		}
 		if (e.getSource() == saveBtn) {
-			// conduct username duplication checks
 			// remove spaces from address, school, employer and name entered
 			// update file database, update tree
+			//updateUser();
 		}
 		if (e.getSource() == cancelBtn) {
 			this.add(editBtn);
@@ -449,15 +450,15 @@ public class ProfileScreen extends JPanel implements ActionListener {
 			yesBtn.setEnabled(false);
 			noBtn.setEnabled(false);
 
-			usernameField.setText(currentUser.getUsername());
-			firstNameField.setText(currentUser.getFirstName());
-			lastNameField.setText(currentUser.getLastName());
-			phoneField.setText(currentUser.getPhone());
-			emailField.setText(currentUser.getEmail());
-			communityField.setText(currentUser.getCommunity());
-			schoolField.setText(currentUser.getSchool());
-			employerField.setText(currentUser.getEmployer());
-			if (currentUser.getPrivacy() == 1) {
+			usernameField.setText(user.getUsername());
+			firstNameField.setText(user.getFirstName());
+			lastNameField.setText(user.getLastName());
+			phoneField.setText(user.getPhone());
+			emailField.setText(user.getEmail());
+			communityField.setText(user.getCommunity());
+			schoolField.setText(user.getSchool());
+			employerField.setText(user.getEmployer());
+			if (user.getPrivacy() == 1) {
 				yesBtn.setSelected(true);
 				noBtn.setSelected(false);
 			} else {

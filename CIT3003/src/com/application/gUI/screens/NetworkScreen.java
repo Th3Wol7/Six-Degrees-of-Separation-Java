@@ -7,18 +7,19 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import com.application.models.Person;
 import com.application.network.FindSeperation;
@@ -33,12 +34,18 @@ public class NetworkScreen extends JPanel implements ActionListener {
 	private JTextArea info;
 	private JComboBox<String> friendsList;
 	private Font labelFont, fieldFont;
-	private String username;
+	private Person user = new Person();
 	private FindSeperation networkService = new FindSeperation();
+	private String userName[] = {}, userID[] = {};
+
 
 
 	public NetworkScreen(String username) {
 		this.username = username;
+
+	public NetworkScreen(Person user) {
+		this.user = user;
+
 		initializeComponents();
 		addComponentsToPanel();
 		setWindowProperties();
@@ -51,6 +58,8 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		// .getScaledInstance(100, 60, Image.SCALE_DEFAULT));
 		// Logo = new JLabel(profileIcon);
 
+		collectUsers();
+
 		labelFont = new Font("Oswald", Font.TYPE1_FONT, 18);
 		fieldFont = new Font("Oswald", Font.TYPE1_FONT, 15);
 		Color buttonColour = new Color(224, 224, 224);
@@ -59,6 +68,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
 		this.add(FrameUtility.exitButton);
+
 		fieldFont = new Font("Oswald", Font.TYPE1_FONT, 15);
 		labelFont = new Font("Oswald", Font.TYPE1_FONT, 16);
 
@@ -85,18 +95,31 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		averageField.setBackground(null);
 		averageField.setForeground(Color.black);
 		averageField.setCaretColor(Color.black);
+
 		//averageField.setText(String.valueOf(getNetworkService().averageDegreeOfSeperation()));
+
+		// averageField.setText(String.valueOf(getNetworkService().averageDegreeOfSeperation()));
 
 		separationLabel = new JLabel("Find Seperation between you and", SwingConstants.LEFT);
 		separationLabel.setBounds(40, 255, 280, 50);
 		separationLabel.setFont(labelFont);
 
+
 		friendsList = new JComboBox<>(); // new GenerateFriendsList().getFriends()
+
+		friendsList = new JComboBox<>(userName); // new GenerateFriendsList().getFriends()
 		friendsList.setFont(fieldFont);
 		friendsList.setBounds(310, 268, 230, 30);
+
+
 		friendsList.setOpaque(false);
+
 		friendsList.setFocusable(false);
 
+		friendsList.setFocusable(true);
+		friendsList.setEditable(true);
+		friendsList.setEnabled(true);
+		AutoCompleteDecorator.decorate(friendsList); // Import swingx-all 1.6.4 to classpath from jar files
 
 		info = new JTextArea();
 		info.setBounds(40, 330, 700, 250);
@@ -112,7 +135,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		searchBtn.setOpaque(true);
 		searchBtn.setBorderPainted(false);
 		searchBtn.setBackground(buttonColour);
-		searchBtn.setEnabled(false);
+		searchBtn.setEnabled(true);
 		searchBtn.setFocusPainted(false);
 	}
 
@@ -133,18 +156,17 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		this.setLayout(null);
 	}
 
-
 	public void registerListeners() {
 		searchBtn.addActionListener(this);
 	}
 
 
-	public String getUsername() {
-		return username;
+	public Person getUser() {
+		return user;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(Person user) {
+		this.user = user;
 	}
 
 	public FindSeperation getNetworkService() {
@@ -164,7 +186,21 @@ public class NetworkScreen extends JPanel implements ActionListener {
 			if(entry.getKey().getUsername().equals(username)) {
 				Person user = entry.getKey();
 				users.add(user);
+
+	// collect data of the users friend
+	public void collectUsers() {
+		List<Person> userList = new ArrayList<>(getNetworkService().getSocialNet().getNetwork().keySet());
+		int i = 0;
+		userName = new String[userList.size()];
+		userID = new String[userList.size()];
+		for (Person person : userList) {
+			userName[i] = person.getFirstName() + " " + person.getLastName();
+			userID[i] = person.getUsername();
+			if (i < userList.size()) {
+				i++;
+
 			}
+
 		});
 		entries.forEach(entry -> {
 			if(entry.getKey().getUsername().equals(friendsList.getSelectedItem())) {
@@ -177,13 +213,47 @@ public class NetworkScreen extends JPanel implements ActionListener {
 		searchValue = users.get(1);
 		//NTS: Check fix this to display data in textArea on screen
 		getNetworkService().degreeOfSeperation(currentUser, searchValue);
+
+		}
+
+	}
+
+
+	public void displaySeparation() {
+		List<Person> userList = new ArrayList<>(getNetworkService().getSocialNet().getNetwork().keySet());
+		Person friend = null;
+		if (!getUser().getUsername().equals("")) {
+			for (Person person : userList) {
+				if (person.getUsername().equals(userID[friendsList.getSelectedIndex()])) {
+					friend = person;
+				}
+			}
+
+			if (friend != null) {
+				info.setText(String.valueOf(getNetworkService().degreeOfSeperation(getUser(), friend)));
+			}
+		} else {
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, "User is not apart of our social network", "Unknown User",
+					JOptionPane.INFORMATION_MESSAGE);
+			try {
+				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+		}
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == searchBtn) {
-			///displaySeparation
+		if (e.getSource() == searchBtn) {
+			displaySeparation();
 		}
 	}
 

@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import com.application.models.Person;
 import com.application.utils.gUI.FrameUtility;
 
 public class UserScreen {
@@ -46,9 +47,13 @@ public class UserScreen {
 
 	private static JFrame parentFrame;
 
+
 	private String user;
 
 	public UserScreen(JFrame frame, String user) {
+	private Person user;
+	
+	public UserScreen(JFrame frame, Person user) {
 
 		frame.setShape(new RoundRectangle2D.Double(0, 0, panWidth, panHeight, 30, 30));
 		frame.setSize(panWidth, panHeight);

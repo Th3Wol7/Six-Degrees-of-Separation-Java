@@ -74,8 +74,9 @@ public class BreadthFirstSearch/* <Person> */ {
 		RBTree = rBTree;
 	}
 
-	public int separationDegree() {
+	public String separationDegree() {
 		Queue<PersonNode> queue = new LinkedList<>();// queue to store nodes to be visited along the breadth
+		String output = "";
 		start.setVisited(true); // mark source node as visited
 		queue.add(start); // push src node to queue
 		while (!(queue.isEmpty())) {
@@ -88,7 +89,7 @@ public class BreadthFirstSearch/* <Person> */ {
 					printer.add(node);
 					//update the key of the node to this now
 					if (node.getData().getFirstName().equalsIgnoreCase(destination.getData().getFirstName())) {
-						System.out.println("Degree found to be: ");
+						output = "Degree found to be: \n";
 						queue.clear();
 						break;
 					}
@@ -96,12 +97,12 @@ public class BreadthFirstSearch/* <Person> */ {
 			}
 
 		}
-		return traceRoute();
+		return traceRoute(output);
 	}
 
 
 	// Computes and prints shortest path
-	private int traceRoute() {
+	private String traceRoute(String output) {
 		//List<PersonNode> node1 = new ArrayList<>();
 		List<PersonNode> route = new ArrayList<>();
 		//PersonNode node = destination;
@@ -132,10 +133,12 @@ public class BreadthFirstSearch/* <Person> */ {
 		Collections.reverse(route);
 		// Output the route
 		for (PersonNode links : route) {
-			//Printing the username connection
-			//System.out.print(links.getData().getUsername() + "-->");
+			output += links.getData().getFirstName() + "-->";
 		}
-		return (route.size()-1);
+		if((route.size()-1) < 0) {
+			return "No connection";
+		}
+		return output+= "\n" + String.valueOf((route.size()-1));
 	}
 
 

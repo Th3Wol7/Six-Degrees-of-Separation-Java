@@ -27,6 +27,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+<<<<<<< HEAD
+=======
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+>>>>>>> branch 'main' of https://github.com/Th3Wol7/Six-Degrees-of-Separation-Java.git
 
 import com.application.models.Person;
 import com.application.network.FindSeperation;
@@ -35,6 +40,7 @@ import com.application.utils.gUI.FrameUtility;
 public class FriendsScreen extends JPanel implements ActionListener {
 	private static Icon profileIcon;
 	private static JLabel Logo;
+	private final String[] tableHeaders = {"People"};
 	private JLabel titleLabel, friendsLabel, suggestionsLabel;
 	private JButton removeBtn, addBtn;
 	private JTextField lineSeparation;
@@ -43,20 +49,24 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	private JPanel content;
 	private JScrollPane tablePanel;
 	private JTable suggestionTable;
+    private DefaultTableModel model;
 	private FindSeperation networkService = new FindSeperation();
-	private String currentUser;
-	private String friendsName[], friendsID[];
-
-	public FriendsScreen(String username) {
-		this.currentUser = username;
+	private Person user;
+	private String friendsName[] = {}, friendsID[] = {};
+	
+	public FriendsScreen(Person user) {
+		this.user = user;
 		initializeComponents();
 		addComponentsToPanel();
 		setWindowProperties();
 		registerListeners();
+		
 	}
 
 	public void initializeComponents() {
-		// collectFriends();
+		model = new DefaultTableModel(tableHeaders, 0);
+        suggestionTable = new JTable(model);
+        collectFriends();
 		FrameUtility.addExitButton();
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
@@ -68,6 +78,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 
 		content = new JPanel();
 		content.setBounds(0, 305, 800, 230);
+		content.setBackground(this.getBackground());
 
 		titleLabel = new JLabel("My Friends", SwingConstants.CENTER);
 		titleLabel.setBounds(280, 50, 200, 50);
@@ -112,34 +123,31 @@ public class FriendsScreen extends JPanel implements ActionListener {
 		removeBtn.setBackground(buttonColour);
 		removeBtn.setEnabled(false);
 		removeBtn.setFocusPainted(false);
-
-		String columns[] = { "Tyrien", "Gilpin" };
-		String data[][] = { { "Jamie Oliver" }, { "John Doe" } };
-
-		suggestionTable = new JTable();
-		suggestionTable.setBounds(content.getBounds());
-		// suggestionTable.setShowGrid(true);
-		// suggestionTable.setShowVerticalLines(true);
-
-		tablePanel = new JScrollPane();
-		tablePanel.getViewport().add(suggestionTable);
-		tablePanel.setOpaque(false);
-		tablePanel.getViewport().setOpaque(false);
-		tablePanel.setBackground(getBackground());
-
-		tablePanel.setBounds(content.getBounds());
-		tablePanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
+				
+		 //Setting Table properties
+        suggestionTable.setPreferredScrollableViewportSize(new Dimension(780, 200));
+        //setBounds(0, 305, 800, 230);
+        suggestionTable.setDefaultEditor(Object.class, null);
+        suggestionTable.setAutoCreateRowSorter(true);
+        //Removing background of table heading
+        suggestionTable.getTableHeader().setOpaque(false);
+        suggestionTable.getTableHeader().setFont(fieldFont);
+        //Setting new background of table headings
+        suggestionTable.getTableHeader().setBackground(Color.white);
+        suggestionTable.setBackground(Color.white);
+        suggestionTable.setForeground(Color.black);
+        suggestionTable.setFont(fieldFont);
+		suggestionTable.setRowHeight(40);
+		suggestionTable.setOpaque(false);
 		suggestionTable.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
 		suggestionTable.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
 
-		suggestionTable.setBackground(getBackground());
-		suggestionTable.setShowGrid(false);
-		suggestionTable.setShowHorizontalLines(true);
-
-		suggestionTable.setFont(fieldFont);
-		suggestionTable.setRowHeight(40);
-		suggestionTable.setOpaque(false);
-		suggestionTable.setEnabled(true);
+		tablePanel = new JScrollPane(suggestionTable, 
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tablePanel.setOpaque(true);
+		tablePanel.getViewport().setOpaque(false);
+		tablePanel.setBackground(this.getBackground());
+		tablePanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.black));
 	}
 
 	// adding the components to the panel
@@ -173,28 +181,50 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	public void collectFriends() {
 		Set<Map.Entry<Person, Collection<Person>>> entries = getNetworkService().getSocialNet().getNetwork().entrySet();
 		entries.forEach(entry -> {
-			if (entry.getKey().getUsername().equals(getCurrentUser())) {
-				int i = 0;
+			if (entry.getKey().getUsername().equals(user.getUsername())) {
+				int i =0;
+				String uNames[] = new String[entry.getValue().size()], 
+						uIDs[] = new String[entry.getValue().size()];
 				for (Person friend : entry.getValue()) {
-					friendsName[i] = friend.getFirstName() + " " + friend.getLastName();
-					friendsID[i] = friend.getUsername();
-					i++;
+					uNames[i] = friend.getFirstName() + " " + friend.getLastName();
+					uIDs[i] = friend.getUsername();
+					if(i < entry.getValue().size()) {
+						i++;
+					}else {
+						return;
+					}
 				}
+				friendsName = uNames;
+				friendsID = uIDs;
 				return;
 			}
 		});
+			int count = 0;
+	        int rowCount = model.getRowCount();
+	        int counter = 0;
+
+	        while (counter < rowCount) {
+	            model.removeRow(count);
+	            counter++;
+	        } 
+	        for (int count1 = 0; count1 < getNetworkService().suggestFriends(user).size(); count1++) {
+	            model.insertRow(count1, new Object[]{
+	            		getNetworkService().suggestFriends(user).get(count1).getFirstName()+
+	            		"  " + getNetworkService().suggestFriends(user).get(count1).getLastName()
+	            });
+	        }
+
 	}
 
 	// removes an element from an array
 	private String[] removeElement(String persons[], int index) {
-		List<String> arrayList = Arrays.asList(persons);// Stream.of(persons).boxed().collect(Collectors.toList());
-		// Remove the specified element
+		List<String> arrayList = Arrays.asList(persons);//Stream.of(persons).boxed().collect(Collectors.toList());
+		//Remove the specified element
 		arrayList.remove(index);
 		String personUpdate[] = {};
-		// return the resultant array
+		//return the resultant array
 		personUpdate = arrayList.toArray(personUpdate);
 		return personUpdate;
-
 	}
 
 	// update the file if a user removes a person from his/her friends list
@@ -213,8 +243,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 				// System.out.println(inFileStream2.hasNextLine());//For Testing purposes
 				// Separating words in line to retrieve individual friend user names
 				userFriends = inFileStream.nextLine().split("\\s+");
-
-				if (userFriends[0].equals(currentUser)) {
+				if (userFriends[0].equals(user.getUsername())) {
 					for (int i = 1; i < userFriends.length; i++) {
 						if (userFriends[i].equals(friendsID[friendList.getSelectedIndex()])) {
 							userFriends[i] = "";
@@ -227,15 +256,20 @@ public class FriendsScreen extends JPanel implements ActionListener {
 
 				if (userFriends[0].equals(friendsID[friendList.getSelectedIndex()])) {
 					for (int i = 1; i < userFriends.length; i++) {
-						if (userFriends[i].equals(currentUser)) {
+						if (userFriends[i].equals(user.getUsername())) {
 							userFriends[i] = "";
 							break;
 						}
 					}
 				}
 
+
 				for (String userFriend : userFriends) {
 					record += userFriend + "\t";
+
+				for (int i = 0; i < userFriends.length; i++) {
+					record += userFriends[i] + "\t";
+
 				}
 				record += "\n";
 				outFileStream.write(record);
@@ -273,11 +307,20 @@ public class FriendsScreen extends JPanel implements ActionListener {
 				String record = "";
 				// Separating words in line to retrieve individual friend user names
 				userFriends = inFileStream.nextLine().split("\\s+");
-				if (userFriends[0].equals(currentUser)) {
-					// userFriends[userFriends.length+1] = insert username number of selected person
-					// here;
-					// friendsID[friendsName.length+1] = insert username of selected person here;
-					// friendsName[friendsName.length+1] = insert username of selected person here;
+				if (userFriends[0].equals(user.getUsername())) {
+					userFriends[userFriends.length+1] = getNetworkService().suggestFriends(user)
+							.get(suggestionTable.getSelectedRow())
+							.getUsername();
+					friendsID[friendsName.length+1] = getNetworkService().suggestFriends(user)
+					.get(suggestionTable.getSelectedRow())
+					.getUsername();
+					
+					friendsName[friendsName.length+1] = getNetworkService().suggestFriends(user)
+							.get(suggestionTable.getSelectedRow())
+							.getFirstName() + "  " +
+							getNetworkService().suggestFriends(user)
+							.get(suggestionTable.getSelectedRow())
+							.getLastName();
 				}
 				/*
 				 * if(userFriends[0].equals(insert username of selected person here)) {
@@ -304,15 +347,14 @@ public class FriendsScreen extends JPanel implements ActionListener {
 				inFileStream.close();
 			}
 		}
-
+	}
+	
+	public Person getUser() {
+		return user;
 	}
 
-	public String getCurrentUser() {
-		return currentUser;
-	}
-
-	public void setCurrentUser(String currentUser) {
-		this.currentUser = currentUser;
+	public void setUser(Person currentUser) {
+		this.user = currentUser;
 	}
 
 	public FindSeperation getNetworkService() {
@@ -335,18 +377,10 @@ public class FriendsScreen extends JPanel implements ActionListener {
 					"Remove Friend", JOptionPane.YES_NO_OPTION);
 
 			if (option == JOptionPane.YES_OPTION) {
-				Person user, newFriend;
+				Person newFriend;
 				List<Person> users = new ArrayList<>();
 				Set<Map.Entry<Person, Collection<Person>>> entries = getNetworkService().getSocialNet().getNetwork()
 						.entrySet();
-				entries.forEach(entry -> {
-					if (entry.getKey().getUsername().equals(getCurrentUser())) {
-						Person networkUser = entry.getKey();
-						users.add(networkUser);
-						return;
-					}
-				});
-
 				entries.forEach(entry -> {
 					if (entry.getKey().getUsername().equals(friendsID[friendList.getSelectedIndex()])) {
 						Person networkUser = entry.getKey();
@@ -355,10 +389,9 @@ public class FriendsScreen extends JPanel implements ActionListener {
 					}
 				});
 
-				user = users.get(0);
 				newFriend = users.get(1);
-				if (user != null && newFriend != null) {
-					getNetworkService().getSocialNet().removeFriend(user, newFriend);
+				if (getUser() != null && newFriend != null) {
+					getNetworkService().getSocialNet().removeFriend(getUser(), newFriend);
 					updateRemoval();
 				}
 
@@ -383,12 +416,12 @@ public class FriendsScreen extends JPanel implements ActionListener {
 			int option = JOptionPane.showConfirmDialog(null, "Are you sure ?", "Log Out", JOptionPane.YES_NO_OPTION);
 
 			if (option == JOptionPane.YES_OPTION) {
-				Person user, newFriend;
+				Person newFriend;
 				List<Person> users = new ArrayList<>();
 				Set<Map.Entry<Person, Collection<Person>>> entries = getNetworkService().getSocialNet().getNetwork()
 						.entrySet();
 				entries.forEach(entry -> {
-					if (entry.getKey().getUsername().equals(getCurrentUser())) {
+					if (entry.getKey().getUsername().equals(user.getUsername())) {
 						Person networkUser = entry.getKey();
 						users.add(networkUser);
 						return;
