@@ -1,0 +1,187 @@
+Breadth First Search
+Declare String separationDegree() {
+		STORE the nodes that should be visited in the linked list.// queue to store nodes to be visited along the breadth
+	  OUTPUT string/variable
+		    SET visited as ture // mark source node as visited
+		        ADD start to queue  // push src node to queue
+		            WHILE queue is empty  {
+			        Person and Current node equal poll queue  // traverse all nodes along the breadth
+			            for(PersonNode node: getRBTree().get(currentNode)) {//currentNode.getFriends()
+				      IF node is visited THEN is equal to false {
+					    SET visted node as true    // // mark it visited
+					        ADD node to queue
+					            SET Previous node to current node
+					                ADD node to printer
+					                    //update the key of the node to this now
+					                        if (node.getData().getFirstName().equalsIgnoreCase(destination.getData().getFirstName())) {
+						                        PRINT "Degree found to be :"     output = "Degree found to be: \n";
+						                            queue.clear();
+						                                break;
+					ENDIF}
+				ENDIF}
+			ENDFOR}
+
+		ENDWHILE}
+
+		Return traceRoute(output);
+	}
+
+
+	// Computes and prints shortest path
+	private String traceRoute(String output) {
+		//List<PersonNode> node1 = new ArrayList<>();
+		List<PersonNode> route = new ArrayList<>();
+          for(PersonNode node: printer) {
+			(node.getData().getUsername()
+					.equalsIgnoreCase(destination.getData().getUsername())) {
+				WHILE node is not equal to null   while (node != null) {
+					ADD node to route     route.add(node);
+					node = node.getPrevious();
+				ENDWHILE}
+			}
+		ENDFOR}
+		// Reverse the route - bring start to the front
+		Collections.reverse(route);
+		// Output the route
+		for (PersonNode links : route) {
+			output += links.getData().getFirstName() + "-->";
+		}
+	     if((route.size()-1) < 0) {
+			return "No connection";
+		ENDIF}
+		return output+= "\n" + String.valueOf((route.size()-1));
+	}
+
+
+
+	DECLARE int traverse() {
+		IF source equal to null THEN  {
+			RETURN -1;
+		} ELSE {
+			Queue<Vertex<Person>> queue = new LinkedList<>();
+			ADD source to queue
+			WHILE queue in not empty while {
+				Current person vertex queue poll
+				IF not current is visited  {
+					SET visited current as true
+					PRINT "Current"
+					IF current equals end THEN {
+						// return distance;
+					ENDIF}
+					ADD all queue to the current friend
+				ENDIF}
+
+		ENDWHILE}
+		RETURN -1;
+	ENDELSEIF}
+
+}
+
+Friend Suggestion
+public List<Person> suggestFriends(Person user) {
+		Array list[] equals list person that is in the suggested Friends
+		TRY {
+			SET entry for collection of persons that is equal to Social Net, AND set entry FOR each
+
+
+				// if person in the network is of same community, school or employer as user
+				IF entry key equals user community
+				IF entry key equal user employer
+				IF entry key equal user school
+
+					// if current person in network is not on users friends list
+					// then add the user to the suggested friends list
+					IF entry key user friend match is equal to false THEN {
+						ADD suggested Friends using entry key
+					ENDIF}
+				ENDIF}
+			});
+
+		} CATCH (NullPointerException ne) {
+			PRINT "Null pointer Exception Thrown in friend finder class"
+			ne.printStackTrace();
+		} CATCH (UnsupportedOperationException uoe) {
+			PRINT"UnsupportedOperationException Thrown in friend finder class"
+			uoe.printStackTrace();
+		} CATCH (Exception ex) {
+			PRINT "Exception Thrown in friend finder class suggestedfriends methos"
+			ex.printStackTrace();
+		}
+
+		RERUN suggestedFriends;
+	}
+
+
+
+	Activity Suggestion
+	public List<String> suggestActivities(Person user) {
+    		List<String> activitySuggestions = new ArrayList<>();
+    		TRY {
+    			Set<Map.Entry<Person, Collection<Person>>> entries = getSocialNet().getNetwork().entrySet();
+    			entries.forEach(entry -> {
+    				// if person in the network is of same community, school or employer as user
+    				IF person in the network is of same community, school or employer as user THEN   {
+    					IF user activity not equals to null   {
+    						FOR String entry activity get key and activity list  for  {// for every string in the user
+    																					// activity list
+    							boolean contains = user.getActivity().stream().anyMatch(entryActivity::equalsIgnoreCase);
+    							IF contains equals false THEN   {// if on users activity list
+    								ADD check equals activity suggestions
+    										.anyMatch(entryActivity::equalsIgnoreCase);
+    								IF add check equals false THEN {// if activity is not already added to suggested activity list
+    									ADD activity suggestions to entry activity
+    								ENDIF}
+    							ENDIF}
+    						ENDFOR}
+    					ENDIF} ELSE {
+    						FOR String entry activity get key and activity list {// for every string in the user
+    																					// activity list
+    							ADD check equals activity suggestion IF any match entry activity equals Ignore case
+    							IF add check equals false THEN
+    								Activity Suggestions add to entry activity
+    							ENDIF}
+    						ENDFOR}
+    					ENDELSE}
+    				ENDIF}
+    			});
+
+    		} CATCH (NullPointerException ne) {
+    			PRINT("Null pointer Exception Thrown in friend finder class");
+    			ne.printStackTrace();
+    		} CATCH (UnsupportedOperationException uoe) {
+    			PRINT("UnsupportedOperationException Thrown in friend finder class");
+    			uoe.printStackTrace();
+    		} CATCH (Exception ex) {
+    			PRINT("Exception Thrown in friend finder class suggestedfriends methos");
+    			ex.printStackTrace();
+    		}
+
+    		RETURN  activitySuggestions;
+    	}
+
+    	Degree of separation
+	    DECLARE String degreeOfSeparation(Person user, Person user2) {
+		OUTPUT string/variable
+		IF user friend match user2 THEN equal true if (friendsMatch(user, user2) == true) {
+			PRINT "Degree of separation between" + user Username() +
+			" & " + user2 Username() + " is 1. Because they are direct friends" + "\n1"
+			RETURN output;
+		} ELSE {
+			// If any of of the users friends is a friend of user2 return 2 degrees of
+			// separation because they both have a mutual friend that they is 1 degree from
+			// them
+			IF find friend user not equal null THEN {// If user has friends then...
+				FOR Person find friends {
+					// for all friends in the source list
+					// if that friends Username = any Friend friends Username
+					FOR Person with same Social Net and Network gets user2  {
+						IF Person2 username equals to person username THEN  {
+							OUTPUT "Degree of separation between " + user FirstName() + " & "
+							+ user2 FirstName() + " is 2 because they share a mutual friend.\nDegree:\n2"
+							RETURN output;
+						ENDIF}
+					ENDFOR}
+				ENDFOR}
+			ENDIF}
+
+
