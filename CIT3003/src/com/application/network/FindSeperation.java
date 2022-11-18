@@ -20,6 +20,7 @@ public class FindSeperation {
 		List<String> activity = new ArrayList<>();
 		List<String> activity2 = new ArrayList<>();
 		List<String> activity3 = new ArrayList<>();
+		List<String> activity4 = new ArrayList<>();
 		activity.add("reading");// For Testing purposes
 		activity.add("movie");// For Testing purposes
 		activity.add("running");// For Testing purposes
@@ -32,7 +33,10 @@ public class FindSeperation {
 		activity3.add("volunteering");
 		activity3.add("running");
 		activity3.add("dancing");
-
+	
+		activity4.add("running");
+		activity4.add("reading");
+		activity4.add("volunteering");
 		Person person = new Person("kfly4", "Kermait", "Ffly", "8765672010", "KeroFfly10@yahoo.com", "Papine", "UTECH",
 				"none", 0, activity);
 
@@ -44,6 +48,11 @@ public class FindSeperation {
 
 		// System.out.println(suggestActivities(person)); Testing suggested activities
 		// method
+		
+		Person person4 = new Person("aks1738", "Ackeem", "Shwarct", "8765672033", "Ackshwarct033@gmail.com", "Papine",
+				"UTECH", "none", 0, activity4);
+		
+		System.out.println(suggestFriends(person4)); // for testing 
 		
 		if (!(socialNet.getNetwork().isEmpty())) {// For Testing purposes
 			System.out.print(degreeOfSeperation(person, person2));
@@ -147,7 +156,12 @@ public class FindSeperation {
 					// if current person in network is not on users friends list
 					// then add the user to the suggested friends list
 					if (friendsMatch(user, entry.getKey()) == false) {
+						if(user.getUsername().equals(entry.getKey().getUsername())) {
+							//System.out.println("user cannot be friend with themselves");
+							suggestedFriends.remove(entry.getKey());
+						}else {
 						suggestedFriends.add(entry.getKey());
+						}
 					}
 				}
 			});
