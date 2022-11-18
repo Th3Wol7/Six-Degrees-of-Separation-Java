@@ -204,6 +204,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 				return;
 			}
 		});
+		if(getUser().getPrivacy() != 1) {
 			int count = 0;
 	        int rowCount = model.getRowCount();
 	        int counter = 0;
@@ -218,6 +219,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	            		"  " + getNetworkService().suggestFriends(user).get(count1).getLastName()
 	            });
 	        }
+		}
 
 	}
 
