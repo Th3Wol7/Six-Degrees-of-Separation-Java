@@ -29,7 +29,8 @@ public class MainScreen {
 		
 		// Try Catch block For frame creation
 		// Calls Function To create main background Plate
-		new FindSeperation();//For Testing purposes
+		FindSeperation socialNet = new FindSeperation();
+		socialNet.getSocialNet().createNetwork();
 		try {
 			BaseScreen baseFrame = new BaseScreen();
 			frame = baseFrame.getBaseFrame();
@@ -37,7 +38,7 @@ public class MainScreen {
 			e.printStackTrace();
 		}
 
-		new LoginScreen(frame);
+		new LoginScreen(frame, socialNet);
 	}
 
 	public static void main(String[] args) {

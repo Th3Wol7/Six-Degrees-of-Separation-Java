@@ -35,11 +35,12 @@ public class NetworkScreen extends JPanel implements ActionListener {
 	private JComboBox<String> friendsList;
 	private Font labelFont, fieldFont;
 	private Person user = new Person();
-	private FindSeperation networkService = new FindSeperation();
+	private FindSeperation networkService;
 	private String userName[] = {}, userID[] = {};
 
-	public NetworkScreen(Person user) {
+	public NetworkScreen(Person user, FindSeperation network) {
 		this.user = user;
+		this.networkService = network;
 		initializeComponents();
 		addComponentsToPanel();
 		setWindowProperties();

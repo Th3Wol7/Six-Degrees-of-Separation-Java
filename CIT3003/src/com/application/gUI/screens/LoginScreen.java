@@ -31,6 +31,8 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import com.application.models.Person;
+import com.application.network.FindSeperation;
+import com.application.network.SocialNetworkService;
 import com.application.utils.gUI.FrameUtility;
 
 public class LoginScreen {
@@ -71,9 +73,12 @@ public class LoginScreen {
     private static JButton loginButton; 
     private  JFrame frame;
     private Person user = new Person();
+    private FindSeperation network;
     
-    public LoginScreen(JFrame frame) {
+    
+    public LoginScreen(JFrame frame, FindSeperation socialNet) {
     	this.frame = frame;
+    	this.network = socialNet;
     	initializeComponents(); 
     	setAll();
     }
@@ -336,7 +341,7 @@ public class LoginScreen {
                     loginPanel.removeAll();
                     frame.remove(loginPanel);
                     finduser();
-                   new UserScreen(frame, user);
+                   new UserScreen(frame, user, network);
             }
 
         });

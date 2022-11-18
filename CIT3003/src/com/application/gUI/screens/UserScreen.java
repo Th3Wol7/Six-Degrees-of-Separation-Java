@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import com.application.models.Person;
+import com.application.network.FindSeperation;
+import com.application.network.SocialNetworkService;
 import com.application.utils.gUI.FrameUtility;
 
 import java.awt.BorderLayout;
@@ -49,9 +51,11 @@ public class UserScreen {
 	private static JFrame parentFrame;
 
 	private Person user;
+	private FindSeperation network;
 	
-	public UserScreen(JFrame frame, Person user) {
-
+	
+	public UserScreen(JFrame frame, Person user, FindSeperation network) {
+		this.network = network;
 		frame.setShape(new RoundRectangle2D.Double(0, 0, panWidth, panHeight, 30, 30));
 		frame.setSize(panWidth, panHeight);
 		frame.setLayout(new BorderLayout());
@@ -201,7 +205,7 @@ public class UserScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				primaryPanel.removeAll();
-				primaryPanel.add(new FriendsScreen(user));
+				primaryPanel.add(new FriendsScreen(user, network));
 				primaryPanel.repaint();
 				primaryPanel.revalidate();
 			}
@@ -211,7 +215,7 @@ public class UserScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				primaryPanel.removeAll();
-				primaryPanel.add(new ActivityScreen(user));
+				primaryPanel.add(new ActivityScreen(user, network));
 				primaryPanel.repaint();
 				primaryPanel.revalidate();
 
@@ -222,7 +226,7 @@ public class UserScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				primaryPanel.removeAll();
-				primaryPanel.add(new NetworkScreen(user));
+				primaryPanel.add(new NetworkScreen(user, network));
 				primaryPanel.repaint();
 				primaryPanel.revalidate();
 
@@ -248,7 +252,7 @@ public class UserScreen {
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
-					new LoginScreen(frame);
+					new LoginScreen(frame, network);
 
 				}
 			}

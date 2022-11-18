@@ -17,18 +17,11 @@ import com.application.models.Vertex;
 import com.application.network.SocialNetworkTree;
 
 public class BreadthFirstSearch/* <Person> */ {
-	private Vertex<Person> source;
-	private Vertex<Person> end;
 	private PersonNode start;
 	private PersonNode destination;
 	private TreeMap<PersonNode, Collection<PersonNode>> RBTree;
 	private List<PersonNode> printer = new ArrayList<>();
 	
-	public BreadthFirstSearch(Vertex<Person> startVertex, Vertex<Person> endVertex) {
-		this.source = startVertex;
-		this.end = endVertex;
-		traverse();
-	}
 	
 	public BreadthFirstSearch(PersonNode begin, PersonNode stop, 
 			TreeMap<PersonNode, Collection<PersonNode>> tree) {
@@ -37,23 +30,7 @@ public class BreadthFirstSearch/* <Person> */ {
 		this.RBTree = tree;
 	}
 
-	
-	public Vertex<Person> getSource() {
-		return source;
-	}
-
-	public void setSource(Vertex<Person> source) {
-		this.source = source;
-	}
-
-	public Vertex<Person> getEnd() {
-		return end;
-	}
-
-	public void setEnd(Vertex<Person> end) {
-		this.end = end;
-	}
-
+	//Getters and Setters
 	public PersonNode getStart() {
 		return start;
 	}
@@ -77,7 +54,7 @@ public class BreadthFirstSearch/* <Person> */ {
 	public void setRBTree(TreeMap<PersonNode, Collection<PersonNode>> rBTree) {
 		RBTree = rBTree;
 	}
-
+	//BFS Algorithm Demonstration
 	public String separationDegree() {
 		Queue<PersonNode> queue = new LinkedList<>();// queue to store nodes to be visited along the breadth
 		String output = "";
@@ -125,32 +102,24 @@ public class BreadthFirstSearch/* <Person> */ {
 			output += links.getData().getFirstName() + "-->";
 		}
 		if((route.size()-1) < 0) {
-			return "No connection";
+			String display = "No Connection\n";
+			if(start.getData().getCommunity().equalsIgnoreCase(destination.getData().getCommunity())) {
+				display+= start.getData().getFirstName()+" and " + destination.getData().getFirstName()+
+						" has community in common\n";
+			}
+			if(start.getData().getSchool().equalsIgnoreCase(destination.getData().getSchool())) {
+				display+= start.getData().getFirstName()+" and " + destination.getData().getFirstName()+
+						" has school in common\n";
+			}
+			if(start.getData().getEmployer().equalsIgnoreCase(destination.getData().getEmployer())) {
+				display+= start.getData().getFirstName()+" and " + destination.getData().getFirstName()+
+						" has employer in common\n";
+			}
+			return display;
 		}
 		return output+= "\n" + String.valueOf((route.size()-1));
 	}
 
 	
-
-	public int traverse() {
-		if (source == null) {
-			return -1;
-		} else {
-			Queue<Vertex<Person>> queue = new LinkedList<>();
-			queue.add(source);
-			while (!queue.isEmpty()) {
-				Vertex<Person> current = queue.poll();
-				if (!current.isVisited()) {
-					current.setVisited(true);
-					System.out.println(current);
-					if (current.equals(end)) {
-						// return distance;
-					}
-					queue.addAll(current.getFriends());
-				}
-			}
-		}
-		return -1;
-	}
 
 }

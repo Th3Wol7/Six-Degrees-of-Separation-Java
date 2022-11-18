@@ -16,7 +16,7 @@ public class FindSeperation {
 	// NTS: remember to Synchronize the tree for threading
 	public FindSeperation() {
 		this.socialNet = new SocialNetworkService();
-		socialNet.createNetwork();// For Testing purposes
+		//socialNet.createNetwork();// For Testing purposes
 		List<String> activity = new ArrayList<>();
 		List<String> activity2 = new ArrayList<>();
 		List<String> activity3 = new ArrayList<>();
@@ -63,8 +63,8 @@ public class FindSeperation {
 	public String degreeOfSeperation(Person user, Person user2) {
 		String output = "";
 		if (friendsMatch(user, user2) == true) {
-			output+= "Degree of seperation between" + user.getUsername() + " & " + user2.getUsername()
-					+ " is 1. Because they are direct friends" + "\n1";
+			output+= "Degree of seperation between " + user.getFirstName() + " & " + user2.getFirstName()
+					+ " is 1. Because they are direct friends" + "\n";
 			return output;
 		} else {
 			// If any of of the users friends is a friend of user2 return 2 degrees of

@@ -5,18 +5,26 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import com.application.models.Person;
@@ -26,12 +34,12 @@ import com.application.utils.gUI.FrameUtility;
 public class ActivityScreen extends JPanel implements ActionListener {
 	private static Icon profileIcon;
 	private static JLabel Logo;
-	private final String[] tableHeaders = {"Activities"};
+	private final String[] tableHeaders = { "Activities" };
 	private JLabel titleLabel, userActivitiesLabel, userDefinedLabel, suggestionLabel;
 	private JButton saveBtn, cancelBtn, addBtn;
 	private JTextField lineSeparation, userDefinedField;
 	private Font labelFont, fieldFont;
-	private FindSeperation networkService = new FindSeperation();
+	private FindSeperation networkService;
 	private JScrollPane tablePanel;
 	private JTable suggestionTable;
 	private DefaultTableModel model;
@@ -39,8 +47,9 @@ public class ActivityScreen extends JPanel implements ActionListener {
 	private JCheckBox movie, running, reading, volunteering, dancing, shopping;
 	private JTextArea tabel;
 
-	public ActivityScreen(Person user) {
+	public ActivityScreen(Person user, FindSeperation netService) {
 		this.user = user;
+		this.networkService = netService;
 		initializeComponents();
 		addComponentsToPanel();
 		setWindowProperties();
@@ -51,7 +60,7 @@ public class ActivityScreen extends JPanel implements ActionListener {
 	public void initializeComponents() {
 		model = new DefaultTableModel(tableHeaders, 0);
 		suggestionTable = new JTable(model);
-		
+
 		FrameUtility.addExitButton();
 		FrameUtility.exitButton.setBounds(755, 0, 45, 45);
 		FrameUtility.exitButton.setForeground(Color.BLACK);
@@ -152,7 +161,6 @@ public class ActivityScreen extends JPanel implements ActionListener {
 		addBtn.setBackground(buttonColour);
 		addBtn.setFocusPainted(false);
 
-		
 		saveBtn = new JButton("Save");
 		saveBtn.setBounds(450, 530, 120, 30);
 		saveBtn.setFont(labelFont);
@@ -173,7 +181,7 @@ public class ActivityScreen extends JPanel implements ActionListener {
 		suggestionTable.setDefaultEditor(Object.class, null);
 		suggestionTable.setAutoCreateRowSorter(true);
 		suggestionTable.getTableHeader().setOpaque(false);
-		suggestionTable.getTableHeader().setFont(fieldFont);		
+		suggestionTable.getTableHeader().setFont(fieldFont);
 		suggestionTable.setBackground(bkgrdColour);
 		suggestionTable.setForeground(Color.black);
 		suggestionTable.setFont(fieldFont);
@@ -223,6 +231,24 @@ public class ActivityScreen extends JPanel implements ActionListener {
 		cancelBtn.addActionListener(this);
 	}
 
+	public FindSeperation getNetworkService() {
+		return networkService;
+	}
+
+	public void setNetworkService(FindSeperation networkService) {
+		this.networkService = networkService;
+	}
+
+	public Person getUser() {
+		return user;
+	}
+
+	public void setUser(Person user) {
+		this.user = user;
+	}
+
+	// This method populates the suggestions to the table and check the boxes
+	// of the activities the user is engaged in
 	public void addSuggestions() {
 		if (user != null && !(user.getUsername().equals(""))) {
 			for (String activity : getUser().getActivity()) {
@@ -242,7 +268,7 @@ public class ActivityScreen extends JPanel implements ActionListener {
 				case "dancing":
 					dancing.setSelected(true);
 					break;
-				case "shopping.setSelected(true);":
+				case "shopping":
 					shopping.setSelected(true);
 					break;
 				default:
@@ -251,36 +277,123 @@ public class ActivityScreen extends JPanel implements ActionListener {
 			}
 		}
 		int count = 0;
-        int rowCount = model.getRowCount();
-        int counter = 0;
+		int rowCount = model.getRowCount();
+		int counter = 0;
 
-        while (counter < rowCount) {
-            model.removeRow(count);
-            counter++;
-        } 
-        for (int count1 = 0; count1 < getNetworkService().suggestActivities(user).size(); count1++) {
-            System.out.println(getNetworkService().suggestActivities(user).get(count1));
-        	model.insertRow(count1, new Object[]{
-            		getNetworkService().suggestActivities(user).get(count1)});
-        }
+		while (counter < rowCount) {
+			model.removeRow(count);
+			counter++;
+		}
+		for (int count1 = 0; count1 < getNetworkService().suggestActivities(user).size(); count1++) {
+			System.out.println(getNetworkService().suggestActivities(user).get(count1));
+			model.insertRow(count1, new Object[] { getNetworkService().suggestActivities(user).get(count1) });
+		}
+	}
+
+	public void updateUserActivites(){
+		int selectionCount = 0;
+		List<String> newActivities = new ArrayList<>();
+		if(movie.isSelected()) {
+			selectionCount+= 1;
+			newActivities.add("movie");
+		}
+		if(running.isSelected()) {
+			selectionCount+= 1;
+			newActivities.add("running");
+		}
+		if(reading.isSelected()) {
+			selectionCount+= 1;
+			newActivities.add("reading");
+		}
+		if(volunteering.isSelected()) {
+			selectionCount+= 1;
+			newActivities.add("volunteering");
+		}
+		if(dancing.isSelected()) {
+			selectionCount+= 1;
+			newActivities.add("dancing");
+		}
+		if(shopping.isSelected()) {
+			selectionCount+= 1;
+			newActivities.add("shopping");
+		}
+		if(!(userDefinedField.getText().equals("")) && !(userDefinedField.getText().equals(" "))) {
+			selectionCount+= 1;
+			newActivities.add(userDefinedField.getText().trim().replaceAll("\\s", ""));
+		}
 		
 		
-	}
+		if(suggestionTable.getSelectedRow() != -1) {
+			selectionCount+= 1;
+			newActivities.add((String)suggestionTable.getValueAt(suggestionTable.getSelectedRow(), 
+									  suggestionTable.getSelectedColumn()));
+		}
+		
+		if(selectionCount > 3 || newActivities.size() > 3) {	
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, "You can ony engage in 3 activties at a time", "You Activities",
+					JOptionPane.INFORMATION_MESSAGE);
+			addSuggestions();
+			try {
+				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			user.setActivity( new ArrayList<>());
+			user.setActivity(newActivities);
+			addSuggestions();
+			Scanner inFileStream = null;
+			FileWriter outFileStream = null;
 
-	public FindSeperation getNetworkService() {
-		return networkService;
-	}
+			File dataTempFile = new File("./database/tempActivities.txt");
+			File databaseFile = new File("./database/ActivitiesCopy.txt");
+			try {
+				inFileStream = new Scanner(databaseFile);
+				outFileStream = new FileWriter(dataTempFile, true);
+				while (inFileStream.hasNext()) {// #while 2
+					String record = "";
+					if (user.getUsername().equals(inFileStream.next())) {
+						String actFName = inFileStream.next();//this variables are necessary
+						String actLName = inFileStream.next();//this variables are necessary
+						String act = inFileStream.next();
+						record += user.getUsername()+"\t"+actFName+"\t"+actLName+"\t";
+						for(int i = 0; i< newActivities.size(); i++) {
+							record+= newActivities.get(i);
+							if(i <(newActivities.size()-1)) {
+								record += ",";
+							}
+						}
+					}else {
+						String username = inFileStream.next(); 
+						String fName = inFileStream.next();
+						String lName = inFileStream.next();
+						String activities = inFileStream.next();
+						record += username+"\t"+fName+"\t"+lName+"\t"+activities; 
+					}
+					record += "\n";
+					outFileStream.write(record);
+				}
+				inFileStream.close();
+				outFileStream.close();
+				// rename the files here
+				// dataTempFile.renameTo(databaseFile);
+				// databaseFile.delete(); //do not uncomment this line until project is complete
+			} catch (FileNotFoundException fnfe) {
+				System.err.println("File could not be found: " + fnfe.getMessage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (inFileStream != null) {
+					inFileStream.close();
+				}
+			}
 
-	public void setNetworkService(FindSeperation networkService) {
-		this.networkService = networkService;
-	}
-
-	public Person getUser() {
-		return user;
-	}
-
-	public void setUser(Person user) {
-		this.user = user;
+		}
 	}
 
 	@Override
@@ -290,6 +403,9 @@ public class ActivityScreen extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == cancelBtn) {
 
+		}
+		if(e.getSource() == addBtn) {
+			updateUserActivites();
 		}
 	}
 

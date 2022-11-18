@@ -38,6 +38,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.application.models.Person;
 import com.application.network.FindSeperation;
+import com.application.network.SocialNetworkService;
 import com.application.utils.gUI.FrameUtility;
 
 public class FriendsScreen extends JPanel implements ActionListener {
@@ -53,12 +54,13 @@ public class FriendsScreen extends JPanel implements ActionListener {
 	private JScrollPane tablePanel;
 	private JTable suggestionTable;
     private DefaultTableModel model;
-	private FindSeperation networkService = new FindSeperation();
+	private FindSeperation networkService;
 	private Person user;
 	private String friendsName[] = {}, friendsID[] = {};
 	
-	public FriendsScreen(Person user) {
+	public FriendsScreen(Person user, FindSeperation socialNet) {
 		this.user = user;
+		this.networkService = socialNet;
 		initializeComponents();
 		addComponentsToPanel();
 		setWindowProperties();

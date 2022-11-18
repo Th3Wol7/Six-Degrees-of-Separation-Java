@@ -115,11 +115,10 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		usernameField.setBounds(40, 190, 250, 25);// 125, 350, 250, uih
 		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
 		usernameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-		usernameField.setBackground(null);
+		usernameField.setBackground(getBackground());
 		usernameField.setForeground(Color.black);
 		usernameField.setFont(fieldFont);
-		usernameField.setCaretColor(Color.black);
-
+		
 		firstNameField = new JTextField(30);
 		firstNameField.setBounds(40, 275, 250, 25);// 125, 350, 250, uih
 		firstNameField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -127,8 +126,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		firstNameField.setBackground(null);
 		firstNameField.setForeground(Color.black);
 		firstNameField.setFont(fieldFont);
-		firstNameField.setCaretColor(Color.black);
-
+		
 		lastNameField = new JTextField(30);
 		lastNameField.setBounds(430, 275, 250, 25);// 125, 350, 250, uih
 		lastNameField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -136,8 +134,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		lastNameField.setBackground(null);
 		lastNameField.setForeground(Color.black);
 		lastNameField.setFont(fieldFont);
-		lastNameField.setCaretColor(Color.black);
-
+		
 		phoneField = new JTextField(20);
 		phoneField.setBounds(430, 445, 250, 25);// 125, 350, 250, uih
 		phoneField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -145,8 +142,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		phoneField.setBackground(null);
 		phoneField.setForeground(Color.black);
 		phoneField.setFont(fieldFont);
-		phoneField.setCaretColor(Color.black);
-
+		
 		emailField = new JTextField(30);
 		emailField.setBounds(430, 190, 250, 25);// 125, 350, 250, uih
 		emailField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -154,8 +150,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		emailField.setBackground(null);
 		emailField.setForeground(Color.black);
 		emailField.setFont(fieldFont);
-		emailField.setCaretColor(Color.black);
-
+		
 		communityField = new JTextField(30);
 		communityField.setBounds(430, 360, 250, 25);// 125, 350, 250, uih
 		communityField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -163,8 +158,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		communityField.setBackground(null);
 		communityField.setForeground(Color.black);
 		communityField.setFont(fieldFont);
-		communityField.setCaretColor(Color.black);
-
+		
 		schoolField = new JTextField(30);
 		schoolField.setBounds(40, 360, 250, 25);// 125, 350, 250, uih
 		schoolField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -172,8 +166,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		schoolField.setBackground(null);
 		schoolField.setForeground(Color.black);
 		schoolField.setFont(fieldFont);
-		schoolField.setCaretColor(Color.black);
-
+		
 		employerField = new JTextField(30);
 		employerField.setBounds(40, 445, 250, 25);// 125, 350, 250, uih
 		employerField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -181,8 +174,7 @@ public class ProfileScreen extends JPanel implements ActionListener {
 		employerField.setBackground(null);
 		employerField.setForeground(Color.black);
 		employerField.setFont(fieldFont);
-		employerField.setCaretColor(Color.black);
-
+		
 		yesBtn = new JRadioButton("Yes");
 		yesBtn.setBounds(140, 510, 65, 20);
 		yesBtn.setFont(labelFont);
