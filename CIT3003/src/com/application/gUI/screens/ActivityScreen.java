@@ -227,6 +227,7 @@ public class ActivityScreen extends JPanel implements ActionListener {
 	}
 
 	public void registerListeners() {
+		addBtn.addActionListener(this);
 		saveBtn.addActionListener(this);
 		cancelBtn.addActionListener(this);
 	}
@@ -285,7 +286,6 @@ public class ActivityScreen extends JPanel implements ActionListener {
 			counter++;
 		}
 		for (int count1 = 0; count1 < getNetworkService().suggestActivities(user).size(); count1++) {
-			System.out.println(getNetworkService().suggestActivities(user).get(count1));
 			model.insertRow(count1, new Object[] { getNetworkService().suggestActivities(user).get(count1) });
 		}
 	}
@@ -329,15 +329,17 @@ public class ActivityScreen extends JPanel implements ActionListener {
 									  suggestionTable.getSelectedColumn()));
 		}
 		
-		if(selectionCount > 3 || newActivities.size() > 3) {	
+		if(selectionCount > 3 || newActivities.size() >3) {	
 			try {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
+			
 			JOptionPane.showMessageDialog(null, "You can ony engage in 3 activties at a time", "You Activities",
 					JOptionPane.INFORMATION_MESSAGE);
 			addSuggestions();
+			
 			try {
 				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 			} catch (Exception ex) {
@@ -354,27 +356,29 @@ public class ActivityScreen extends JPanel implements ActionListener {
 			File databaseFile = new File("./database/ActivitiesCopy.txt");
 			try {
 				inFileStream = new Scanner(databaseFile);
-				outFileStream = new FileWriter(dataTempFile, true);
+				outFileStream = new FileWriter(dataTempFile);
 				while (inFileStream.hasNext()) {// #while 2
 					String record = "";
-					if (user.getUsername().equals(inFileStream.next())) {
-						String actFName = inFileStream.next();//this variables are necessary
-						String actLName = inFileStream.next();//this variables are necessary
-						String act = inFileStream.next();
-						record += user.getUsername()+"\t"+actFName+"\t"+actLName+"\t";
+					String username = inFileStream.next(); 
+					String fName = inFileStream.next();
+					String lName = inFileStream.next();
+					String activities = inFileStream.next();
+					record += username+"\t"+fName+"\t"+lName+"\t"+activities; 
+					
+					if (user.getUsername().equals(username)) {
+						record = "";
+						//String actFName = inFileStream.next();//this variables are necessary
+						//String actLName = inFileStream.next();//this variables are necessary
+						//String act = inFileStream.next();
+						record += user.getUsername()+"\t"+fName+"\t"+lName+"\t";
 						for(int i = 0; i< newActivities.size(); i++) {
 							record+= newActivities.get(i);
 							if(i <(newActivities.size()-1)) {
 								record += ",";
 							}
 						}
-					}else {
-						String username = inFileStream.next(); 
-						String fName = inFileStream.next();
-						String lName = inFileStream.next();
-						String activities = inFileStream.next();
-						record += username+"\t"+fName+"\t"+lName+"\t"+activities; 
 					}
+						
 					record += "\n";
 					outFileStream.write(record);
 				}
@@ -399,13 +403,14 @@ public class ActivityScreen extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == saveBtn) {
-
+			updateUserActivites();
+			// rename the files here and delete here
 		}
 		if (e.getSource() == cancelBtn) {
-
+			addSuggestions();
 		}
 		if(e.getSource() == addBtn) {
-			updateUserActivites();
+			updateUserActivites();			
 		}
 	}
 

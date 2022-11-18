@@ -52,8 +52,6 @@ public class FindSeperation {
 		Person person4 = new Person("aks1738", "Ackeem", "Shwarct", "8765672033", "Ackshwarct033@gmail.com", "Papine",
 				"UTECH", "none", 0, activity4);
 		
-		System.out.println(suggestFriends(person4)); // for testing 
-		
 		if (!(socialNet.getNetwork().isEmpty())) {// For Testing purposes
 			System.out.print(degreeOfSeperation(person, person2));
 		}
