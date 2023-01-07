@@ -50,8 +50,7 @@ public class ActivityScreen extends JPanel implements ActionListener {
 	private DefaultTableModel model;
 	private Person user;
 	private JCheckBox movie, running, reading, volunteering, dancing, shopping;
-	private JTextArea tabel;
-
+	
 	public ActivityScreen(Person user, FindSeperation netService) {
 		this.user = user;
 		this.networkService = netService;

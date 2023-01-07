@@ -105,15 +105,15 @@ public class BreadthFirstSearch/* <Person> */ {
 		if((route.size()-1) < 0) {
 			String display = "No Connection\n";
 			if(start.getData().getCommunity().equalsIgnoreCase(destination.getData().getCommunity())) {
-				display+= start.getData().getFirstName()+" and " + destination.getData().getFirstName()+
+				display+= start.getData().getFirstName()+"(you) and " + destination.getData().getFirstName()+
 						" has community in common\n";
 			}
 			if(start.getData().getSchool().equalsIgnoreCase(destination.getData().getSchool())) {
-				display+= start.getData().getFirstName()+" and " + destination.getData().getFirstName()+
+				display+= start.getData().getFirstName()+"(you) and " + destination.getData().getFirstName()+
 						" has school in common\n";
 			}
 			if(start.getData().getEmployer().equalsIgnoreCase(destination.getData().getEmployer())) {
-				display+= start.getData().getFirstName()+" and " + destination.getData().getFirstName()+
+				display+= start.getData().getFirstName()+"(you) and " + destination.getData().getFirstName()+
 						" has employer in common\n";
 			}
 			return display;

@@ -1,0 +1,120 @@
+aks1738	wigor1732	pabon1733	dawoo1734	kfly4
+jib1731	wigor1732			
+wigor1732	aks1738 jib1731				
+pabon1733	aks1738				
+dawoo1734	georop1	kensup2	aks1738		
+georop1	dawoo1734				
+kensup2	dawoo1734				
+kfly4		lwick5	renk6	aks1738		
+lwick5	kfly4				
+renk6		kfly4				
+jim1737	Tyrien14	doop10	Kimberly13	Watson12	
+wia8		Kimberly13	uper11	supwal9		
+dev1739	Watson12	uper11	doop10		
+supwal9	uper11	wia8			
+doop10	jim1737	dev1739			
+uper11	supwal9	wia8	dev1739		
+Watson12	dev1739	jim1737	Tyrien14		
+Kimberly13	wia8	jim1737			
+Tyrien14	jim1737	Watson12			
+Jimmy15	Deidre127	Micheal20			
+Saul16	Dwayne126	Deidre127			
+Derrick17	Danae125	Dwayne126			
+David18	Antonio124	Danae125			
+Ian19		Roger123	Antonio124			
+Micheal20	Jimmy15	Roger123			
+Roger123	Ian19	Micheal20			
+Antonio124	David18	Ian19			
+Danae125	Derrick17	David18			
+Dwayne126	Saul16	Derrick17			
+Deidre127	Jimmy15	Saul16			
+Gail128	Nle120	Christina1			
+Christina1	Mar402	Gail128			
+Christina9	Stark20	Jada223			
+Jada223	Jeez236	Christina9			
+Alex224	Kareem235	Joel225			
+Joel225	Sam234	Alex224			
+Kevon226	Justin233	Sudan232			
+Sudan232	Justin233	Kevon226			
+Nathan228	ODANE231	Nia229			
+Nia229	Nioka230	Nathan228			
+Nioka230	Nia229	ODANE231			
+ODANE231	Nathan228	Nioka230						
+Justin233	Kevon226	Sudan232			
+Sam234	Joel225	Kareem235			
+Kareem235	Alex224	Sam234			
+Jeez236	Jada223	Stark20			
+Stark20	Christina9	Jeez236			
+Mar402	Christina1	Nle120			
+Nle120	Gail128	Mar402			
+Sage34	Shelby420	Gunnar503			
+Lindsey57	JacoG293	Donna39			
+Donna39	KashB302	Lindsey57			
+Simon90	Ameri129	Gunnar503			
+Gunnar503	Sage34	Simon90			
+Ameri129	Simon90	KashB302			
+KashB302	Donna39	Ameri129			
+JacoG293	Lindsey57	Shelby420			
+Shelby420	Sage34	JacoG293			
+Jamar392	Monroe58				
+Yu492		Anika57				
+Ali283	Larson849				
+Garner2094	Reid74				
+Darryl94	Nevaeh12				
+Maya948	Ferrell39				
+Nathaly90	Kadyn403				
+Kadyn403	Nathaly90				
+Ferrell39	Maya948				
+Nevaeh12	Darryl94				
+Reid74	Garner2094				
+Larson849	Ali283				
+Anika57	Yu492				
+Monroe58	Jamar392				
+Tucker84	Guzman83	Daniels489	Aria82		
+Porter23	Horn920				
+Reyes948	Olson29				
+Best2839	Miles892				
+Jackson49	Kenley478				
+Daniels489	Tucker84				
+Kenley478	Jackson49				
+Miles892	Best2839				
+Olson29	Reyes948				
+Horn920	Porter23				
+Guzman83	Tucker84				
+Arias82	Salas30	Tucker84			
+Graves028	Simon290				
+Felix083	Molly309				
+Selah839	Barron029				
+Augustus29	Avery29				
+Belen02	Cora39				
+Bella39	Allie38				
+Damarion389	 Raymond093				
+Raymond093	Damarion389				
+Allie38	Bella39				
+Cora39	Belen02				
+Avery29	Augustus29				
+Barron029	Selah839				
+Molly309	Felix083				
+Simon290	Graves028				
+Salas30	Arias82				
+Price902	Marlene93				
+Dania239	Quint839				
+Ray92		Adriel389				
+Pope902	Mira938				
+Barber929	Aydin389				
+Tori39	Janae874				
+Damaris29	Alber29				
+Ale930	Joyce902				
+Joyce902	Ale930				
+Alber29	Damaris29				
+Janae874	Tori39				
+Aydin389	Barber929				
+Mira938	Pope902				
+Adriel389	Ray92				
+Quint839	Dania239				
+Marlene93	Price902				
+Hops93	Mayra983	Boyd893			
+Henry390	Cesar489				
+Eli39		Maria589				
+Jerami389	Nylah385				
+Lambert39	Dakota894				

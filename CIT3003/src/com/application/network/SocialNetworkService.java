@@ -171,7 +171,7 @@ public class SocialNetworkService {
 			addPerson(user);
 		}
 		if (!(network.containsKey(friend))) {
-			addPerson(user);
+			addPerson(friend);
 		}
 
 		// Creating link between the two persons in the network by adding a friend
@@ -186,7 +186,7 @@ public class SocialNetworkService {
 			addPerson(user);
 		}
 		if (!(network.containsKey(friend))) {
-			addPerson(user);
+			addPerson(friend);
 		}
 
 		// removing link between the two persons in the network by adding a friend

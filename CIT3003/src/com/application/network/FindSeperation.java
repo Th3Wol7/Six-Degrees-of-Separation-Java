@@ -21,45 +21,6 @@ public class FindSeperation {
 	// NTS: remember to Synchronize the tree for threading
 	public FindSeperation() {
 		this.socialNet = new SocialNetworkService();
-		//socialNet.createNetwork();// For Testing purposes
-		List<String> activity = new ArrayList<>();
-		List<String> activity2 = new ArrayList<>();
-		List<String> activity3 = new ArrayList<>();
-		List<String> activity4 = new ArrayList<>();
-		activity.add("reading");// For Testing purposes
-		activity.add("movie");// For Testing purposes
-		activity.add("running");// For Testing purposes
-
-		// reading,movie,running
-		activity2.add("reading");
-		activity2.add("dancing");
-		activity2.add("shopping");
-
-		activity3.add("volunteering");
-		activity3.add("running");
-		activity3.add("dancing");
-	
-		activity4.add("running");
-		activity4.add("reading");
-		activity4.add("volunteering");
-		Person person = new Person("kfly4", "Kermait", "Ffly", "8765672010", "KeroFfly10@yahoo.com", "Papine", "UTECH",
-				"none", 0, activity);
-
-		Person person2 = new Person("jib1731", "Jim", "Bibby", "8765672032", "Jibibby032@gmail.com", "Papine", "UTECH",
-				"none", 0, activity2);
-
-		Person person3 = new Person("Kareem235", "Kareem", "Feather", "8764132519", "KaFeat56@gmail.com", "Portmore",
-				"none", "none", 0, activity3);
-
-		// System.out.println(suggestActivities(person)); Testing suggested activities
-		// method
-		
-		Person person4 = new Person("aks1738", "Ackeem", "Shwarct", "8765672033", "Ackshwarct033@gmail.com", "Papine",
-				"UTECH", "none", 0, activity4);
-		
-		if (!(socialNet.getNetwork().isEmpty())) {// For Testing purposes
-			System.out.print(degreeOfSeperation(person, person2));
-		}
 	}
 
 	FindSeperation(SocialNetworkService sns) {
