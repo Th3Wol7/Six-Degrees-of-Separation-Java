@@ -4,33 +4,32 @@ package com.application.gUI.screens;
  * Version 1
  */
 
-import java.io.IOException;
-
-import javax.swing.JFrame;
-
 import com.application.network.FindSeperation;
 
+import javax.swing.*;
+import java.io.IOException;
+
 public class MainScreen {
-	private static JFrame frame;
+    private static JFrame frame;
 
-	public MainScreen() {
-		
-		// Try Catch block For frame creation
-		// Calls Function To create main background Plate
-		FindSeperation socialNet = new FindSeperation();
-		//socialNet.getSocialNet().createNetwork();
-		try {
-			BaseScreen baseFrame = new BaseScreen();
-			frame = baseFrame.getBaseFrame();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    public MainScreen() {
 
-		new LoginScreen(frame, socialNet);
-	}
+        // Try Catch block For frame creation
+        // Calls Function To create main background Plate
+        FindSeperation socialNet = new FindSeperation();
+        //socialNet.getSocialNet().createNetwork();
+        try {
+            BaseScreen baseFrame = new BaseScreen();
+            frame = baseFrame.getBaseFrame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-	public static void main(String[] args) {
-		new MainScreen();
-	}
+        new LoginScreen(frame, socialNet);
+    }
+
+    public static void main(String[] args) {
+        new MainScreen();
+    }
 
 }

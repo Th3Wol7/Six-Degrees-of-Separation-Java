@@ -1,17 +1,10 @@
 package com.application.utils.network;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
+import com.application.models.Node;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.application.models.Node;
-import com.application.models.Person;
 
 public class DijkstrasSearch<Person> {
 
