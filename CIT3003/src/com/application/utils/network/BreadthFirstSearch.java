@@ -97,7 +97,7 @@ public class BreadthFirstSearch/* <Person> */ {
             output += links.getData().getFirstName() + "-->";
         }
         if ((route.size() - 1) < 0) {
-            String display = "No Connection\n";
+            String display = "No direct Connection\n";
             if (start.getData().getCommunity().equalsIgnoreCase(destination.getData().getCommunity())) {
                 display += start.getData().getFirstName() + "(you) and " + destination.getData().getFirstName() +
                         " has community in common\n";

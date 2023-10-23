@@ -80,7 +80,7 @@ public class NetworkScreen extends JPanel implements ActionListener {
         averageField.setBackground(null);
         averageField.setForeground(Color.black);
         averageField.setCaretColor(Color.black);
-        // averageField.setText(String.valueOf(getNetworkService().averageDegreeOfSeperation()));
+        averageField.setText(String.valueOf(getNetworkService().averageDegreeOfSeperation()));
 
         separationLabel = new JLabel("Find Seperation between you and", SwingConstants.LEFT);
         separationLabel.setBounds(40, 255, 280, 50);

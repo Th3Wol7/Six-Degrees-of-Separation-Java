@@ -11,6 +11,8 @@ import com.application.utils.network.BreadthFirstSearch;
 
 import java.util.*;
 
+import static java.lang.Math.floor;
+
 public class FindSeperation {
     private final SocialNetworkService socialNet;
 
@@ -127,13 +129,13 @@ public class FindSeperation {
             });
 
         } catch (NullPointerException ne) {
-            System.out.println("Null pointer Exception Thrown in friend finder class");
+            System.out.println("Null pointer Exception Thrown in FindSeparation class");
             ne.printStackTrace();
         } catch (UnsupportedOperationException uoe) {
-            System.out.println("UnsupportedOperationException Thrown in friend finder class");
+            System.out.println("UnsupportedOperationException Thrown in FindSeparation class");
             uoe.printStackTrace();
         } catch (Exception ex) {
-            System.out.println("Exception Thrown in friend finder class suggested friends method");
+            System.out.println("Exception Thrown in FindSeparation class suggested friends method");
             ex.printStackTrace();
         }
 
@@ -174,13 +176,13 @@ public class FindSeperation {
                 }
             });
         } catch (NullPointerException ne) {
-            System.out.println("Null pointer Exception Thrown in friend finder class");
+            System.out.println("Null pointer Exception Thrown in FindSeparation class");
             ne.printStackTrace();
         } catch (UnsupportedOperationException uoe) {
-            System.out.println("UnsupportedOperationException Thrown in friend finder class");
+            System.out.println("UnsupportedOperationException Thrown in FindSeparationclass");
             uoe.printStackTrace();
         } catch (Exception ex) {
-            System.out.println("Exception Thrown in friend finder class suggestedfriends methos");
+            System.out.println("Exception Thrown in FindSeparation class suggestedfriends method");
             ex.printStackTrace();
         }
 
@@ -189,9 +191,67 @@ public class FindSeperation {
 
     // This method determine the average degree of separation of the nodes in the
     // tree
-    public int averageDegreeOfSeperation() {
+    public double averageDegreeOfSeperation() {
+        double totalDegrees = 0;
+        int totalPairs = 0;
 
-        return 0;
+        // Get all users in the network
+        Set<Person> allUsers = getSocialNet().getNetwork().keySet();
+        List<Person> userList = new ArrayList<>(allUsers);
+
+        // For each pair of users
+        for (int i = 0; i < userList.size(); i++) {
+            for (int j = i + 1; j < userList.size(); j++) {
+                try {
+                    // Get degree of separation between user1 and user2
+                    String degree = degreeOfSeperation(userList.get(i), userList.get(j));
+                    // Extract the numerical part from the degree string
+                    int numericalDegree = Integer.parseInt(degree.replaceAll("[^0-9]", ""));
+                    totalDegrees += numericalDegree;
+                    totalPairs++;
+                } catch (NumberFormatException e) {
+                    System.out.println("Error parsing degree of separation: " + e.getMessage());
+                } catch (Exception e) {
+                    System.out.println("Unexpected error: " + e.getMessage());
+                }
+            }
+        }
+
+        // Calculate and return the average degree of separation
+        return floor(totalPairs > 0 ? totalDegrees / totalPairs : 0);
+    }
+
+
+    public double averageDegreeOfSeperation2() {
+        double totalDegrees = 0;
+        int totalPairs = 0;
+
+        // Get all users in the network
+        Set<Person> allUsers = getSocialNet().getNetwork().keySet();
+
+        // For each pair of users
+        for (Person user1 : allUsers) {
+            for (Person user2 : allUsers) {
+                // Don't calculate degree of separation with self
+               try {
+                   if (!user1.equals(user2)) {
+                       // Get degree of separation between user1 and user2
+                       String degree = degreeOfSeperation(user1, user2);
+                       // Extract the numerical part from the degree string
+                       int numericalDegree = Integer.parseInt(degree.replaceAll("[^0-9]", ""));
+                       totalDegrees += numericalDegree;
+                       totalPairs++;
+                   }
+               } catch (NumberFormatException e) {
+                System.out.println("Error parsing degree of separation: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Unexpected error: " + e.getMessage());
+            }
+            }
+        }
+
+        // Calculate and return the average degree of separation
+        return floor(totalDegrees / totalPairs);
     }
 
 }
