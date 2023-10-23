@@ -188,58 +188,6 @@ public class LoginScreen {
         }
     }
 
-
-    /* //function before optimization
-    public void finduser() {
-        Scanner inFileStream = null;
-        Scanner inFileStream2 = null;
-        try {
-            inFileStream = new Scanner(new File("./database/people1.txt"));
-            inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
-            while (inFileStream.hasNext()) {
-                Person person;
-                String username = inFileStream.next();
-                String firstName = inFileStream.next();
-                String lastName = inFileStream.next();
-                String phone = inFileStream.next();
-                String email = inFileStream.next();
-                String community = inFileStream.next();
-                String school = inFileStream.next();
-                String employer = inFileStream.next();
-                int privacy = inFileStream.nextInt();
-                ArrayList<String> activities = new ArrayList<>(); // Accounting for activity
-                while (inFileStream2.hasNext()) {// #while 2
-                    if (username.equals(inFileStream2.next())) {
-                        String actUser = inFileStream2.next();// this variables are necessary
-                        String actFName = inFileStream2.next();// this variables are necessary
-                        String act = inFileStream2.next();
-                        String act1[] = act.split(",");
-                        for (int i = 0; i < act1.length; i++) {
-                            activities.add(act1[i]);
-                        }
-                        // resetting in file stream
-                        inFileStream2 = new Scanner(new File("./database/ActivitiesCopy.txt"));
-                        break;// exit #while 2
-                    }
-                }
-                person = new Person(username, firstName, lastName, phone, email, community, school, employer, privacy,
-                        activities);
-                if (userName.getText().trim().equals(person.getUsername())) {
-                    user = person;
-                    break;
-                }
-            }
-        } catch (FileNotFoundException fnfe) {
-            System.err.println("File could not be found: " + fnfe.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (inFileStream != null) {
-                inFileStream.close();
-            }
-        }
-    }
-*/
     // Setting properties of user login screen attributes
     public void addLoginFields() {
         // setting user name input text field properties

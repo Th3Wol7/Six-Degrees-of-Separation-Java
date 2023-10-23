@@ -356,65 +356,6 @@ public class ProfileScreen extends JPanel implements ActionListener {
         }
     }
 
-    /*
-    public void updateUser() {// NTS: Test this method
-        String username = usernameField.getText().trim().replaceAll("\\s", "");
-        String firstName = firstNameField.getText().trim().replaceAll("\\s", "");
-        String lastName = lastNameField.getText().trim().replaceAll("\\s", "");
-        String phone = phoneField.getText().trim().replaceAll("\\s", "");
-        String email = emailField.getText().trim().replaceAll("\\s", "");
-        String community = communityField.getText().trim().replaceAll("\\s", "");
-        String school = schoolField.getText().trim().replaceAll("\\s", "");
-        String employer = employerField.getText().trim().replaceAll("\\s", "");
-        int privacy = 0;
-        if (yesBtn.isSelected() == true) {
-            privacy = 1;
-        }
-        Scanner inFileStream = null;
-        FileWriter outFileStream = null;
-
-        File dataTempFile = new File("./com.database.database/tempPeopleDatabase.txt");
-        File databaseFile = new File("./com.database.database/peopleCopy.txt");
-
-        try {
-            inFileStream = new Scanner(databaseFile);
-            outFileStream = new FileWriter(dataTempFile);
-            while (inFileStream.hasNext()) {
-                String username2 = inFileStream.next();
-                String firstName2 = inFileStream.next();
-                String lastName2 = inFileStream.next();
-                String phone2 = inFileStream.next();
-                String email2 = inFileStream.next();
-                String community2 = inFileStream.next();
-                String school2 = inFileStream.next();
-                String employer2 = inFileStream.next();
-                int privacy2 = inFileStream.nextInt();
-                String record = username2 + "\t" + firstName2 + "\t" + lastName2 + "\t" + phone2 + "\t" + email2 + "\t"
-                        + community2 + "\t" + school2 + "\t" + employer2 + "\t" + privacy2 + "\n";
-
-                if (username2.equals(getUser().getUsername())) {
-                    Person person1 = new Person(username, firstName, lastName, phone, email, community, school,
-                            employer, privacy, getUser().getActivity());
-                    record = username + "\t" + firstName + "\t" + lastName + "\t" + phone + "\t" + email + "\t"
-                            + community + "\t" + school + "\t" + employer + "\t" + privacy + "\n";
-                    setUser(person1);
-                }
-                outFileStream.write(record);
-            }
-            inFileStream.close();
-            outFileStream.close();
-        } catch (FileNotFoundException fnfe) {
-            System.err.println("File could not be found: " + fnfe.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (inFileStream != null) {
-                inFileStream.close();
-            }
-        }
-
-    }
-*/
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editBtn) {
@@ -442,6 +383,22 @@ public class ProfileScreen extends JPanel implements ActionListener {
                     && !emailField.getText().equals("") && !communityField.getText().equals("")
                     && !schoolField.getText().equals("") && !employerField.getText().equals("")) {
                 updateUser();
+                File tempFile = new File("CIT3003/src/com/application/database/tempPeopleDatabase.txt");
+                File oldFile = new File("CIT3003/src/com/application/database/peopleCopy.txt");
+                if (tempFile.exists()) {
+                    if (oldFile.delete()) {
+                        System.out.println("Old file deleted.");
+                    } else {
+                        System.out.println("Failed to delete old file.");
+                    }
+                    if (tempFile.renameTo(oldFile)) {
+                        System.out.println("Temp file renamed to old file.");
+                    } else {
+                        System.out.println("Failed to rename temp file.");
+                    }
+                } else {
+                    System.out.println("Temp file does not exist.");
+                }
                 this.add(editBtn);
                 cancelBtn.setVisible(false);
                 this.remove(cancelBtn);
@@ -517,3 +474,95 @@ public class ProfileScreen extends JPanel implements ActionListener {
     }
 
 }
+/* For use in updating action listerner method
+
+@Override
+public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == editBtn) {
+        switchToEditMode();
+    }
+    if (e.getSource() == saveBtn) {
+        if (isFormComplete()) {
+            updateUser();
+            renameFiles();
+            switchToViewMode();
+        } else {
+            showErrorMessage("One or more field empty", "Missing info");
+        }
+    }
+    if (e.getSource() == cancelBtn) {
+        switchToViewMode();
+    }
+}
+
+private void switchToEditMode() {
+    editBtn.setVisible(false);
+    this.remove(editBtn);
+    this.add(saveBtn);
+    this.add(cancelBtn);
+    cancelBtn.setVisible(true);
+    setFieldsEnabled(true);
+}
+
+private void switchToViewMode() {
+    this.add(editBtn);
+    cancelBtn.setVisible(false);
+    this.remove(cancelBtn);
+    this.remove(saveBtn);
+    editBtn.setVisible(true);
+    setFieldsEnabled(false);
+}
+
+private void setFieldsEnabled(boolean enabled) {
+    usernameField.setEnabled(enabled);
+    firstNameField.setEnabled(enabled);
+    lastNameField.setEnabled(enabled);
+    phoneField.setEnabled(enabled);
+    emailField.setEnabled(enabled);
+    communityField.setEnabled(enabled);
+    schoolField.setEnabled(enabled);
+    employerField.setEnabled(enabled);
+    yesBtn.setEnabled(enabled);
+    noBtn.setEnabled(enabled);
+}
+
+private boolean isFormComplete() {
+    return !usernameField.getText().equals("") && !firstNameField.getText().equals("")
+            && !lastNameField.getText().equals("") && !phoneField.getText().equals("")
+            && !emailField.getText().equals("") && !communityField.getText().equals("")
+            && !schoolField.getText().equals("") && !employerField.getText().equals("");
+}
+
+private void renameFiles() {
+    File tempFile = new File("CIT3003/src/com/application/database/tempPeopleDatabase.txt");
+    File oldFile = new File("CIT3003/src/com/application/database/peopleCopy.txt");
+
+    if (tempFile.exists()) {
+        if (oldFile.delete()) {
+            System.out.println("Old file deleted.");
+        } else {
+            System.out.println("Failed to delete old file.");
+        }
+        if (tempFile.renameTo(oldFile)) {
+            System.out.println("Temp file renamed to old file.");
+        } else {
+            System.out.println("Failed to rename temp file.");
+        }
+    } else {
+        System.out.println("Temp file does not exist.");
+    }
+}
+
+private void showErrorMessage(String message, String title) {
+    try {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
+
+
+
+ */

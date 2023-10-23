@@ -167,10 +167,8 @@ public class NetworkScreen extends JPanel implements ActionListener {
         }
     }
 
-    // This method call other methods to calculate the degree of separation between
-    // user and
-    // a selected target then displays it to the text area on the bottom half of the
-    // screen
+    // This method call other methods to calculate the degree of separation between user and a
+    // selected target then displays it to the text area on the bottom half of the screen
     public void displaySeparation() {
         List<Person> userList = new ArrayList<>(getNetworkService().getSocialNet().getNetwork().keySet());
         Person friend = null;

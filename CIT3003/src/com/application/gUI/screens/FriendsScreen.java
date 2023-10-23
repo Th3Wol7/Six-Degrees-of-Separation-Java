@@ -35,7 +35,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
     private DefaultTableModel model;
     private FindSeperation networkService;
     private Person user;
-    private String friendsName[] = {}, friendsID[] = {};
+    private String[] friendsName = {}, friendsID = {};
 
     public FriendsScreen(Person user, FindSeperation socialNet) {
         this.user = user;
@@ -167,8 +167,8 @@ public class FriendsScreen extends JPanel implements ActionListener {
         entries.forEach(entry -> {
             if (entry.getKey().getUsername().equals(user.getUsername())) {
                 int i = 0;
-                String uNames[] = new String[entry.getValue().size()],
-                        uIDs[] = new String[entry.getValue().size()];
+                String[] uNames = new String[entry.getValue().size()],
+                        uIDs = new String[entry.getValue().size()];
                 for (Person friend : entry.getValue()) {
                     uNames[i] = friend.getFirstName() + " " + friend.getLastName();
                     uIDs[i] = friend.getUsername();
@@ -180,7 +180,6 @@ public class FriendsScreen extends JPanel implements ActionListener {
                 }
                 friendsName = uNames;
                 friendsID = uIDs;
-                return;
             }
         });
         if (getUser().getPrivacy() != 1) {
@@ -203,11 +202,11 @@ public class FriendsScreen extends JPanel implements ActionListener {
     }
 
     // removes an element from an array
-    private String[] removeElement(String persons[], int index) {
+    private String[] removeElement(String[] persons, int index) {
         List<String> arrayList = Arrays.asList(persons);//Stream.of(persons).boxed().collect(Collectors.toList());
         //Remove the specified element
         arrayList.remove(index);
-        String personUpdate[] = {};
+        String[] personUpdate = {};
         //return the resultant array
         personUpdate = arrayList.toArray(personUpdate);
         return personUpdate;
@@ -273,6 +272,7 @@ public class FriendsScreen extends JPanel implements ActionListener {
     }
 
     // update the file if a user adds a new friend
+
     public void updateAddition() {
         Scanner inFileStream = null;
         FileWriter outFileStream = null;
@@ -365,7 +365,6 @@ public class FriendsScreen extends JPanel implements ActionListener {
                     if (entry.getKey().getUsername().equals(friendsID[friendList.getSelectedIndex()])) {
                         Person networkUser = entry.getKey();
                         users.add(networkUser);
-                        return;
                     }
                 });
 
@@ -404,7 +403,6 @@ public class FriendsScreen extends JPanel implements ActionListener {
                     if (entry.getKey().getUsername().equals(user.getUsername())) {
                         Person networkUser = entry.getKey();
                         users.add(networkUser);
-                        return;
                     }
                 });
 
